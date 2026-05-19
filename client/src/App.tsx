@@ -17,6 +17,7 @@ import PayPage from "@/pages/pay-page";
 import KioskAuthPage from "@/pages/kiosk-auth-page";
 import KioskHomePage from "@/pages/kiosk-home-page";
 import BusinessProfilePage from "@/pages/business-profile-page";
+import OwnerReportPage from "@/pages/owner-report-page";
 import { ProtectedRoute } from "./lib/protected-route";
 import { Loader2 } from "lucide-react";
 
@@ -62,6 +63,8 @@ function CrmRouter() {
       <ProtectedRoute path="/group-lesson-add" component={GroupLessonAddPage} />
       {/* OUHVE ABM — Module 1 Business Profile */}
       <ProtectedRoute path="/business-profile" component={BusinessProfilePage} />
+      {/* OUHVE ABM — Module 8 Owner Report (첫 화면 후보 — HomePage 대체 예정) */}
+      <ProtectedRoute path="/report" component={OwnerReportPage} />
       <ProtectedRoute path="/" component={HomePage} />
       <ProtectedRoute path="/:rest*" component={HomePage} />
       <Route component={NotFound} />

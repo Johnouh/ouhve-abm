@@ -6,6 +6,7 @@ import { storage } from "./storage";
 import { analyzeChurnRisk, analyzeRevenueInsights } from "./services/ai-service";
 import { computeProfileCompletion } from "./services/business-profile-helper";
 import { summarizeMemberStatuses } from "./services/member-status-engine";
+import { generateOwnerReport } from "./services/owner-report-service";
 import { preparePayment, cancelPayment as billgateCancelPayment, verifyCallbackHash, generateLinkPaymentUrl, generateOrderId, generateOrderDate, generateHashKey, SERVICE_CODES, PAYMENT_METHOD_LABELS, type BillgatePgConfig } from "./services/billgate-service";
 import { smsProvider, buildLinkPaymentSmsMessage } from "./services/sms-service";
 import { insertPgTransactionSchema, insertPgProductSchema } from "@shared/schema";
@@ -425,6 +426,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const franchiseId = (req as any).franchiseId;
     const summary = await summarizeMemberStatuses(franchiseId);
     res.json(summary);
+  }));
+
+  // ================================================================
+  // OUHVE ABM — Module 8: Owner Report (첫 화면)
+  // 브리프 #15: "AI 운영 리포트형 첫 화면" — CRM 대시보드를 대체
+  // ================================================================
+  app.get("/api/owner-report", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const report = await generateOwnerReport(franchiseId);
+    res.json(report);
   }));
 
   // Username availability check
