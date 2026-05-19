@@ -1,0 +1,203 @@
+/* ============================================================
+   GL allpay Landing — Design System
+   Dark Navy + Gold theme, separate from CRM (light + orange)
+============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Landing CSS Variables ── */
+.landing {
+  --l-navy: #0A1628;
+  --l-mid-navy: #0D2244;
+  --l-blue-dark: #0F2C54;
+  --l-gold: #C9A84C;
+  --l-gold-light: #E2C47A;
+  --l-gold-dark: #A8882E;
+  --l-white: #FFFFFF;
+  --l-gray-light: #F5F5F7;
+  --l-text-main: #FFFFFF;
+  --l-text-sub: #B0BAD1;
+  --l-gray-text: #8A8FA8;
+  --l-font-kr: 'Noto Sans KR', sans-serif;
+  --l-font-en: 'Inter', 'Helvetica Neue', sans-serif;
+  --l-shadow-gold: 0 4px 24px rgba(201, 168, 76, 0.25);
+  --l-shadow-card: 0 8px 40px rgba(0, 0, 0, 0.3);
+
+  font-family: var(--l-font-kr);
+  background-color: var(--l-navy);
+  color: var(--l-text-main);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── Smooth scroll ── */
+.landing {
+  scroll-behavior: smooth;
+}
+
+/* ── Section label (English small caps) ── */
+.landing .section-label {
+  font-family: var(--l-font-en);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--l-gold);
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* ── Gold divider ── */
+.landing .gold-divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--l-gold), var(--l-gold-dark));
+  margin: 20px 0;
+}
+
+/* ── Badge ── */
+.landing .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201, 168, 76, 0.15);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 30px;
+  padding: 6px 18px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--l-gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Origin badge ── */
+.landing .origin-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--l-gold);
+  letter-spacing: 0.03em;
+}
+
+/* ── Button styles ── */
+.landing .btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, var(--l-gold), var(--l-gold-dark));
+  color: var(--l-navy);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: var(--l-shadow-gold);
+}
+.landing .btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(201, 168, 76, 0.35);
+}
+
+.landing .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--l-white);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.landing .btn-outline:hover {
+  border-color: var(--l-gold);
+  color: var(--l-gold);
+}
+
+/* ── Fade-in animation ── */
+.landing .fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.landing .fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.landing .fade-in-delay-1 { transition-delay: 0.2s; }
+.landing .fade-in-delay-2 { transition-delay: 0.4s; }
+.landing .fade-in-delay-3 { transition-delay: 0.6s; }
+
+/* ── Note block ── */
+.landing .note-block {
+  padding: 20px 28px;
+  background: rgba(201, 168, 76, 0.06);
+  border-left: 3px solid var(--l-gold);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+  color: var(--l-text-sub);
+  line-height: 1.8;
+}
+.landing .note-block strong {
+  color: var(--l-white);
+}
+
+/* ── Header ── */
+.landing-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+.landing-header.scrolled {
+  background: rgba(10, 22, 40, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+}
+
+/* ── Mobile menu overlay ── */
+.landing-mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(10, 22, 40, 0.98);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.landing-mobile-menu.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .landing .container-landing {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

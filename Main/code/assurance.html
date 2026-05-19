@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GL allpay — 킵페이 안심결제서비스 | 선불결제 소비자 보호</title>
+  <meta name="description" content="GL allpay 킵페이 안심결제서비스: 회원권 결제 시 최대 300만원 한도 보상, SGI서울보증 기반, 공정위 의무표시 완벽 대응" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .assurance-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #0A1628 0%, #0D2244 60%, #0F2C54 100%);
+      padding: 160px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .assurance-hero::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 60%; height: 140%;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .assurance-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 30px;
+      padding: 6px 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .assurance-hero-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .assurance-hero-sub {
+      font-size: 1.1rem;
+      color: var(--text-sub);
+      max-width: 600px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    /* highlight strip */
+    .highlight-strip {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      padding: 60px 0;
+    }
+    .highlight-strip .hl-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+    .highlight-item .num {
+      font-family: var(--font-en);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1;
+      display: block;
+    }
+    .highlight-item .hl-label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-top: 8px;
+      display: block;
+    }
+    .highlight-item .hl-desc {
+      font-size: 0.85rem;
+      color: rgba(10,22,40,0.7);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* section utils */
+    .section-lg { padding: 100px 0; }
+    .section-md { padding: 80px 0; }
+    .section-dark { background: var(--navy); }
+    .section-mid  { background: var(--mid-navy); }
+    .section-alt  { background: #0F2C54; }
+
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-header .slabel {
+      font-family: var(--font-en);
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 12px;
+    }
+    .section-header h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.3; }
+    .section-header p  { font-size: 1rem; color: var(--text-sub); max-width: 640px; margin: 16px auto 0; line-height: 1.8; }
+
+    /* what-grid */
+    .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .what-text h3 { font-size: 1.8rem; font-weight: 700; margin-bottom: 20px; line-height: 1.4; }
+    .what-text p  { color: var(--text-sub); line-height: 1.9; margin-bottom: 16px; }
+    .emphasis {
+      background: rgba(201,168,76,0.12);
+      border-left: 3px solid var(--gold);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      color: var(--white);
+      font-weight: 500;
+      line-height: 1.7;
+    }
+    .what-visual {
+      background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.03));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+    }
+    .what-visual .big-shield { font-size: 6rem; margin-bottom: 20px; }
+    .what-visual .coverage-badge {
+      background: var(--gold); color: var(--navy);
+      font-weight: 800; font-size: 1.5rem;
+      padding: 12px 32px; border-radius: 50px;
+      display: inline-block; margin-bottom: 16px;
+    }
+    .what-visual .coverage-desc { color: var(--text-sub); font-size: 0.9rem; }
+    .sgi-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px; padding: 10px 20px;
+      margin-top: 10px; font-size: 0.85rem; color: var(--text-sub);
+    }
+    .sgi-badge strong { color: var(--white); }
+
+    /* flow steps */
+    .flow-steps {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 0; position: relative; margin-top: 40px;
+    }
+    .flow-steps::before {
+      content: '';
+      position: absolute; top: 40px; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(to right, var(--gold-dark), var(--gold), var(--gold-dark));
+    }
+    .flow-step { text-align: center; padding: 0 10px; position: relative; }
+    .flow-step .step-icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--mid-navy); border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px; font-size: 1.8rem; position: relative; z-index: 1;
+    }
+    .flow-step .step-num {
+      position: absolute; top: -6px; right: -6px;
+      background: var(--gold); color: var(--navy);
+      width: 22px; height: 22px; border-radius: 50%;
+      font-size: 0.7rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .flow-step .step-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; color: var(--white); }
+    .flow-step .step-desc  { font-size: 0.78rem; color: var(--text-sub); line-height: 1.6; }
+
+    /* condition cards */
+    .condition-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .condition-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 32px;
+      transition: all 0.3s;
+    }
+    .condition-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      background: rgba(201,168,76,0.05);
+      transform: translateY(-4px);
+    }
+    .condition-card .card-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .condition-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--gold); }
+    .condition-card p  { font-size: 0.88rem; color: var(--text-sub); line-height: 1.7; }
+
+    /* mandatory */
+    .law-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(220,60,60,0.15); border: 1px solid rgba(220,60,60,0.4);
+      color: #FF6B6B; border-radius: 30px;
+      padding: 6px 18px; font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.05em; margin-bottom: 24px;
+    }
+    .law-alert-box {
+      background: rgba(220,60,60,0.08);
+      border: 1px solid rgba(220,60,60,0.3);
+      border-radius: 16px; padding: 40px; margin-bottom: 48px;
+    }
+    .law-alert-box h3 { font-size: 1.4rem; font-weight: 700; color: #FF8A8A; margin-bottom: 16px; }
+    .law-alert-box p  { color: var(--text-sub); line-height: 1.8; margin-bottom: 12px; }
+    .law-detail { background: rgba(255,255,255,0.04); border-radius: 10px; padding: 20px 24px; margin-top: 16px; }
+    .law-detail li {
+      font-size: 0.9rem; color: var(--text-sub);
+      padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .law-detail li:last-child { border-bottom: none; }
+    .law-detail li::before { content: '▸'; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+
+    .mandatory-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+    .mandatory-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 32px;
+      display: flex; gap: 20px;
+    }
+    .mandatory-item .mi-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .mandatory-item h4 { font-weight: 700; font-size: 1rem; margin-bottom: 8px; color: var(--white); }
+    .mandatory-item p  { font-size: 0.85rem; color: var(--text-sub); line-height: 1.7; }
+    .tag {
+      display: inline-block;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold); font-size: 0.72rem; font-weight: 600;
+      padding: 2px 10px; border-radius: 20px; margin-top: 10px;
+    }
+    .tag-green {
+      background: rgba(92,232,136,0.15);
+      border-color: rgba(92,232,136,0.3);
+      color: #5CE888;
+    }
+
+    /* industry pills */
+    .industry-pills { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 40px; }
+    .industry-pill {
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold-light); padding: 10px 24px;
+      border-radius: 50px; font-size: 0.9rem; font-weight: 600; transition: all 0.3s;
+    }
+    .industry-pill.primary { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+
+    /* diff grid */
+    .diff-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .diff-card {
+      background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.02));
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 20px; padding: 40px 32px; text-align: center; transition: all 0.3s;
+    }
+    .diff-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: 0 16px 40px rgba(201,168,76,0.15); }
+    .diff-card .d-icon { font-size: 3rem; margin-bottom: 16px; }
+    .diff-card h4 { font-size: 1.15rem; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
+    .diff-card p  { font-size: 0.88rem; color: var(--text-sub); line-height: 1.7; }
+    .d-highlight { background: rgba(201,168,76,0.15); border-radius: 8px; padding: 8px 16px; margin-top: 12px; font-size: 0.85rem; font-weight: 600; color: var(--gold-light); }
+
+    /* compare table */
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 40px; }
+    .compare-table thead tr { background: rgba(201,168,76,0.15); }
+    .compare-table th {
+      padding: 16px 20px; font-size: 0.9rem; font-weight: 700;
+      text-align: left; color: var(--gold);
+      border-bottom: 2px solid rgba(201,168,76,0.3);
+    }
+    .compare-table td { padding: 16px 20px; font-size: 0.88rem; color: var(--text-sub); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table td:first-child { color: var(--white); font-weight: 600; }
+    .compare-table .good    { color: #5CE888; }
+    .compare-table .bad     { color: #FF6B6B; }
+    .compare-table .neutral { color: var(--gold-light); }
+
+    /* faq */
+    .faq-list { max-width: 800px; margin: 40px auto 0; }
+    .faq-item {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.3s;
+    }
+    .faq-item.active { border-color: rgba(201,168,76,0.4); }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 28px; cursor: pointer;
+      background: rgba(255,255,255,0.03); font-weight: 600; font-size: 0.95rem; transition: background 0.3s;
+    }
+    .faq-q:hover { background: rgba(255,255,255,0.05); }
+    .faq-item.active .faq-q { color: var(--gold); background: rgba(201,168,76,0.06); }
+    .faq-arrow { color: var(--gold); font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; }
+    .faq-item.active .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      padding: 0 28px; max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      color: var(--text-sub); font-size: 0.88rem; line-height: 1.8;
+    }
+    .faq-item.active .faq-a { padding: 0 28px 22px; max-height: 300px; }
+
+    /* cta */
+    .assurance-cta { background: linear-gradient(135deg, #0D2244, #0A1628); padding: 100px 0; text-align: center; }
+    .assurance-cta h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 20px; line-height: 1.3; }
+    .assurance-cta p  { font-size: 1.05rem; color: var(--text-sub); margin-bottom: 40px; line-height: 1.8; }
+    .cta-btn-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 900px) {
+      .what-grid, .flow-steps { grid-template-columns: 1fr; }
+      .flow-steps::before { display: none; }
+      .condition-cards, .mandatory-grid, .diff-grid { grid-template-columns: 1fr; }
+      .highlight-strip .hl-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-gl">GL</span><span class="logo-allpay">&nbsp;allpay</span>
+        </a>
+        <nav class="nav">
+          <a href="service.html" class="nav-link">서비스</a>
+          <a href="settlement.html" class="nav-link">정산구조</a>
+          <a href="assurance.html" class="nav-link active">안심서비스</a>
+          <a href="map.html" class="nav-link">가맹점 지도</a>
+          <a href="contact.html" class="nav-link">문의하기</a>
+          <a href="contact.html" class="btn btn-gold nav-cta">상담신청</a>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose" aria-label="메뉴 닫기">&times;</button>
+    <a href="service.html" class="nav-link" onclick="closeMobileMenu()">서비스</a>
+    <a href="settlement.html" class="nav-link" onclick="closeMobileMenu()">정산구조</a>
+    <a href="assurance.html" class="nav-link" onclick="closeMobileMenu()">안심서비스</a>
+    <a href="map.html" class="nav-link" onclick="closeMobileMenu()">가맹점 지도</a>
+    <a href="contact.html" class="nav-link" onclick="closeMobileMenu()">문의하기</a>
+    <a href="contact.html" class="btn btn-gold" onclick="closeMobileMenu()">상담신청</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="assurance-hero">
+    <div class="container">
+      <div style="max-width:720px;">
+        <span class="assurance-hero-badge">킵페이 안심결제서비스</span>
+        <h1 class="assurance-hero-title">
+          회원권을 결제한 순간부터<br>
+          <span class="gold">소비자가 보호받습니다.</span>
+        </h1>
+        <p class="assurance-hero-sub">
+          킵페이 안심결제서비스는 회원권 결제 시 자동 가입되는 소비자 보호 프로그램입니다.<br>
+          시설 폐업·영업 중단 시 <strong>최대 300만원까지 보상</strong>하며, SGI서울보증이 뒷받침합니다.
+        </p>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <a href="#what" class="btn btn-gold">킵페이 안심결제서비스 알아보기</a>
+          <a href="contact.html" class="btn btn-outline">상담 문의하기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHT STRIP -->
+  <div class="highlight-strip">
+    <div class="container">
+      <div class="hl-grid">
+        <div class="highlight-item">
+          <span class="num">300만원</span>
+          <span class="hl-label">최대 보상 한도</span>
+          <span class="hl-desc">회원권 1건당 적용</span>
+        </div>
+        <div class="highlight-item">
+          <span class="num">SGI</span>
+          <span class="hl-label">서울보증보험 연계</span>
+          <span class="hl-desc">공신력 있는 보증 기관</span>
+        </div>
+        <div class="highlight-item">
+          <span class="num">자동</span>
+          <span class="hl-label">GL Pay 결제 즉시 가입</span>
+          <span class="hl-desc">별도 신청 불필요</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 안심서비스란? -->
+  <section class="section-lg section-dark" id="what">
+    <div class="container">
+      <div class="what-grid">
+        <div class="what-text fade-in">
+          <span class="slabel" style="font-family:var(--font-en);font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:12px;">What is Assurance Service</span>
+          <h3>킵페이 안심결제서비스란<br>무엇인가요?</h3>
+          <p>피트니스·요가·필라테스 등 <strong>선불 결제 기반 업종</strong>에서는 소비자가 회원권을 결제한 후 업체가 갑작스럽게 폐업하거나 운영을 중단할 경우 환불을 받지 못하는 문제가 발생합니다.</p>
+          <p>킵페이 안심결제서비스는 회원권 결제 시 자동으로 가입되어, 이러한 상황에서 소비자를 보호하는 <strong>보상 연계 서비스</strong>입니다.</p>
+          <div class="emphasis">
+            가맹점이 GL allpay를 도입하면 소비자에게 “SGI서울보증 연계 킵페이 안심결제서비스 가입 가맹점”임을 표시할 수 있어 신뢰도가 높아지고, 회원 모집이 더 원활해집니다.
+          </div>
+        </div>
+        <div class="what-visual fade-in">
+          <div class="big-shield">SGI</div>
+          <div class="coverage-badge">최대 300만원 보상</div>
+          <div class="coverage-desc" style="margin-bottom:16px;">회원권 결제 시 자동 적용</div>
+          <div class="sgi-badge">
+            <span></span>
+            <span><strong>SGI서울보증보험</strong> 연계 서비스</span>
+          </div>
+          <div class="sgi-badge">
+            <span></span>
+            <span>공정거래위원회 <strong>의무표시 기준 충족</strong></span>
+          </div>
+          <div class="sgi-badge">
+            <span></span>
+            <span>체육시설법 및 소비자보호법 <strong>적합</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 보상 적용 흐름 -->
+  <section class="section-md section-mid">
+    <div class="container">
+      <div class="section-header">
+        <span class="slabel">How It Works</span>
+        <h2>안심서비스 보상 적용 흐름</h2>
+        <p>회원권 결제 후 문제 발생 시, 아래 5단계 프로세스로 보상이 이루어집니다.</p>
+      </div>
+      <div class="flow-steps fade-in">
+        <div class="flow-step">
+          <div class="step-icon"><span class="step-num">1</span></div>
+          <div class="step-title">GL Pay 결제</div>
+          <div class="step-desc">소비자가 회원권을 GL allpay로 결제</div>
+        </div>
+        <div class="flow-step">
+          <div class="step-icon"><span class="step-num">2</span></div>
+          <div class="step-title">자동 서비스 가입</div>
+          <div class="step-desc">결제 즉시 안심서비스 자동 등록</div>
+        </div>
+        <div class="flow-step">
+          <div class="step-icon"><span class="step-num">3</span></div>
+          <div class="step-title">폐업·중단 발생</div>
+          <div class="step-desc">시설 폐업 또는 영업 중단 사유 발생</div>
+        </div>
+        <div class="flow-step">
+          <div class="step-icon"><span class="step-num">4</span></div>
+          <div class="step-title">보상 신청</div>
+          <div class="step-desc">소비자가 GL allpay에 보상 접수 신청</div>
+        </div>
+        <div class="flow-step">
+          <div class="step-icon"><span class="step-num">5</span></div>
+          <div class="step-title">보상 지급</div>
+          <div class="step-desc">최대 300만원 한도 내 잔여금액 보상</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 보상 조건 -->
+  <section class="section-lg section-dark">
+    <div class="container">
+      <div class="section-header">
+        <span class="slabel">Coverage Conditions</span>
+        <h2>보상 적용 조건</h2>
+        <p>아래 조건에 해당하는 경우 최대 300만원 한도 내에서 보상이 적용됩니다.</p>
+      </div>
+      <div class="condition-cards fade-in">
+        <div class="condition-card">
+          <div class="card-icon"></div>
+          <h4>시설 폐업</h4>
+          <p>가맹점이 정상적인 영업을 중단하고 폐업한 경우. 잔여 회원 기간에 해당하는 금액을 산정하여 보상합니다.</p>
+        </div>
+        <div class="condition-card">
+          <div class="card-icon"></div>
+          <h4>영업 중단</h4>
+          <p>시설이 부득이한 사유로 영업을 중단하여 회원이 서비스를 이용할 수 없게 된 경우에도 보상이 적용됩니다.</p>
+        </div>
+        <div class="condition-card">
+          <div class="card-icon"></div>
+          <h4>환불 불가 상황</h4>
+          <p>업체 측의 귀책사유로 인해 소비자가 정상적인 환불을 받지 못하는 상황이 발생한 경우 보상 대상에 포함됩니다.</p>
+        </div>
+      </div>
+      <div style="margin-top:40px;padding:24px 32px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:12px;">
+        <p style="font-size:0.88rem;color:var(--text-sub);line-height:1.8;">
+          <strong style="color:var(--gold-light);">보상 제외 사항:</strong>
+          소비자 개인 사정에 의한 해지 요청, 계약 기간 종료 후 미이용, 소비자 귀책 사유로 인한 환불 거부, 
+          이미 이용한 기간에 대한 소급 보상은 해당되지 않습니다. 자세한 약관은 상담 시 안내받으실 수 있습니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 의무표시 법령 -->
+  <section class="section-lg section-alt" id="mandatory">
+    <div class="container">
+      <div class="section-header">
+        <span class="law-badge">법령 의무사항</span>
+        <h2>2025년부터 달라지는 선불결제 의무표시</h2>
+        <p>공정거래위원회 표시·광고법 개정으로 선불결제 업종에 대한 의무 표시가 강화되었습니다.</p>
+      </div>
+      <div class="law-alert-box fade-in">
+        <h3>법령 개정 핵심 내용</h3>
+        <p>체육시설법 및 공정거래위원회 중요정보 고시 개정안에 따라, 피트니스·요가·필라테스·헬스클럽 등 <strong>선불결제 기반 체육시설 사업자</strong>는 계약 체결 시 반드시 아래 정보를 소비자에게 고지·표시해야 합니다.</p>
+        <div class="law-detail">
+          <ul>
+            <li>소비자 피해보상을 위한 보증보험 또는 유사서비스 가입 여부 및 보상 한도</li>
+            <li>선불금 보전 수단 및 사업자 등록 정보</li>
+            <li>계약 해지 시 환불 기준 및 절차</li>
+            <li>시설 이용 범위, 기간, 이용료 등 핵심 계약 조건</li>
+            <li>분쟁 발생 시 처리 절차 및 소비자 상담 연락처</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mandatory-grid fade-in">
+        <div class="mandatory-item">
+          <div class="mi-icon"></div>
+          <div>
+            <h4>체육시설법 의무 표시</h4>
+            <p>체육시설의 설치·이용에 관한 법률 개정으로 피트니스 등 체육시설 사업자는 선불금 보전 수단을 의무 표시해야 합니다. 미이행 시 과태료 및 영업 제재가 가능합니다.</p>
+            <span class="tag">법률 개정 적용</span>
+          </div>
+        </div>
+        <div class="mandatory-item">
+          <div class="mi-icon"></div>
+          <div>
+            <h4>공정위 중요정보 고시 개정</h4>
+            <p>공정거래위원회 표시·광고법에 따른 중요정보 고시 개정안이 행정예고되어, 선불 서비스 업종의 피해보상 관련 정보 표시가 강화됩니다.</p>
+            <span class="tag">공정위 행정예고</span>
+          </div>
+        </div>
+        <div class="mandatory-item">
+          <div class="mi-icon"></div>
+          <div>
+            <h4>유사서비스 가입 의무화</h4>
+            <p>SGI서울보증보험 등 공신력 있는 기관의 보증보험 또는 이에 준하는 유사서비스에 의무적으로 가입해야 하며, 이를 소비자에게 표시해야 합니다.</p>
+            <span class="tag">가입 의무화</span>
+          </div>
+        </div>
+        <div class="mandatory-item">
+          <div class="mi-icon"></div>
+          <div>
+            <h4>GL allpay로 간편 대응</h4>
+            <p>GL allpay 킵페이 안심결제서비스 가입 가맹점은 SGI서울보증 연계 사실과 최대 300만원 보상 한도를 자동으로 소비자에게 표시할 수 있어 의무 표시 요건을 충족합니다.</p>
+            <span class="tag tag-green">GL allpay 해결</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 대상 업종 -->
+  <section class="section-md section-mid">
+    <div class="container">
+      <div class="section-header">
+        <span class="slabel">Target Industries</span>
+        <h2>안심서비스 적용 대상 업종</h2>
+        <p>선불 회원권을 판매하는 모든 업종에 적용됩니다. 특히 아래 업종은 의무표시 대상에 해당됩니다.</p>
+      </div>
+      <div class="industry-pills fade-in">
+        <span class="industry-pill primary">헬스 / 피트니스센터</span>
+        <span class="industry-pill primary">요가</span>
+        <span class="industry-pill primary">필라테스</span>
+        <span class="industry-pill">복싱 / 격투기</span>
+        <span class="industry-pill">수영장</span>
+        <span class="industry-pill">스케이트 / 아이스링크</span>
+        <span class="industry-pill">테니스 / 스쿼시</span>
+        <span class="industry-pill">배드민턴</span>
+        <span class="industry-pill">댄스 / 댄스스포츠</span>
+        <span class="industry-pill">태권도 / 검도</span>
+        <span class="industry-pill">골프 연습장</span>
+        <span class="industry-pill">서핑 / 수상스포츠</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GL allpay 차별성 -->
+  <section class="section-lg section-dark">
+    <div class="container">
+      <div class="section-header">
+        <span class="slabel">Our Difference</span>
+        <h2>GL allpay만의 킵페이 안심결제서비스 차별성</h2>
+        <p>단순한 결제 수단을 넘어, 킵페이 안심결제서비스로 가맹점과 소비자 모두를 보호하는 구조를 설계합니다.</p>
+      </div>
+      <div class="diff-grid fade-in">
+        <div class="diff-card">
+          <div class="d-icon"></div>
+          <h4>원천사 직접 연계</h4>
+          <p>2·3차 PG사를 거치지 않고 원천 결제사와 직접 연결되기 때문에 안심서비스 보상 체계도 안정적으로 유지됩니다.</p>
+          <div class="d-highlight">리스크 구조 자체를 근본적으로 차단</div>
+        </div>
+        <div class="diff-card">
+          <div class="d-icon"></div>
+          <h4>무이자 3-24개월 할부</h4>
+          <p>GL Pay의 무이자 3-24개월 할부와 안심서비스가 결합되어 소비자는 부담 없이 프리미엄 회원권을 구매하고 동시에 보호받을 수 있습니다.</p>
+          <div class="d-highlight">소비자 부담 ↓ &nbsp;|&nbsp; 가맹점 매출 ↑</div>
+        </div>
+        <div class="diff-card">
+          <div class="d-icon"></div>
+          <h4>법령 의무표시 자동 충족</h4>
+          <p>킵페이 안심결제서비스 가입 시 공정위 의무표시 및 체육시설법 요건을 자동으로 충족하므로 별도의 서류 준비 없이 법적 요건을 갖출 수 있습니다.</p>
+          <div class="d-highlight">공정위·체육시설법 동시 대응</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 비교표 -->
+  <section class="section-md section-mid">
+    <div class="container">
+      <div class="section-header">
+        <span class="slabel">Comparison</span>
+        <h2>GL allpay vs 일반 PG사 비교</h2>
+        <p>안심서비스와 소비자 보호 측면에서 GL allpay와 일반 PG사의 차이를 확인하세요.</p>
+      </div>
+      <div class="fade-in" style="overflow-x:auto;">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>비교 항목</th>
+              <th>GL allpay</th>
+              <th>2·3차 PG사</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>킵페이 안심결제서비스</td><td class="good">O 킵페이 안심결제서비스 (최대 300만원)</td><td class="bad">X 해당 없음</td></tr>
+            <tr><td>SGI서울보증 연계</td><td class="good">O 연계 운영</td><td class="bad">X 미연계</td></tr>
+            <tr><td>원천결제사 직결</td><td class="good">O 직접 연결</td><td class="bad">X 다단계 경유</td></tr>
+            <tr><td>공정위 의무표시 대응</td><td class="good">O 자동 충족</td><td class="bad">X 별도 대응 필요</td></tr>
+            <tr><td>무이자 할부 지원</td><td class="good">O 최대 3-24개월</td><td class="neutral">△ 일부 제한적</td></tr>
+            <tr><td>피트니스 업종 승인</td><td class="good">O 공식 입점 가능</td><td class="bad">X 대부분 기피</td></tr>
+            <tr><td>정산 안정성</td><td class="good">O 직접 정산</td><td class="bad">X PG사 부도 리스크</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-lg section-dark">
+    <div class="container">
+      <div class="section-header">
+        <span class="slabel">FAQ</span>
+        <h2>자주 묻는 질문</h2>
+        <p>안심서비스에 대해 가장 많이 묻는 질문들을 정리했습니다.</p>
+      </div>
+      <div class="faq-list fade-in">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>안심서비스는 별도로 신청해야 하나요?</span>
+            <span class="faq-arrow">▾</span>
+          </div>
+          <div class="faq-a">아니요. GL allpay를 통해 회원권 결제가 이루어지면 소비자에게 안심서비스가 자동으로 적용됩니다. 소비자 또는 가맹점 모두 별도 신청 절차 없이 즉시 서비스 혜택을 받을 수 있습니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>300만원 한도는 1인당인가요, 결제 건당인가요?</span>
+            <span class="faq-arrow">▾</span>
+          </div>
+          <div class="faq-a">최대 300만원 보상 한도는 회원권 결제 건당 적용됩니다. 정확한 보상 기준 및 계산 방식은 상담을 통해 자세히 안내받으실 수 있습니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>가맹점이 폐업하지 않아도 안심서비스가 의미 있나요?</span>
+            <span class="faq-arrow">▾</span>
+          </div>
+          <div class="faq-a">네, 안심서비스는 소비자 신뢰도를 높이는 마케팅 도구로도 매우 효과적입니다. "SGI서울보증 안심서비스 가입 가맹점" 표시는 잠재 회원의 가입 결정을 돕고, 공정위 의무표시 요건을 충족해 법적 리스크도 줄여줍니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>피트니스 외 업종도 적용받을 수 있나요?</span>
+            <span class="faq-arrow">▾</span>
+          </div>
+          <div class="faq-a">네. 요가, 필라테스, 복싱, 수영장 등 선불 회원권을 판매하는 모든 체육·운동 시설에 적용 가능합니다. 그 외 선불 서비스 업종도 협의를 통해 적용 여부를 검토할 수 있습니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>안심서비스 비용(수수료)은 얼마인가요?</span>
+            <span class="faq-arrow">▾</span>
+          </div>
+          <div class="faq-a">킵페이 안심결제서비스 관련 수수료 구조는 가맹점별 계약 조건 및 결제 규모에 따라 다르게 적용됩니다. 상담 문의를 통해 맞춤 안내를 받으실 수 있습니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="assurance-cta">
+    <div class="container">
+      <span style="font-family:var(--font-en);font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:16px;">Start Now</span>
+      <h2>지금 바로 킵페이 안심결제서비스를<br>가맹점에 도입하세요</h2>
+      <p>소비자 보호와 법령 의무표시, 매출 향상까지<br>킵페이 안심결제서비스 하나로 해결됩니다.</p>
+      <div class="cta-btn-group">
+        <a href="contact.html" class="btn btn-gold" style="font-size:1.05rem;padding:16px 40px;">무료 상담 신청하기</a>
+        <a href="contact.html" class="btn btn-outline">상담 문의하기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="logo-gl">GL</span><span class="logo-allpay">&nbsp;allpay</span>
+          </div>
+          <p class="footer-tagline">Payment, Structured.</p>
+          <p class="footer-desc">PG기반 직접 정산 구조 위에 설계된<br>결제 솔루션 파트너</p>
+        </div>
+        <div class="footer-nav">
+          <h4>서비스</h4>
+          <a href="service.html">서비스 소개</a>
+          <a href="settlement.html">정산구조</a>
+          <a href="assurance.html">안심서비스</a>
+          <a href="map.html">가맹점 지도</a>
+        </div>
+        <div class="footer-nav">
+          <h4>회사</h4>
+          <a href="contact.html">상담 문의</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">이용약관</a>
+        </div>
+        <div class="footer-contact">
+          <h4>연락처</h4>
+          <p>admin@glallpay.com</p>
+          <p>info@glallpay.com</p>
+          <p>평일 09:00 – 18:00</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-info">
+          <span>㈜지엘올페이</span>
+          <span>사업자등록번호: 112-88-03313</span>
+          <span>대표: 강용신</span>
+          <span>경기도 용인시 수지구 수지로342번길 32, 5층 503·504호</span>
+        </div>
+        <p class="footer-copy">© 2026 GL allpay. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      const wasActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      if (!wasActive) item.classList.add('active');
+    }
+  </script>
+</body>
+</html>

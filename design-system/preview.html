@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>OUHVE ABM — Final Palette (H + I-accent)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: #18181B; color: #E4E4E7; padding: 32px; -webkit-font-smoothing: antialiased; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .subtitle { color: #A1A1AA; margin-bottom: 8px; font-size: 14px; }
+  .rules { background: #18181B; border: 1px solid #27272A; border-radius: 8px; padding: 12px 16px; font-size: 12px; color: #D4D4D8; margin-bottom: 24px; line-height: 1.7; font-family: 'SF Mono', monospace; }
+
+  .swatch-row { display: flex; gap: 8px; margin-bottom: 24px; }
+  .swatch { flex: 1; padding: 14px; border-radius: 8px; font-size: 11px; font-family: 'SF Mono', monospace; text-align: center; }
+
+  .stage { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 1100px) { .stage { grid-template-columns: 1fr; } }
+  .stage-label { font-size: 11px; color: #A1A1AA; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+
+  /* === Shared component styles === */
+  .app { border-radius: 16px; overflow: hidden; border: 1px solid #27272A; }
+
+  /* LIGHT theme */
+  .light {
+    --bg: #F8FAFC;
+    --bg-card: #FFFFFF;
+    --bg-muted: #F1F5F9;
+    --border: #E2E8F0;
+    --text: #0F172A;
+    --text-muted: #64748B;
+    --text-faint: #94A3B8;
+  }
+  /* DARK theme */
+  .dark {
+    --bg: #020617;
+    --bg-card: #0F172A;
+    --bg-muted: #1E293B;
+    --border: #1E293B;
+    --text: #F1F5F9;
+    --text-muted: #94A3B8;
+    --text-faint: #64748B;
+  }
+
+  .app-body { background: var(--bg); color: var(--text); padding: 24px; min-height: 520px; }
+
+  /* Header */
+  .app-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .brand-block { display: flex; align-items: center; gap: 10px; }
+  .brand-logo {
+    width: 32px; height: 32px; border-radius: 8px; position: relative;
+    background: #FF5A1F;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 1px #FF5A1F30, 0 4px 12px #FF5A1F25;
+  }
+  /* Teal accent dot on logo — pointwise shape */
+  .brand-logo::after {
+    content: ''; position: absolute; bottom: -2px; right: -2px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #0F766E;
+    border: 2px solid var(--bg);
+  }
+  .brand-text { font-weight: 800; font-size: 18px; letter-spacing: -0.02em; color: var(--text); }
+  .brand-mark-text { color: #FF5A1F; }
+  .header-meta { display: flex; align-items: center; gap: 12px; }
+  .live-dot {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .live-dot::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: #0F766E;
+    box-shadow: 0 0 0 3px #0F766E25;
+  }
+  .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--bg-muted); border: 1px solid var(--border); }
+
+  /* KPI Cards */
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+  .kpi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; position: relative; overflow: hidden; }
+  .kpi-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, #FF5A1F, #FF5A1F40, transparent);
+  }
+  .kpi-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .kpi-value { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 6px; color: var(--text); }
+  .kpi-delta { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; margin-top: 4px; color: var(--text-muted); }
+  /* Teal dot as positive indicator */
+  .kpi-delta-pos::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%; background: #0F766E;
+  }
+  /* Persimmon icon chip */
+  .kpi-icon {
+    position: absolute; top: 14px; right: 14px;
+    width: 28px; height: 28px; border-radius: 8px;
+    background: #FF5A1F12; color: #FF5A1F;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+  }
+
+  /* Section with chart */
+  .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .panel-title { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  /* Teal squircle as section icon background */
+  .panel-icon-chip {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: #0F766E15;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .panel-icon-chip::after {
+    content: ''; width: 8px; height: 8px; border-radius: 2px; background: #0F766E;
+  }
+
+  /* Bar chart */
+  .chart { display: flex; align-items: flex-end; gap: 8px; height: 100px; padding: 8px 0; }
+  .bar { flex: 1; background: #FF5A1F; border-radius: 4px 4px 0 0; opacity: 0.85; }
+  .bar:nth-child(1) { height: 40%; }
+  .bar:nth-child(2) { height: 65%; }
+  .bar:nth-child(3) { height: 50%; }
+  .bar:nth-child(4) { height: 80%; }
+  .bar:nth-child(5) { height: 70%; }
+  .bar:nth-child(6) { height: 95%; }
+  .bar:nth-child(7) { height: 60%; }
+  /* Teal line overlay as "target" indicator */
+  .chart-wrapper { position: relative; }
+  .target-line { position: absolute; left: 0; right: 0; top: 30%; height: 2px; background: #0F766E; border-radius: 1px; opacity: 0.7; }
+  .target-line::before {
+    content: 'Goal'; position: absolute; right: 0; top: -16px;
+    font-size: 9px; color: var(--text-muted); padding: 2px 6px; background: var(--bg-card); font-family: 'SF Mono', monospace;
+  }
+
+  /* Member row */
+  .row { display: flex; align-items: center; padding: 10px 12px; border-radius: 8px; gap: 12px; }
+  .row + .row { margin-top: 4px; }
+  .row:hover { background: var(--bg-muted); }
+  .row-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--bg-muted); border: 1px solid var(--border); position: relative; flex-shrink: 0; }
+  /* Teal "online" status dot on avatar */
+  .row-avatar.online::after {
+    content: ''; position: absolute; bottom: 0; right: 0;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #0F766E; border: 2px solid var(--bg-card);
+  }
+  .row-name { font-size: 13px; color: var(--text); font-weight: 500; }
+  .row-meta { font-size: 11px; color: var(--text-muted); }
+  .row-action { margin-left: auto; }
+
+  /* Buttons */
+  .btn-primary {
+    background: #FF5A1F; color: white;
+    padding: 8px 16px; border-radius: 8px; border: none; font-weight: 600; font-size: 13px; cursor: pointer;
+    box-shadow: 0 1px 0 #00000010, 0 2px 8px #FF5A1F30;
+  }
+  .btn-ghost {
+    background: transparent; color: var(--text);
+    padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border); font-weight: 600; font-size: 13px; cursor: pointer;
+  }
+
+  /* Tag pills — neutral, NO teal text */
+  .tag { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; background: var(--bg-muted); color: var(--text-muted); margin-right: 6px; }
+  /* But pill with teal dot prefix is allowed */
+  .tag.has-dot { padding-left: 8px; display: inline-flex; align-items: center; gap: 6px; }
+  .tag.has-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #0F766E; }
+
+  /* Empty state — teal as decorative shape only */
+  .empty {
+    text-align: center; padding: 24px; border: 1px dashed var(--border); border-radius: 12px; margin-top: 8px;
+  }
+  .empty-shape {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: #0F766E15;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 10px;
+  }
+  .empty-shape::after { content: ''; width: 20px; height: 20px; border-radius: 4px; background: #0F766E; opacity: 0.6; }
+  .empty-text { font-size: 13px; color: var(--text-muted); }
+
+  /* Section spacing */
+  .footer-cta { display: flex; gap: 10px; margin-top: 16px; }
+
+  .annotation {
+    font-size: 11px; color: #A1A1AA; padding: 8px 12px; background: #0F766E10; border-left: 2px solid #0F766E;
+    border-radius: 4px; margin-top: 16px; font-family: 'SF Mono', monospace; line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+  <h1>OUHVE ABM — Final Palette</h1>
+  <p class="subtitle">Base: <strong>H Slate</strong> · Primary: <strong>Persimmon #FF5A1F</strong> · Accent: <strong>Forest Teal #0F766E (도형 포인트 전용)</strong></p>
+
+  <div class="rules">
+    <strong>티얼(#0F766E) 사용 규칙:</strong><br>
+    ✓ 허용 — 로고 점, KPI 상승 인디케이터 점, 차트 목표선, 아바타 온라인 점, 아이콘 칩 배경, 빈 상태 일러스트 도형, 태그 앞 점<br>
+    ✗ 금지 — 본문 글자색, KPI 숫자 색, 헤딩, 버튼 텍스트, 링크 텍스트, 보더 라인 단독, 큰 배경
+  </div>
+
+  <div class="swatch-row">
+    <div class="swatch" style="background:#FF5A1F; color:white;">#FF5A1F<br><b>Persimmon</b> · Primary</div>
+    <div class="swatch" style="background:#0F766E; color:white;">#0F766E<br><b>Forest Teal</b> · Point only</div>
+    <div class="swatch" style="background:#F8FAFC; color:#0F172A; border:1px solid #E2E8F0;">#F8FAFC<br><b>Slate-50</b> · Light BG</div>
+    <div class="swatch" style="background:#020617; color:#F1F5F9;">#020617<br><b>Slate-950</b> · Dark BG</div>
+    <div class="swatch" style="background:#0F172A; color:#F1F5F9;">#0F172A<br><b>Slate-900</b> · Dark Card</div>
+  </div>
+
+  <div class="stage">
+
+    <!-- LIGHT -->
+    <div>
+      <div class="stage-label">Light Mode</div>
+      <div class="app">
+        <div class="app-body light">
+          <!-- Header -->
+          <div class="app-header">
+            <div class="brand-block">
+              <div class="brand-logo">O</div>
+              <div class="brand-text">OUHVE<span class="brand-mark-text"> ABM</span></div>
+            </div>
+            <div class="header-meta">
+              <span class="live-dot">실시간 동기화</span>
+              <div class="avatar"></div>
+            </div>
+          </div>
+
+          <!-- KPI -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">활성 회원</div>
+              <div class="kpi-value">2,847</div>
+              <div class="kpi-delta kpi-delta-pos">+12% MoM</div>
+              <div class="kpi-icon">M</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">이번달 매출</div>
+              <div class="kpi-value">₩48.2M</div>
+              <div class="kpi-delta kpi-delta-pos">+8% MoM</div>
+              <div class="kpi-icon">₩</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">출석률</div>
+              <div class="kpi-value">73%</div>
+              <div class="kpi-delta kpi-delta-pos">목표 달성</div>
+              <div class="kpi-icon">%</div>
+            </div>
+          </div>
+
+          <!-- Chart panel -->
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <div class="panel-icon-chip"></div>
+                주간 방문 추이
+              </div>
+              <span class="tag">7일</span>
+            </div>
+            <div class="chart-wrapper">
+              <div class="chart">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              </div>
+              <div class="target-line"></div>
+            </div>
+          </div>
+
+          <!-- Members panel -->
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <div class="panel-icon-chip"></div>
+                최근 활동
+              </div>
+              <span class="tag has-dot">활성 24명</span>
+            </div>
+            <div class="row">
+              <div class="row-avatar online"></div>
+              <div><div class="row-name">김민준</div><div class="row-meta">PT 예약 · 10분 전</div></div>
+              <div class="row-action"><span class="tag">VIP</span></div>
+            </div>
+            <div class="row">
+              <div class="row-avatar online"></div>
+              <div><div class="row-name">이서연</div><div class="row-meta">출석 체크 · 32분 전</div></div>
+              <div class="row-action"><span class="tag">정회원</span></div>
+            </div>
+            <div class="row">
+              <div class="row-avatar"></div>
+              <div><div class="row-name">박지호</div><div class="row-meta">결제 완료 · 1시간 전</div></div>
+              <div class="row-action"><span class="tag">신규</span></div>
+            </div>
+          </div>
+
+          <div class="footer-cta">
+            <button class="btn-primary">새 회원 등록</button>
+            <button class="btn-ghost">리포트 보기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DARK -->
+    <div>
+      <div class="stage-label">Dark Mode</div>
+      <div class="app">
+        <div class="app-body dark">
+          <div class="app-header">
+            <div class="brand-block">
+              <div class="brand-logo">O</div>
+              <div class="brand-text">OUHVE<span class="brand-mark-text"> ABM</span></div>
+            </div>
+            <div class="header-meta">
+              <span class="live-dot">실시간 동기화</span>
+              <div class="avatar"></div>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">활성 회원</div>
+              <div class="kpi-value">2,847</div>
+              <div class="kpi-delta kpi-delta-pos">+12% MoM</div>
+              <div class="kpi-icon">M</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">이번달 매출</div>
+              <div class="kpi-value">₩48.2M</div>
+              <div class="kpi-delta kpi-delta-pos">+8% MoM</div>
+              <div class="kpi-icon">₩</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">출석률</div>
+              <div class="kpi-value">73%</div>
+              <div class="kpi-delta kpi-delta-pos">목표 달성</div>
+              <div class="kpi-icon">%</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <div class="panel-icon-chip"></div>
+                주간 방문 추이
+              </div>
+              <span class="tag">7일</span>
+            </div>
+            <div class="chart-wrapper">
+              <div class="chart">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              </div>
+              <div class="target-line"></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <div class="panel-icon-chip"></div>
+                최근 활동
+              </div>
+              <span class="tag has-dot">활성 24명</span>
+            </div>
+            <div class="row">
+              <div class="row-avatar online"></div>
+              <div><div class="row-name">김민준</div><div class="row-meta">PT 예약 · 10분 전</div></div>
+              <div class="row-action"><span class="tag">VIP</span></div>
+            </div>
+            <div class="row">
+              <div class="row-avatar online"></div>
+              <div><div class="row-name">이서연</div><div class="row-meta">출석 체크 · 32분 전</div></div>
+              <div class="row-action"><span class="tag">정회원</span></div>
+            </div>
+            <div class="row">
+              <div class="row-avatar"></div>
+              <div><div class="row-name">박지호</div><div class="row-meta">결제 완료 · 1시간 전</div></div>
+              <div class="row-action"><span class="tag">신규</span></div>
+            </div>
+          </div>
+
+          <div class="footer-cta">
+            <button class="btn-primary">새 회원 등록</button>
+            <button class="btn-ghost">리포트 보기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="annotation">
+    티얼 포인트 위치 — ① 로고 우하단 점 ② 헤더 "실시간 동기화" 점 ③ KPI 상승 인디케이터 작은 점 ④ 차트 Goal 가로선 ⑤ 패널 제목 옆 사각형 아이콘 칩 ⑥ 아바타 우하단 온라인 점 ⑦ "활성 24명" 태그 앞 점 ⑧ (빈 상태일 때) 일러스트 사각형 도형
+  </div>
+
+</body>
+</html>

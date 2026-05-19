@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GLAllPay - 헬스장 통합 운영 플랫폼</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      color: #1a1a2e;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .logo span { color: #FF6B35; }
+    .nav-btn {
+      padding: 0.625rem 1.5rem;
+      background: #FF6B35;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-btn:hover { opacity: 0.9; }
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 span { color: #FF6B35; }
+    .hero p {
+      font-size: 1.125rem;
+      color: #666;
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .hero-btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: #FF6B35;
+      color: #fff;
+      border-radius: 12px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(255, 107, 53, 0.3);
+    }
+    .hero-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 800px;
+      width: 100%;
+      margin-top: 4rem;
+    }
+    .feature {
+      padding: 1.5rem;
+      border: 1px solid #f0f0f0;
+      border-radius: 12px;
+      text-align: left;
+    }
+    .feature h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .feature p {
+      font-size: 0.875rem;
+      color: #888;
+      line-height: 1.5;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #aaa;
+      font-size: 0.75rem;
+      border-top: 1px solid #f0f0f0;
+    }
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .features { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">GL<span>All</span>Pay</div>
+    <a href="/business/auth" class="nav-btn">Business Login</a>
+  </header>
+  <main class="hero">
+    <h1>헬스장 운영,<br /><span>하나로</span> 통합하세요</h1>
+    <p>회원 관리, 결제, 수업, 출석, 통계까지. GLAllPay 하나면 충분합니다.</p>
+    <a href="/business" class="hero-btn">Business 시작하기</a>
+    <div class="features">
+      <div class="feature">
+        <h3>회원 관리</h3>
+        <p>회원 등록부터 계약, 출석, 상담 이력까지 한눈에</p>
+      </div>
+      <div class="feature">
+        <h3>PG 결제</h3>
+        <p>카드 결제, QR 결제, 링크 결제를 하나의 터미널에서</p>
+      </div>
+      <div class="feature">
+        <h3>수업 스케줄</h3>
+        <p>그룹 수업과 PT 스케줄을 캘린더로 효율적 관리</p>
+      </div>
+    </div>
+  </main>
+  <footer>
+    &copy; 2026 GLAllPay. All rights reserved.
+  </footer>
+</body>
+</html>

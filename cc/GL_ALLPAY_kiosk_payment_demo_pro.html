@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GL ALLPAY KIOSK 결제창 Pro</title>
+  <style>
+    :root{
+      --navy:#0f172a;
+      --navy2:#111827;
+      --sky:#0ea5e9;
+      --sky2:#0284c7;
+      --sky3:#38bdf8;
+      --bg:#f8fafc;
+      --line:#e5e7eb;
+      --text:#0f172a;
+      --muted:#64748b;
+      --ok:#16a34a;
+      --okbg:#dcfce7;
+      --danger:#ef4444;
+      --dangerbg:#fee2e2;
+      --white:#ffffff;
+      --shadow:0 24px 60px rgba(15,23,42,.16);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;background:var(--bg);color:var(--text)}
+    body{min-height:100vh}
+    .page{min-height:100vh;background:
+      radial-gradient(circle at top left, rgba(14,165,233,.12), transparent 28%),
+      linear-gradient(180deg, #f8fbff 0%, #f8fafc 100%);
+    }
+    .wrap{max-width:1280px;margin:0 auto;padding:32px 24px 48px}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+    .brand{display:flex;flex-direction:column;gap:6px}
+    .eyebrow{font-size:12px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--sky2)}
+    h1{margin:0;font-size:38px;line-height:1.1;letter-spacing:-.03em}
+    .sub{color:var(--muted);font-size:15px}
+    .btn{border:none;border-radius:14px;padding:14px 18px;font-weight:700;cursor:pointer;transition:.18s ease;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+    .btn.primary{background:var(--sky);color:#fff}
+    .btn.primary:hover{background:var(--sky2)}
+    .btn.ghost{background:#fff;color:var(--text);border:1px solid var(--line)}
+    .btn.dark{background:var(--navy);color:#fff}
+    .demo-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start}
+    .card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+    .card.pad{padding:24px}
+    .list{display:grid;gap:14px;margin-top:18px}
+    .item{border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:#fff}
+    .item b{display:block;font-size:17px;margin-bottom:6px}
+    .item span{color:var(--muted);font-size:14px;line-height:1.5}
+    .preview-shell{padding:18px;background:linear-gradient(180deg,#dbeafe 0%,#eff6ff 100%);border-radius:28px;border:1px solid #bfdbfe}
+    .kiosk-frame{background:#0b1220;border-radius:30px;padding:20px;min-height:760px;box-shadow:0 35px 80px rgba(2,6,23,.24)}
+    .kiosk-screen{background:#fff;border-radius:22px;overflow:hidden;min-height:720px;display:flex;flex-direction:column}
+    .kiosk-header{background:linear-gradient(135deg, #0f172a 0%, #0b1220 60%, #0369a1 100%);color:#fff;padding:18px 22px;display:flex;justify-content:space-between;align-items:center}
+    .kiosk-header .title{font-size:22px;font-weight:800;letter-spacing:-.02em}
+    .kiosk-header .small{font-size:13px;color:#cbd5e1;margin-top:4px}
+    .badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);padding:8px 12px;border-radius:999px;font-size:12px;font-weight:700}
+    .order-wrap{display:grid;grid-template-columns:1fr 380px;gap:0;flex:1}
+    .product-area{padding:24px;background:#f8fafc}
+    .product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .product{border:1px solid var(--line);background:#fff;border-radius:18px;padding:18px;cursor:pointer;transition:.15s ease}
+    .product:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(15,23,42,.08)}
+    .product .name{font-size:18px;font-weight:800;letter-spacing:-.02em}
+    .product .desc{margin-top:6px;color:var(--muted);font-size:13px}
+    .product .price{margin-top:14px;font-size:22px;font-weight:800;color:var(--navy)}
+    .summary{border-left:1px solid var(--line);background:#fff;padding:22px;display:flex;flex-direction:column}
+    .sum-head{display:flex;justify-content:space-between;align-items:center}
+    .sum-head h2{margin:0;font-size:24px;letter-spacing:-.02em}
+    .sum-head .count{color:var(--muted);font-size:13px}
+    .cart{margin-top:16px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+    .cart-head,.cart-row{display:grid;grid-template-columns:1.1fr .7fr .6fr;gap:10px;padding:14px 16px}
+    .cart-head{background:#f8fafc;font-size:12px;color:var(--muted);font-weight:700}
+    .cart-row{border-top:1px solid var(--line);font-size:14px}
+    .cart-row .item-name{font-weight:700}
+    .calc{margin-top:18px;display:grid;gap:10px}
+    .calc-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted)}
+    .calc-row strong{color:var(--text)}
+    .calc-total{margin-top:8px;padding-top:16px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:flex-end}
+    .calc-total .label{font-size:14px;color:var(--muted)}
+    .calc-total .value{font-size:36px;font-weight:900;letter-spacing:-.04em}
+    .sum-actions{margin-top:auto;display:grid;gap:10px;padding-top:22px}
+    .pay-panel{display:none;position:fixed;inset:0;background:rgba(2,6,23,.56);backdrop-filter:blur(4px);z-index:100;align-items:center;justify-content:center;padding:24px}
+    .pay-panel.active{display:flex}
+    .modal{width:min(1220px, 100%);height:min(900px, 100%);background:#fff;border-radius:30px;overflow:hidden;box-shadow:0 40px 100px rgba(2,6,23,.35);display:grid;grid-template-columns:1fr 420px}
+    .modal-left{padding:28px;background:
+      radial-gradient(circle at top left, rgba(14,165,233,.08), transparent 24%),
+      #f8fafc;display:flex;flex-direction:column}
+    .modal-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+    .modal-top h3{margin:0;font-size:34px;line-height:1.04;letter-spacing:-.03em}
+    .modal-top p{margin:10px 0 0;color:var(--muted);font-size:15px}
+    .close{width:48px;height:48px;border-radius:14px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:20px}
+    .method-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:24px}
+    .method{border:1px solid var(--line);border-radius:18px;background:#fff;padding:18px;cursor:pointer;transition:.15s ease}
+    .method.active{border:2px solid var(--sky);background:#f0f9ff}
+    .method .m-title{font-weight:800;font-size:18px}
+    .method .m-sub{margin-top:6px;color:var(--muted);font-size:13px}
+    .pay-content{margin-top:22px;display:grid;grid-template-columns:1.1fr .9fr;gap:18px;flex:1}
+    .pay-box{border:1px solid var(--line);border-radius:22px;background:#fff;padding:20px}
+    .pay-box h4{margin:0 0 14px;font-size:18px}
+    .amount-display{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);background:#f8fafc;border-radius:18px;padding:18px 20px;margin-bottom:14px}
+    .amount-display .label{font-size:13px;color:var(--muted)}
+    .amount-display .value{font-size:34px;font-weight:900;letter-spacing:-.04em}
+    .select-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field{display:grid;gap:8px;margin-top:12px}
+    .field label{font-size:13px;font-weight:700;color:#334155}
+    .field select,.field input{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font:inherit;background:#fff}
+    .num-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+    .num-btn{border:none;border-radius:16px;background:#0f172a;color:#fff;padding:18px 0;font-size:22px;font-weight:800;cursor:pointer}
+    .num-btn.light{background:#fff;color:var(--text);border:1px solid var(--line)}
+    .kiosk-side{background:linear-gradient(180deg,#0f172a 0%,#111827 100%);color:#fff;padding:28px;display:flex;flex-direction:column}
+    .kiosk-side h4{margin:0;font-size:24px}
+    .side-card{margin-top:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:18px}
+    .side-mini{display:flex;justify-content:space-between;align-items:center;color:#cbd5e1;font-size:14px;margin-bottom:10px;gap:12px}
+    .side-total{margin-top:12px;padding-top:14px;border-top:1px dashed rgba(255,255,255,.18);display:flex;justify-content:space-between;align-items:flex-end}
+    .side-total .label{font-size:13px;color:#cbd5e1}
+    .side-total .value{font-size:38px;font-weight:900;letter-spacing:-.04em}
+    .pay-flow{margin-top:18px;display:grid;gap:12px}
+    .flow-item{border-radius:16px;background:rgba(255,255,255,.06);padding:14px 16px;color:#cbd5e1;font-size:14px}
+    .flow-item b{display:block;color:#fff;margin-bottom:4px}
+    .side-actions{margin-top:auto;display:grid;gap:12px;padding-top:24px}
+    .side-actions .btn{width:100%}
+    .btn.white{background:#fff;color:var(--sky-700)}
+    .btn.soft{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.14)}
+    .note{margin-top:18px;font-size:12px;color:var(--muted);line-height:1.7}
+    .ok-msg{display:none;margin-top:14px;padding:14px 16px;border-radius:14px;background:#ecfdf5;color:#166534;font-weight:700}
+    .ok-msg.active{display:block}
+    .screen{display:none}
+    .screen.active{display:block}
+    .waiting-center,.done-center{
+      height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;
+    }
+    .tap-card{
+      width:180px;height:240px;border-radius:22px;background:linear-gradient(180deg,#0f172a,#1d4ed8);
+      box-shadow:0 20px 50px rgba(15,23,42,.18);position:relative;margin-bottom:20px;
+    }
+    .tap-card:before{
+      content:"";position:absolute;top:18px;left:18px;width:46px;height:34px;border-radius:8px;background:#fbbf24;
+    }
+    .waves{display:flex;gap:10px;align-items:flex-end;margin-top:16px}
+    .wave{
+      width:14px;border-radius:999px;background:var(--sky3);animation:pulse 1.2s infinite ease-in-out;
+    }
+    .wave:nth-child(1){height:26px}
+    .wave:nth-child(2){height:40px;animation-delay:.1s}
+    .wave:nth-child(3){height:54px;animation-delay:.2s}
+    @keyframes pulse{
+      0%,100%{transform:scaleY(.8);opacity:.55}
+      50%{transform:scaleY(1.1);opacity:1}
+    }
+    .receipt{
+      width:100%;max-width:520px;border:1px solid var(--line);border-radius:22px;background:#fff;padding:22px;box-shadow:0 20px 50px rgba(15,23,42,.08);
+    }
+    .receipt h5{margin:0;font-size:22px}
+    .receipt .r-sub{margin-top:6px;color:var(--muted);font-size:13px}
+    .receipt .r-line{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:14px}
+    .receipt .r-total{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:flex-end}
+    .receipt .r-total .v{font-size:30px;font-weight:900;letter-spacing:-.03em}
+    .success-badge{
+      display:inline-flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:999px;background:var(--okbg);color:var(--ok);font-size:38px;font-weight:900;margin-bottom:18px;
+    }
+    .manual-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:1100px){
+      .demo-grid,.order-wrap,.modal,.pay-content{grid-template-columns:1fr}
+      .summary{border-left:none;border-top:1px solid var(--line)}
+      .modal{height:auto;max-height:95vh;overflow:auto}
+      .method-grid,.highlights,.product-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:700px){
+      h1{font-size:42px}
+      .method-grid,.highlights,.product-grid,.select-row,.manual-grid{grid-template-columns:1fr}
+      .wrap{padding:24px 16px 36px}
+      .kiosk-frame{padding:14px}
+      .modal-left,.kiosk-side{padding:18px}
+      .modal-top h3{font-size:28px}
+      .amount-display .value,.side-total .value{font-size:30px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="wrap">
+      <div class="top">
+        <div class="brand">
+          <div class="eyebrow">GL ALLPAY</div>
+          <h1 style="font-size:42px">KIOSK형 결제창 Pro</h1>
+          <div class="sub">카드 터치 대기 · 결제 완료 영수증 · 수기결제 포함</div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn ghost" onclick="location.reload()">초기화</button>
+          <button class="btn primary" onclick="openPayment()">결제창 열기</button>
+        </div>
+      </div>
+
+      <div class="demo-grid">
+        <div class="card pad">
+          <div class="eyebrow">추가 반영 내용</div>
+          <h2 style="margin:10px 0 0;font-size:30px;letter-spacing:-.03em">실제 현장 흐름처럼 강화</h2>
+          <div class="list">
+            <div class="item">
+              <b>1. 카드 터치/삽입 대기 화면</b>
+              <span>카드결제 요청 후 실제 키오스크나 단말기처럼 카드 삽입/터치를 기다리는 전환 화면을 추가했어.</span>
+            </div>
+            <div class="item">
+              <b>2. 결제 완료 영수증 화면</b>
+              <span>승인 후 영수증 형태의 완료 페이지가 나오도록 구성했어. 승인금액, 상품명, 결제수단, 할부 정보가 표시돼.</span>
+            </div>
+            <div class="item">
+              <b>3. 수기결제 포함</b>
+              <span>카드번호/유효기간/할부 입력을 받는 수기결제 탭까지 추가해서, 비대면 또는 수기입력 시나리오도 시연 가능해.</span>
+            </div>
+          </div>
+          <div class="note">
+            시연 흐름 추천: 상품 선택 → 결제창 → 카드결제/수기결제 선택 → 결제 요청 → 카드 대기 → 완료 영수증
+          </div>
+        </div>
+
+        <div class="preview-shell">
+          <div class="kiosk-frame">
+            <div class="kiosk-screen">
+              <div class="kiosk-header">
+                <div>
+                  <div class="title">GL ALLPAY KIOSK</div>
+                  <div class="small">회원권 · PT · 정기결제 · 현장 결제</div>
+                </div>
+                <div class="badge">현장 결제 모드</div>
+              </div>
+
+              <div class="order-wrap">
+                <div class="product-area">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap">
+                    <div>
+                      <div style="font-size:26px;font-weight:900;letter-spacing:-.03em">상품 선택</div>
+                      <div style="margin-top:4px;color:var(--muted);font-size:14px">회원권 또는 PT 상품을 선택한 뒤 결제를 진행하세요.</div>
+                    </div>
+                    <button class="btn primary" onclick="openPayment()">결제창 열기</button>
+                  </div>
+
+                  <div class="product-grid">
+                    <div class="product" onclick="selectProduct('1개월 회원권', 180000, '단기 등록용')">
+                      <div class="name">1개월 회원권</div>
+                      <div class="desc">단기 등록용</div>
+                      <div class="price">₩180,000</div>
+                    </div>
+                    <div class="product" onclick="selectProduct('3개월 회원권', 420000, '기본 회원권')">
+                      <div class="name">3개월 회원권</div>
+                      <div class="desc">기본 회원권</div>
+                      <div class="price">₩420,000</div>
+                    </div>
+                    <div class="product" onclick="selectProduct('12개월 회원권', 1200000, '장기 회원권')">
+                      <div class="name">12개월 회원권</div>
+                      <div class="desc">장기 회원권</div>
+                      <div class="price">₩1,200,000</div>
+                    </div>
+                    <div class="product" onclick="selectProduct('PT 30회', 1500000, '개인 트레이닝')">
+                      <div class="name">PT 30회</div>
+                      <div class="desc">개인 트레이닝</div>
+                      <div class="price">₩1,500,000</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="summary">
+                  <div class="sum-head">
+                    <h2>주문 요약</h2>
+                    <div class="count" id="itemCount">1건 선택</div>
+                  </div>
+
+                  <div class="cart">
+                    <div class="cart-head">
+                      <div>상품</div><div>수량</div><div>금액</div>
+                    </div>
+                    <div class="cart-row">
+                      <div class="item-name" id="cartName">12개월 회원권</div>
+                      <div>1</div>
+                      <div id="cartAmount">₩1,200,000</div>
+                    </div>
+                  </div>
+
+                  <div class="calc">
+                    <div class="calc-row"><span>상품금액</span><strong id="subAmount">₩1,200,000</strong></div>
+                    <div class="calc-row"><span>할인</span><strong>₩0</strong></div>
+                    <div class="calc-row"><span>추가비용</span><strong>₩0</strong></div>
+                  </div>
+
+                  <div class="calc-total">
+                    <div class="label">최종 결제금액</div>
+                    <div class="value" id="totalAmount">₩1,200,000</div>
+                  </div>
+
+                  <div class="sum-actions">
+                    <button class="btn primary" onclick="openPayment()">결제하기</button>
+                    <button class="btn ghost">직원 호출</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pay-panel" id="payPanel">
+      <div class="modal">
+        <div class="modal-left">
+          <div class="screen active" id="screenSelect">
+            <div class="modal-top">
+              <div>
+                <h3>KIOSK 결제창</h3>
+                <p>카드결제 / 정기결제 / 현장 QR / 수기결제를 선택하고 결제를 진행하세요.</p>
+              </div>
+              <button class="close" onclick="closePayment()">✕</button>
+            </div>
+
+            <div class="method-grid">
+              <div class="method active" data-method="card" onclick="setMethod('card', this)">
+                <div class="m-title">카드결제</div>
+                <div class="m-sub">카드 삽입 / 터치 결제</div>
+              </div>
+              <div class="method" data-method="manual" onclick="setMethod('manual', this)">
+                <div class="m-title">수기결제</div>
+                <div class="m-sub">카드번호 직접 입력</div>
+              </div>
+              <div class="method" data-method="auto" onclick="setMethod('auto', this)">
+                <div class="m-title">정기결제 등록</div>
+                <div class="m-sub">월회원권 자동 청구</div>
+              </div>
+              <div class="method" data-method="qr" onclick="setMethod('qr', this)">
+                <div class="m-title">현장 QR</div>
+                <div class="m-sub">모바일 스캔 결제</div>
+              </div>
+            </div>
+
+            <div class="pay-content">
+              <div class="pay-box">
+                <h4>결제 정보</h4>
+
+                <div class="amount-display">
+                  <div>
+                    <div class="label">결제 금액</div>
+                    <div class="value" id="modalAmount">₩1,200,000</div>
+                  </div>
+                  <button class="btn ghost" onclick="clearAmount()">금액 초기화</button>
+                </div>
+
+                <div class="select-row">
+                  <div class="field">
+                    <label>상품명</label>
+                    <input id="productNameInput" value="12개월 회원권" />
+                  </div>
+                  <div class="field">
+                    <label>회원명</label>
+                    <input id="customerName" value="현장 고객" />
+                  </div>
+                </div>
+
+                <div class="select-row">
+                  <div class="field">
+                    <label>할부 개월</label>
+                    <select id="installment">
+                      <option>일시불</option>
+                      <option>2개월</option>
+                      <option>3개월</option>
+                      <option>6개월</option>
+                      <option>12개월</option>
+                      <option>24개월</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label>직원 메모</label>
+                    <input value="카운터 현장 결제" />
+                  </div>
+                </div>
+
+                <div id="manualFields" style="display:none">
+                  <div class="manual-grid">
+                    <div class="field">
+                      <label>카드번호</label>
+                      <input value="1234-1234-1234-1234" />
+                    </div>
+                    <div class="field">
+                      <label>유효기간</label>
+                      <input value="12/29" />
+                    </div>
+                  </div>
+                  <div class="manual-grid">
+                    <div class="field">
+                      <label>할부 개월</label>
+                      <input value="일시불" />
+                    </div>
+                    <div class="field">
+                      <label>승인 비밀번호 앞 2자리</label>
+                      <input value="12" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label>금액 입력</label>
+                  <div class="num-grid">
+                    <button class="num-btn" onclick="appendAmount('1')">1</button>
+                    <button class="num-btn" onclick="appendAmount('2')">2</button>
+                    <button class="num-btn" onclick="appendAmount('3')">3</button>
+                    <button class="num-btn" onclick="appendAmount('4')">4</button>
+                    <button class="num-btn" onclick="appendAmount('5')">5</button>
+                    <button class="num-btn" onclick="appendAmount('6')">6</button>
+                    <button class="num-btn" onclick="appendAmount('7')">7</button>
+                    <button class="num-btn" onclick="appendAmount('8')">8</button>
+                    <button class="num-btn" onclick="appendAmount('9')">9</button>
+                    <button class="num-btn light" onclick="appendAmount('000')">000</button>
+                    <button class="num-btn" onclick="appendAmount('0')">0</button>
+                    <button class="num-btn light" onclick="backspaceAmount()">⌫</button>
+                  </div>
+                </div>
+
+                <div class="ok-msg" id="okMsg">결제 요청이 생성되었습니다. 시연용으로 성공 메시지만 표시합니다.</div>
+              </div>
+
+              <div class="pay-box">
+                <h4>결제 가이드</h4>
+                <div class="list" style="margin-top:0">
+                  <div class="item">
+                    <b>카드결제</b>
+                    <span>카드 삽입 / 터치 후 승인 대기 화면으로 이동.</span>
+                  </div>
+                  <div class="item">
+                    <b>수기결제</b>
+                    <span>카드번호와 유효기간을 수동 입력하는 시나리오.</span>
+                  </div>
+                  <div class="item">
+                    <b>정기결제 / 현장 QR</b>
+                    <span>월회원권 등록, QR 결제와 같은 확장형 흐름도 시연 가능.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="screen" id="screenWaiting">
+            <div class="waiting-center">
+              <div class="tap-card"></div>
+              <h3 style="margin:0;font-size:40px;letter-spacing:-.03em">카드를 삽입하거나 터치해주세요</h3>
+              <p style="margin:14px 0 0;color:var(--muted);font-size:17px;max-width:560px">
+                현장 단말기 또는 KIOSK 카드 리더기에서 결제를 진행하는 단계입니다.
+              </p>
+              <div class="waves">
+                <div class="wave"></div><div class="wave"></div><div class="wave"></div>
+              </div>
+              <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:28px">
+                <button class="btn primary" onclick="completePayment()">승인 완료 시연</button>
+                <button class="btn ghost" onclick="showScreen('screenSelect')">이전으로</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="screen" id="screenDone">
+            <div class="done-center">
+              <div class="success-badge">✓</div>
+              <h3 style="margin:0;font-size:42px;letter-spacing:-.03em">결제가 완료되었습니다</h3>
+              <p style="margin:14px 0 0;color:var(--muted);font-size:17px">영수증 확인 후 다음 고객 결제를 진행할 수 있습니다.</p>
+
+              <div class="receipt">
+                <h5>결제 영수증</h5>
+                <div class="r-sub">GL ALLPAY KIOSK · 승인 완료</div>
+                <div class="r-line"><span>상품명</span><strong id="receiptProduct">12개월 회원권</strong></div>
+                <div class="r-line"><span>회원명</span><strong id="receiptCustomer">현장 고객</strong></div>
+                <div class="r-line"><span>결제수단</span><strong id="receiptMethod">카드결제</strong></div>
+                <div class="r-line"><span>할부</span><strong id="receiptInstall">일시불</strong></div>
+                <div class="r-line"><span>승인번호</span><strong>GL20260309-001</strong></div>
+                <div class="r-total">
+                  <span>최종 결제금액</span>
+                  <div class="v" id="receiptAmount">₩1,200,000</div>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:24px">
+                <button class="btn primary" onclick="showScreen('screenSelect')">새 결제 시작</button>
+                <button class="btn ghost" onclick="closePayment()">닫기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kiosk-side">
+          <h4>결제 요약</h4>
+
+          <div class="side-card">
+            <div class="side-mini"><span>상품</span><strong id="sideProduct">12개월 회원권</strong></div>
+            <div class="side-mini"><span>결제수단</span><strong id="sideMethod">카드결제</strong></div>
+            <div class="side-mini"><span>할부</span><strong id="sideInstall">일시불</strong></div>
+
+            <div class="side-total">
+              <div class="label">최종 결제금액</div>
+              <div class="value" id="sideAmount">₩1,200,000</div>
+            </div>
+          </div>
+
+          <div class="pay-flow">
+            <div class="flow-item"><b>STEP 1</b> 상품/금액 확인</div>
+            <div class="flow-item"><b>STEP 2</b> 결제수단 및 할부 선택</div>
+            <div class="flow-item"><b>STEP 3</b> 카드 대기 또는 수기 입력</div>
+            <div class="flow-item"><b>STEP 4</b> 승인 완료 및 영수증 출력</div>
+          </div>
+
+          <div class="side-actions">
+            <button class="btn white" onclick="submitPayment()">결제 요청</button>
+            <button class="btn soft" onclick="closePayment()">취소</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let amount = 1200000;
+    let method = 'card';
+
+    function formatWon(v){
+      return '₩' + Number(v || 0).toLocaleString('ko-KR');
+    }
+
+    function syncAmount(){
+      document.getElementById('cartAmount').textContent = formatWon(amount);
+      document.getElementById('subAmount').textContent = formatWon(amount);
+      document.getElementById('totalAmount').textContent = formatWon(amount);
+      document.getElementById('modalAmount').textContent = formatWon(amount);
+      document.getElementById('sideAmount').textContent = formatWon(amount);
+      document.getElementById('receiptAmount').textContent = formatWon(amount);
+    }
+
+    function syncProduct(name){
+      document.getElementById('cartName').textContent = name;
+      document.getElementById('productNameInput').value = name;
+      document.getElementById('sideProduct').textContent = name;
+      document.getElementById('receiptProduct').textContent = name;
+    }
+
+    function selectProduct(name, price){
+      amount = price;
+      syncAmount();
+      syncProduct(name);
+    }
+
+    function openPayment(){
+      document.getElementById('payPanel').classList.add('active');
+      document.getElementById('okMsg').classList.remove('active');
+      showScreen('screenSelect');
+      syncAmount();
+      syncInstallment();
+      syncMethod();
+      syncReceipt();
+    }
+
+    function closePayment(){
+      document.getElementById('payPanel').classList.remove('active');
+      showScreen('screenSelect');
+    }
+
+    function setMethod(next, el){
+      method = next;
+      document.querySelectorAll('.method').forEach(x => x.classList.remove('active'));
+      el.classList.add('active');
+      syncMethod();
+      document.getElementById('manualFields').style.display = method === 'manual' ? 'block' : 'none';
+    }
+
+    function syncMethod(){
+      const labelMap = {
+        card: '카드결제',
+        manual: '수기결제',
+        auto: '정기결제 등록',
+        qr: '현장 QR'
+      };
+      document.getElementById('sideMethod').textContent = labelMap[method];
+      document.getElementById('receiptMethod').textContent = labelMap[method];
+    }
+
+    function appendAmount(val){
+      let raw = String(amount || '');
+      raw = raw === '0' ? '' : raw;
+      raw += String(val);
+      amount = Number(raw || 0);
+      syncAmount();
+    }
+
+    function backspaceAmount(){
+      let raw = String(amount || '');
+      raw = raw.slice(0, -1);
+      amount = Number(raw || 0);
+      syncAmount();
+    }
+
+    function clearAmount(){
+      amount = 0;
+      syncAmount();
+    }
+
+    function syncInstallment(){
+      const val = document.getElementById('installment').value;
+      document.getElementById('sideInstall').textContent = val;
+      document.getElementById('receiptInstall').textContent = val;
+    }
+
+    function syncReceipt(){
+      document.getElementById('receiptProduct').textContent = document.getElementById('productNameInput').value || '상품명 없음';
+      document.getElementById('receiptCustomer').textContent = document.getElementById('customerName').value || '현장 고객';
+      syncMethod();
+      syncInstallment();
+      syncAmount();
+    }
+
+    function showScreen(id){
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    document.getElementById('installment').addEventListener('change', syncInstallment);
+    document.getElementById('productNameInput').addEventListener('input', function(){
+      const name = this.value || '상품명 없음';
+      document.getElementById('cartName').textContent = name;
+      document.getElementById('sideProduct').textContent = name;
+      document.getElementById('receiptProduct').textContent = name;
+    });
+    document.getElementById('customerName').addEventListener('input', function(){
+      document.getElementById('receiptCustomer').textContent = this.value || '현장 고객';
+    });
+
+    function submitPayment(){
+      syncReceipt();
+      document.getElementById('okMsg').classList.add('active');
+      if(method === 'card'){
+        showScreen('screenWaiting');
+      } else {
+        completePayment();
+      }
+    }
+
+    function completePayment(){
+      syncReceipt();
+      showScreen('screenDone');
+    }
+
+    syncAmount();
+    syncReceipt();
+  </script>
+</body>
+</html>

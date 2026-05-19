@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Landing page container utility */
+.container-landing {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+@media (max-width: 768px) {
+  .container-landing {
+    padding: 0 20px;
+  }
+}
+
+/* Success Animation Styles */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    stroke-dasharray: 0 50;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 50 50;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes progressBar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.4s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.5s ease-out;
+}
+
+.animate-checkmark {
+  animation: checkmark 0.6s ease-out;
+}
+
+.animate-progressBar {
+  animation: progressBar 2s ease-out;
+}
+
+.animate-twinkle {
+  animation: twinkle 1s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 4s linear infinite;
+}
+
+/* ============================================
+ * OUHVE ABM — Design Tokens
+ * Primary: Persimmon #FF5A1F (메인 CTA, 브랜드, KPI 강조)
+ * Accent:  Forest Teal #0F766E (도형/점 전용 — 글자 사용 금지)
+ * Base:    Slate (light #F8FAFC / dark #020617)
+ * 상세 규칙: /design-system/usage-rules.md
+ * ============================================ */
+
+:root {
+  /* Base — Slate Light */
+  --background: hsl(210, 40%, 98%);          /* #F8FAFC slate-50 */
+  --foreground: hsl(222, 47%, 11%);          /* #0F172A slate-900 */
+  --muted: hsl(210, 40%, 96%);               /* #F1F5F9 slate-100 */
+  --muted-foreground: hsl(215, 16%, 47%);    /* #64748B slate-500 */
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(222, 47%, 11%);
+  --card: hsl(0, 0%, 100%);                  /* #FFFFFF — card lifts above bg */
+  --card-foreground: hsl(222, 47%, 11%);
+  --border: hsl(214, 32%, 91%);              /* #E2E8F0 slate-200 */
+  --input: hsl(214, 32%, 91%);
+
+  /* Primary — Persimmon */
+  --primary: hsl(14, 100%, 56%);             /* #FF5A1F */
+  --primary-foreground: hsl(0, 0%, 100%);
+
+  /* Secondary (neutral surface) */
+  --secondary: hsl(210, 40%, 96%);
+  --secondary-foreground: hsl(222, 47%, 11%);
+
+  /* Accent — Forest Teal (point shapes only — never on text) */
+  --accent: hsl(174, 78%, 26%);              /* #0F766E */
+  --accent-foreground: hsl(0, 0%, 100%);
+
+  /* Semantic */
+  --destructive: hsl(0, 84%, 60%);           /* #EF4444 red-500 */
+  --destructive-foreground: hsl(0, 0%, 100%);
+
+  --ring: hsl(14, 100%, 56%);                /* focus ring = Persimmon */
+  --radius: 0.5rem;
+
+  /* Legacy aliases (kept for backward compat — point to OUHVE Persimmon) */
+  --gym-primary: hsl(14, 100%, 56%);
+  --gym-primary-hover: hsl(14, 100%, 62%);
+  --gym-primary-light: hsl(14, 100%, 97%);
+  --gym-secondary: hsl(174, 78%, 26%);
+  --gym-gray-50: hsl(210, 40%, 98%);
+  --gym-gray-100: hsl(210, 40%, 96%);
+  --gym-gray-200: hsl(214, 32%, 91%);
+  --gym-gray-300: hsl(213, 27%, 84%);
+  --gym-gray-400: hsl(215, 20%, 65%);
+  --gym-gray-500: hsl(215, 16%, 47%);
+  --gym-gray-600: hsl(215, 19%, 35%);
+  --gym-gray-700: hsl(215, 25%, 27%);
+  --gym-gray-800: hsl(217, 33%, 17%);
+  --gym-gray-900: hsl(222, 47%, 11%);
+}
+
+.dark {
+  /* Base — Slate Dark */
+  --background: hsl(222, 47%, 5%);           /* #020617 slate-950 */
+  --foreground: hsl(210, 40%, 96%);          /* #F1F5F9 slate-100 */
+  --muted: hsl(217, 33%, 17%);               /* #1E293B slate-800 */
+  --muted-foreground: hsl(215, 20%, 65%);    /* #94A3B8 slate-400 */
+  --popover: hsl(222, 47%, 11%);
+  --popover-foreground: hsl(210, 40%, 96%);
+  --card: hsl(222, 47%, 11%);                /* #0F172A slate-900 */
+  --card-foreground: hsl(210, 40%, 96%);
+  --border: hsl(217, 33%, 17%);
+  --input: hsl(217, 33%, 17%);
+
+  /* Primary — Persimmon (slightly brighter for dark BG contrast) */
+  --primary: hsl(14, 100%, 62%);
+  --primary-foreground: hsl(0, 0%, 100%);
+
+  --secondary: hsl(217, 33%, 17%);
+  --secondary-foreground: hsl(210, 40%, 96%);
+
+  /* Accent — Teal brighter in dark mode (#14B8A6) for contrast */
+  --accent: hsl(173, 80%, 40%);
+  --accent-foreground: hsl(0, 0%, 100%);
+
+  --destructive: hsl(0, 84%, 65%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+
+  --ring: hsl(14, 100%, 62%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .gym-primary {
+    background-color: var(--gym-primary);
+  }
+
+  .gym-primary-hover:hover {
+    background-color: var(--gym-primary-hover);
+  }
+
+  .text-gym-primary {
+    color: var(--gym-primary);
+  }
+
+  .border-gym-primary {
+    border-color: var(--gym-primary);
+  }
+
+  .focus-gym-primary:focus {
+    --tw-ring-color: var(--gym-primary);
+  }
+
+  /* hover-elevate: 마우스 올리면 그림자 증가 + 살짝 위로 이동 */
+  .hover-elevate {
+    @apply transition-all duration-200 ease-out;
+  }
+  .hover-elevate:hover {
+    @apply shadow-md -translate-y-0.5;
+  }
+
+  /* active-elevate-2: 클릭 시 눌리는 효과 */
+  .active-elevate-2 {
+    @apply transition-all duration-100;
+  }
+  .active-elevate-2:active {
+    @apply shadow-sm translate-y-0;
+  }
+}

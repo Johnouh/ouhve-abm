@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>수익 구조 시뮬레이터 — GL allpay</title>
+<meta name="description" content="GL allpay 안심보장서비스와 무이자할부 구조에서 수수료를 상쇄하고 실수령이 늘어나는 구조를 직접 확인해보세요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --navy:#0A1628;
+  --mid:#0D2244;
+  --blue:#0F2C54;
+  --gold:#C9A84C;
+  --gold-l:#E2C47A;
+  --gold-d:#A8882E;
+  --white:#FFFFFF;
+  --sub:#B0BAD1;
+  --gray:#8A8FA8;
+  --danger:#e74c3c;
+  --success:#10b981;
+  --warn:#f59e0b;
+  --font-kr:'Noto Sans KR',sans-serif;
+  --font-en:'Inter','Helvetica Neue',sans-serif;
+  --radius:10px;
+  --shadow:0 8px 32px rgba(0,0,0,0.35);
+}
+
+body{
+  font-family:var(--font-kr);
+  background:var(--navy);
+  color:var(--white);
+  line-height:1.65;
+  min-height:100vh;
+}
+
+/* ── Header ── */
+.sim-header{
+  background:linear-gradient(135deg,#060E1A 0%,var(--mid) 100%);
+  border-bottom:1px solid rgba(201,168,76,0.15);
+  padding:0;
+}
+.sim-header-inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.sim-logo{
+  font-family:var(--font-en);
+  font-size:1.2rem;
+  font-weight:700;
+  text-decoration:none;
+  color:var(--white);
+}
+.sim-logo span{color:var(--gold);}
+.sim-nav-back{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:0.82rem;
+  color:var(--sub);
+  text-decoration:none;
+  transition:color 0.25s;
+}
+.sim-nav-back:hover{color:var(--gold);}
+
+/* ── Hero ── */
+.sim-hero{
+  background:linear-gradient(160deg,var(--mid) 0%,var(--blue) 60%,#060E1A 100%);
+  padding:56px 32px 48px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.sim-hero::before{
+  content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 60%);
+  pointer-events:none;
+}
+.sim-eyebrow{
+  font-family:var(--font-en);font-size:0.72rem;font-weight:700;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gold);display:block;margin-bottom:16px;
+}
+.sim-title{
+  font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;letter-spacing:-0.02em;
+  line-height:1.2;margin-bottom:14px;
+}
+.sim-title span{color:var(--gold);}
+.sim-desc{
+  font-size:0.9rem;color:var(--sub);line-height:1.8;
+  max-width:580px;margin:0 auto 28px;
+}
+.sim-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 18px;
+  background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);
+  border-radius:100px;font-size:0.78rem;font-weight:600;color:var(--gold-l);
+}
+
+/* ── Main Layout ── */
+.sim-wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:36px 24px 80px;
+}
+
+/* ── Cards / Panels ── */
+.panel{
+  background:var(--mid);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:14px;
+  padding:28px 28px;
+  margin-bottom:24px;
+}
+.panel-gold{
+  border-color:rgba(201,168,76,0.25);
+  background:linear-gradient(135deg,rgba(201,168,76,0.06),var(--mid));
+}
+
+.panel-title{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:10px;margin-bottom:20px;
+}
+.panel-title::before{
+  content:'';width:20px;height:1.5px;background:var(--gold);flex-shrink:0;
+}
+
+/* ── Input Grid ── */
+.input-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;
+}
+.input-section-label{
+  font-size:0.82rem;font-weight:700;color:var(--white);
+  margin-bottom:12px;padding-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.input-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.input-row:last-child{border-bottom:none;}
+.input-label{font-size:0.875rem;color:var(--sub);}
+.input-right{display:flex;align-items:center;gap:6px;}
+.sim-input{
+  width:130px;padding:9px 12px;
+  background:rgba(255,255,255,0.05);
+  border:1.5px solid rgba(255,255,255,0.12);
+  border-radius:8px;
+  font-size:0.9rem;font-family:var(--font-kr);
+  color:var(--white);text-align:right;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.sim-input:focus{
+  outline:none;
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,168,76,0.15);
+}
+.sim-input::placeholder{color:rgba(255,255,255,0.2);}
+.input-suffix{font-size:0.78rem;color:var(--gray);}
+
+/* ── Rate Settings ── */
+.rate-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:14px;
+  margin-bottom:20px;
+}
+.rate-item{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:10px;padding:14px 12px;
+  text-align:center;
+}
+.rate-label{font-size:0.72rem;color:var(--gray);margin-bottom:8px;font-weight:600;}
+.rate-input-wrap{display:flex;align-items:center;justify-content:center;gap:4px;}
+.rate-input{
+  width:72px;padding:8px 8px;
+  background:rgba(255,255,255,0.07);
+  border:1.5px solid rgba(255,255,255,0.1);
+  border-radius:7px;
+  font-size:0.9rem;font-family:var(--font-en);
+  color:var(--white);text-align:center;
+  transition:border-color 0.2s;
+}
+.rate-input:focus{outline:none;border-color:var(--gold);}
+.rate-pct{font-size:0.78rem;color:var(--gray);}
+
+/* ── Calc Button ── */
+.calc-btn{
+  width:100%;padding:16px;
+  background:var(--gold);
+  color:var(--navy);
+  border:none;border-radius:10px;
+  font-size:1rem;font-weight:800;
+  font-family:var(--font-kr);cursor:pointer;
+  transition:all 0.25s;letter-spacing:-0.01em;
+}
+.calc-btn:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.3);}
+.calc-btn:active{transform:translateY(0);}
+
+/* ── Summary Cards ── */
+.summary-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  margin-bottom:28px;
+}
+.sum-card{
+  padding:20px;border-radius:12px;text-align:center;
+  border-top:3px solid;
+}
+.sum-card.basic{background:rgba(16,185,129,0.08);border-color:var(--success);}
+.sum-card.premium{background:rgba(201,168,76,0.08);border-color:var(--gold);}
+.sum-card.danger{background:rgba(231,76,60,0.08);border-color:var(--danger);}
+.sum-card.info{background:rgba(59,130,246,0.08);border-color:#3b82f6;}
+.sum-label{font-size:0.72rem;color:var(--sub);margin-bottom:8px;font-weight:600;letter-spacing:0.05em;}
+.sum-value{font-family:var(--font-en);font-size:1.7rem;font-weight:800;line-height:1.1;}
+.sum-sub{font-size:0.72rem;color:var(--gray);margin-top:6px;}
+.sum-card.basic .sum-value{color:var(--success);}
+.sum-card.premium .sum-value{color:var(--gold);}
+.sum-card.danger .sum-value{color:var(--danger);}
+.sum-card.info .sum-value{color:#60a5fa;}
+
+/* ── Tables ── */
+.table-wrap{overflow-x:auto;border-radius:10px;margin-top:4px;}
+table{width:100%;border-collapse:collapse;font-size:0.82rem;}
+thead th{
+  background:#060E1A;
+  color:var(--sub);
+  padding:12px 14px;
+  text-align:center;
+  font-weight:700;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;
+  white-space:nowrap;
+}
+thead th:first-child{text-align:left;border-radius:8px 0 0 0;}
+thead th:last-child{border-radius:0 8px 0 0;}
+tbody td{
+  padding:11px 14px;
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  background:var(--mid);
+  font-size:0.82rem;
+}
+tbody td:first-child{text-align:left;font-weight:600;color:var(--white);}
+tbody tr:hover td{background:rgba(201,168,76,0.05);}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:last-child td:first-child{border-radius:0 0 0 8px;}
+tbody tr:last-child td:last-child{border-radius:0 0 8px 0;}
+
+.tr-basic td{background:rgba(16,185,129,0.04)!important;}
+.tr-premium td{background:rgba(201,168,76,0.05)!important;}
+.tr-premium td{border-bottom:1px solid rgba(201,168,76,0.1)!important;}
+
+.val-up{color:var(--success);font-weight:700;}
+.val-gold{color:var(--gold);font-weight:800;}
+.val-danger{color:var(--danger);font-weight:700;}
+.val-sub{color:var(--gray);}
+.tag-basic{display:inline-block;padding:2px 8px;background:rgba(16,185,129,0.15);color:#6ee7b7;border-radius:4px;font-size:0.68rem;font-weight:700;margin-left:6px;}
+.tag-prem{display:inline-block;padding:2px 8px;background:rgba(201,168,76,0.15);color:var(--gold-l);border-radius:4px;font-size:0.68rem;font-weight:700;margin-left:6px;}
+
+/* ── Scenario Table ── */
+.scenario-table tbody td{background:rgba(255,255,255,0.02)!important;}
+.scenario-table tbody tr:hover td{background:rgba(201,168,76,0.06)!important;}
+.scenario-row-active td{background:rgba(201,168,76,0.07)!important;}
+
+/* ── Pitch Blocks ── */
+.pitch-row{display:grid;grid-template-columns:1.3fr 0.7fr;gap:20px;margin-top:20px;}
+.pitch-box{
+  padding:24px 24px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:10px;
+}
+.pitch-box.gold-box{
+  background:rgba(201,168,76,0.05);
+  border-color:rgba(201,168,76,0.2);
+}
+.pitch-head{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+}
+.pitch-box p{font-size:0.85rem;color:var(--sub);line-height:1.85;}
+.pitch-box strong{color:var(--white);}
+
+/* ── Mini Stats ── */
+.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px;}
+.mini-stat{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:8px;padding:12px;text-align:center;
+}
+.mini-label{font-size:0.68rem;color:var(--gray);margin-bottom:4px;}
+.mini-value{font-family:var(--font-en);font-size:1.1rem;font-weight:800;color:var(--white);}
+
+/* ── Tip Box ── */
+.tip-box{
+  padding:20px 24px;
+  background:rgba(201,168,76,0.06);
+  border-left:3px solid var(--gold);
+  border-radius:0 8px 8px 0;
+  font-size:0.85rem;color:var(--sub);line-height:1.8;
+  margin-top:20px;
+}
+.tip-box strong{color:var(--gold-l);}
+
+/* ── Notice ── */
+.notice{
+  padding:16px 20px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:8px;
+  font-size:0.75rem;color:var(--gray);
+  line-height:1.7;margin-top:12px;
+  text-align:center;
+}
+
+/* ── Footer ── */
+.sim-footer{
+  background:#060E1A;
+  border-top:1px solid rgba(201,168,76,0.1);
+  padding:32px 24px;
+  text-align:center;
+}
+.sim-footer p{font-size:0.78rem;color:var(--gray);line-height:1.8;}
+.sim-footer a{color:var(--gold);text-decoration:none;}
+.sim-footer a:hover{text-decoration:underline;}
+
+/* ── Hidden ── */
+.hidden{display:none;}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .rate-grid{grid-template-columns:repeat(3,1fr);}
+  .summary-row{grid-template-columns:repeat(2,1fr);}
+  .pitch-row{grid-template-columns:1fr;}
+}
+@media(max-width:680px){
+  .input-grid{grid-template-columns:1fr;}
+  .rate-grid{grid-template-columns:1fr 1fr;}
+  .summary-row{grid-template-columns:1fr 1fr;}
+  .sim-hero{padding:40px 20px 36px;}
+  .sim-wrap{padding:24px 16px 60px;}
+  .panel{padding:20px 18px;}
+  .mini-stats{grid-template-columns:1fr;}
+}
+@media(max-width:440px){
+  .summary-row{grid-template-columns:1fr;}
+  .rate-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="sim-header">
+  <div class="sim-header-inner">
+    <a href="index.html" class="sim-logo"><span>GL</span> allpay</a>
+    <nav style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <a href="service.html" class="sim-nav-back">서비스</a>
+      <a href="settlement.html" class="sim-nav-back">정산구조</a>
+      <a href="assurance.html" class="sim-nav-back">안심서비스</a>
+      <a href="map.html" class="sim-nav-back">가맹점 지도</a>
+      <a href="contact.html" class="sim-nav-back">문의하기</a>
+      <a href="contact.html" style="background:var(--gold);color:var(--navy);font-weight:700;font-size:0.82rem;padding:8px 18px;border-radius:6px;text-decoration:none;">상담신청</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<div class="sim-hero">
+  <span class="sim-eyebrow">GL allpay — Revenue Simulator</span>
+  <h1 class="sim-title">수수료를 녹이고도<br><span>실수령이 늘어나는 구조</span>를 확인하세요</h1>
+  <p class="sim-desc">
+    안심보장서비스 + 무이자 할부 + PG 수수료를 가격에 반영했을 때<br>
+    가맹점이 실제로 얼마나 더 받을 수 있는지 직접 계산해보세요.
+  </p>
+  <span class="sim-tag">✦ 베이직안심권 vs 프리미엄안심12개월권 2트랙 설계</span>
+</div>
+
+<!-- ── Main ── -->
+<div class="sim-wrap">
+
+  <!-- 설계 기준 안내 -->
+  <div class="panel panel-gold" style="margin-bottom:28px;">
+    <div class="panel-title">설계 기준</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+      <div>
+        <p style="font-size:0.82rem;color:var(--sub);line-height:1.8;">
+          <strong style="color:var(--white);">베이직안심권</strong> — 안심보장서비스 의무가입을 포함한 단기권.<br>
+          카드사 문화공제형 일시불·3~6개월 무이자 구간을 활용하여<br>
+          추가 할부수수료 없이 진행하는 비교적 저렴한 구조입니다.
+        </p>
+      </div>
+      <div>
+        <p style="font-size:0.82rem;color:var(--sub);line-height:1.8;">
+          <strong style="color:var(--gold-l);">프리미엄안심12개월권</strong> — 장기권·고액 PT 전용.<br>
+          결제수수료 + 안심서비스 + 12개월 추가 5%를 가격에 녹여<br>
+          월 부담을 낮추면서 객단가를 올리는 설계입니다.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 입력 영역 -->
+  <div class="panel">
+    <div class="panel-title">현재 센터 가격 입력</div>
+
+    <div class="input-grid">
+      <!-- 회원권 -->
+      <div>
+        <div class="input-section-label">회원권 (헬스)</div>
+        <div class="input-row">
+          <span class="input-label">1개월</span>
+          <div class="input-right">
+            <input type="number" class="sim-input" id="m1" value="100000" min="0">
+            <span class="input-suffix">원</span>
+          </div>
+        </div>
+        <div class="input-row">
+          <span class="input-label">3개월</span>
+          <div class="input-right">
+            <input type="number" class="sim-input" id="m3" value="250000" min="0">
+            <span class="input-suffix">원</span>
+          </div>
+        </div>
+        <div class="input-row">
+          <span class="input-label">6개월</span>
+          <div class="input-right">
+            <input type="number" class="sim-input" id="m6" value="400000" min="0">
+            <span class="input-suffix">원</span>
+          </div>
+        </div>
+        <div class="input-row">
+          <span class="input-label">12개월</span>
+          <div class="input-right">
+            <input type="number" class="sim-input" id="m12" value="480000" min="0">
+            <span class="input-suffix">원</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PT 회원권 -->
+      <div>
+        <div class="input-section-label">PT 회원권</div>
+        <div class="input-row">
+          <span class="input-label">10회</span>
+          <div class="input-right">
+            <input type="number" class="sim-input" id="pt10" value="500000" min="0">
+            <span class="input-suffix">원</span>
+          </div>
+        </div>
+        <div class="input-row">
+          <span class="input-label">20회</span>
+          <div class="input-right">
+            <input type="number" class="sim-input" id="pt20" value="900000" min="0">
+            <span class="input-suffix">원</span>
+          </div>
+        </div>
+        <div class="input-row">
+          <span class="input-label">30회</span>
+          <div class="input-right">
+            <input type="number" class="sim-input" id="pt30" value="1200000" min="0">
+            <span class="input-suffix">원</span>
+          </div>
+        </div>
+        <div class="input-row">
+          <span class="input-label">50회</span>
+          <div class="input-right">
+            <input type="number" class="sim-input" id="pt50" value="1800000" min="0">
+            <span class="input-suffix">원</span>
+          </div>
+        </div>
+        <div class="input-row">
+          <span class="input-label">100회</span>
+          <div class="input-right">
+            <input type="number" class="sim-input" id="pt100" value="3000000" min="0">
+            <span class="input-suffix">원</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 수수료율 설정 -->
+    <div class="panel-title" style="margin-top:8px;margin-bottom:16px;">수수료 · 인상율 설정</div>
+    <div class="rate-grid">
+      <div class="rate-item">
+        <div class="rate-label">전체 인상율</div>
+        <div class="rate-input-wrap">
+          <input type="number" class="rate-input" id="markupRate" value="15" min="0" max="100">
+          <span class="rate-pct">%</span>
+        </div>
+      </div>
+      <div class="rate-item">
+        <div class="rate-label">고객 제시 할인율</div>
+        <div class="rate-input-wrap">
+          <input type="number" class="rate-input" id="discountRate" value="5" min="0" max="100">
+          <span class="rate-pct">%</span>
+        </div>
+      </div>
+      <div class="rate-item">
+        <div class="rate-label">PG 결제수수료</div>
+        <div class="rate-input-wrap">
+          <input type="number" class="rate-input" id="pgRate" value="2.9" min="0" max="10" step="0.1">
+          <span class="rate-pct">%</span>
+        </div>
+      </div>
+      <div class="rate-item">
+        <div class="rate-label">안심보장서비스</div>
+        <div class="rate-input-wrap">
+          <input type="number" class="rate-input" id="safeRate" value="3.5" min="0" max="10" step="0.1">
+          <span class="rate-pct">%</span>
+        </div>
+      </div>
+      <div class="rate-item" style="border-color:rgba(201,168,76,0.25);background:rgba(201,168,76,0.05);">
+        <div class="rate-label" style="color:var(--gold);">12개월 추가비용</div>
+        <div class="rate-input-wrap">
+          <input type="number" class="rate-input" id="longRate" value="5.0" min="0" max="15" step="0.1" style="border-color:rgba(201,168,76,0.3);">
+          <span class="rate-pct">%</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:0.73rem;color:var(--gray);line-height:1.6;margin-bottom:20px;">
+      기준 로직: 결제수수료 + 안심서비스 = 베이직안심권 비용 / 문화공제형(일시불·3~6개월) = 추가 할부수수료 없음 / 12개월 무이자 = 위 비용 + 추가 5%
+    </p>
+
+    <button class="calc-btn" onclick="calculate()">수익 구조 계산하기 →</button>
+  </div>
+
+
+  <!-- ── 결과 영역 ── -->
+  <div id="results" class="hidden">
+
+    <!-- 요약 카드 -->
+    <div class="summary-row" id="summaryRow"></div>
+
+    <!-- 회원권 결과 테이블 -->
+    <div class="panel" style="margin-bottom:24px;">
+      <div class="panel-title">회원권 2트랙 시뮬레이션</div>
+      <p style="font-size:0.8rem;color:var(--sub);margin-bottom:16px;line-height:1.7;">
+        가격을 전반적으로 올리되, <strong style="color:var(--white);">베이직안심권(단기·문화공제)</strong>과
+        <strong style="color:var(--gold-l);">프리미엄안심12개월권(장기·월납)</strong> 두 상품으로 고객에게 제시합니다.
+        "단순 인상"이 아닌 "레벨 선택"으로 인식시키는 것이 핵심입니다.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>기간 / 상품</th>
+              <th>현재가</th>
+              <th>제시 정가</th>
+              <th>제시 판매가</th>
+              <th>결제수수료</th>
+              <th>안심서비스</th>
+              <th>12개월 추가</th>
+              <th>총비용률</th>
+              <th>실수령액</th>
+              <th>추가 수령액</th>
+              <th>상담 월납</th>
+            </tr>
+          </thead>
+          <tbody id="memberTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PT 결과 테이블 -->
+    <div class="panel" style="margin-bottom:24px;">
+      <div class="panel-title">PT 고액권 2트랙 시뮬레이션</div>
+      <p style="font-size:0.8rem;color:var(--sub);margin-bottom:16px;line-height:1.7;">
+        PT는 고액권일수록 <strong style="color:var(--gold-l);">프리미엄안심12개월권</strong>으로 전환 시 객단가 효과가 큽니다.
+        월 납부액을 제시해 결제 저항을 낮추고, 가맹점 실수령을 함께 높이는 전략입니다.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>회차</th>
+              <th>현재가</th>
+              <th>제시 정가</th>
+              <th>베이직권 실수령</th>
+              <th>베이직권 추가수령</th>
+              <th>프리미엄권 실수령</th>
+              <th>프리미엄권 추가수령</th>
+              <th>프리미엄권 월부담</th>
+              <th>회당 단가</th>
+            </tr>
+          </thead>
+          <tbody id="ptTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 결제수수료 구간 시나리오 비교 -->
+    <div class="panel" style="margin-bottom:24px;">
+      <div class="panel-title">결제수수료 구간별 시나리오 비교 (12개월권 기준)</div>
+      <p style="font-size:0.8rem;color:var(--sub);margin-bottom:16px;line-height:1.7;">
+        2.5% / 2.9% / 3.3% 세 구간에서 베이직안심권과 프리미엄안심12개월권의 실수령을 비교합니다.
+        <strong style="color:var(--white);">가격 인상분에 수수료를 녹여도 가맹점 실수령이 방어되거나 증가</strong>하는 구조를 확인하세요.
+      </p>
+      <div class="table-wrap">
+        <table class="scenario-table">
+          <thead>
+            <tr>
+              <th>결제수수료</th>
+              <th>베이직권 비용률</th>
+              <th>프리미엄권 비용률</th>
+              <th>베이직권 실수령</th>
+              <th>프리미엄권 실수령</th>
+              <th>프리미엄 추가수령</th>
+              <th>고객 월부담</th>
+            </tr>
+          </thead>
+          <tbody id="scenarioTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 상담 전략 -->
+    <div class="panel" style="margin-bottom:20px;">
+      <div class="panel-title">현장 상담 전략 & 가맹점 수익 해석</div>
+      <div class="pitch-row">
+        <div class="pitch-box" id="customerPitch"></div>
+        <div class="pitch-box gold-box" id="salesPitch"></div>
+      </div>
+    </div>
+
+    <!-- 핵심 해석 tip -->
+    <div class="tip-box" id="tipBox"></div>
+
+    <!-- 면책 고지 -->
+    <div class="notice">
+      본 시뮬레이션은 영업 설계용 참고 자료입니다. 문화공제 가능 구간, 카드사 무이자 조건, 실제 적용 수수료는
+      카드사 정책 및 계약 조건에 따라 달라질 수 있습니다. | GL allpay × 안심보장서비스
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Footer ── -->
+<footer class="sim-footer">
+  <p>
+    <strong style="color:var(--white);">GL allpay</strong> (주식회사 지엘올페이) &nbsp;|&nbsp;
+    사업자등록번호: 112-88-03313 &nbsp;|&nbsp; 대표이사: 강용신<br>
+    경기도 용인시 수지구 수지로342번길 32, 5층 503·504호 &nbsp;|&nbsp;
+    <a href="mailto:admin@glallpay.com">admin@glallpay.com</a> &nbsp;|&nbsp;
+    <a href="mailto:info@glallpay.com">info@glallpay.com</a><br>
+    <a href="index.html" style="margin-top:6px;display:inline-block;">← GL allpay 홈으로</a>
+    &nbsp;&nbsp;
+    Copyright © 2026 GL allpay. All rights reserved.
+  </p>
+</footer>
+
+<script>
+/* ── Utility ── */
+function fmt(n){
+  if(n===0)return '0';
+  return Math.round(n).toLocaleString('ko-KR');
+}
+function fmtW(n){
+  const abs=Math.abs(n);
+  if(abs>=100000000){
+    const ok=n/100000000;
+    return (ok%1===0?ok.toFixed(0):ok.toFixed(1))+'억원';
+  }
+  if(abs>=10000){
+    const man=n/10000;
+    return (man%1===0?man.toFixed(0):man.toFixed(1))+'만원';
+  }
+  return fmt(n)+'원';
+}
+function net(amount,pg,safe,extra){
+  const pgC=Math.round(amount*pg);
+  const safeC=Math.round(amount*safe);
+  const extraC=Math.round(amount*extra);
+  return{pgC,safeC,extraC,net:amount-pgC-safeC-extraC,totalRate:pg+safe+extra};
+}
+
+/* ── Calculate ── */
+function calculate(){
+  const markup=parseFloat(document.getElementById('markupRate').value||0)/100;
+  const disc=parseFloat(document.getElementById('discountRate').value||0)/100;
+  const pg=parseFloat(document.getElementById('pgRate').value||0)/100;
+  const safe=parseFloat(document.getElementById('safeRate').value||0)/100;
+  const longR=parseFloat(document.getElementById('longRate').value||0)/100;
+
+  const mIds=['m1','m3','m6','m12'];
+  const mLabels=['1개월','3개월','6개월','12개월'];
+  const mMonths=[1,3,6,12];
+
+  const ptIds=['pt10','pt20','pt30','pt50','pt100'];
+  const ptLabels=['10회','20회','30회','50회','100회'];
+  const ptCounts=[10,20,30,50,100];
+
+  /* ── Member Table ── */
+  let mHTML='';
+  mIds.forEach((id,i)=>{
+    const cur=parseInt(document.getElementById(id).value)||0;
+    if(!cur)return;
+    const raised=Math.round(cur*(1+markup));
+    const paid=Math.round(raised*(1-disc));
+    const is12=mMonths[i]===12;
+    const r=net(paid,pg,safe,is12?longR:0);
+    const extra=r.net-cur;
+    const monthly=mMonths[i]===1?'-':'월 '+fmt(Math.round(paid/mMonths[i]))+'원';
+    const rowCls=is12?'tr-premium':'tr-basic';
+    const tag=is12?'<span class="tag-prem">프리미엄안심12개월권</span>':'<span class="tag-basic">베이직안심권</span>';
+    mHTML+=`<tr class="${rowCls}">
+      <td>${mLabels[i]}${tag}</td>
+      <td>${fmt(cur)}원</td>
+      <td class="val-up">${fmt(raised)}원</td>
+      <td><strong>${fmt(paid)}원</strong></td>
+      <td class="val-danger">−${fmt(r.pgC)}원</td>
+      <td class="val-danger">−${fmt(r.safeC)}원</td>
+      <td class="${is12?'val-danger':'val-sub'}">${is12?'−'+fmt(r.extraC)+'원':'없음'}</td>
+      <td>${(r.totalRate*100).toFixed(1)}%</td>
+      <td class="val-up">${fmt(r.net)}원</td>
+      <td class="${extra>=0?'val-gold':'val-danger'}">${extra>=0?'+':''}${fmt(extra)}원</td>
+      <td>${monthly}</td>
+    </tr>`;
+  });
+  document.getElementById('memberTable').innerHTML=mHTML;
+
+  /* ── PT Table ── */
+  let ptHTML='';
+  let bestExtra=-Infinity,bestLabel='',bestMonthly=0,bestPaid=0;
+  ptIds.forEach((id,i)=>{
+    const cur=parseInt(document.getElementById(id).value)||0;
+    if(!cur)return;
+    const raised=Math.round(cur*(1+markup));
+    const paid=Math.round(raised*(1-disc));
+    const basic=net(paid,pg,safe,0);
+    const prem=net(paid,pg,safe,longR);
+    const bExtra=basic.net-cur;
+    const pExtra=prem.net-cur;
+    const m12=Math.round(paid/12);
+    const perSess=Math.round(prem.net/ptCounts[i]);
+    if(pExtra>bestExtra){bestExtra=pExtra;bestLabel=ptLabels[i];bestMonthly=m12;bestPaid=paid;}
+    ptHTML+=`<tr>
+      <td>${ptLabels[i]}</td>
+      <td>${fmt(cur)}원</td>
+      <td class="val-up">${fmt(raised)}원</td>
+      <td class="val-up">${fmt(basic.net)}원</td>
+      <td class="${bExtra>=0?'val-gold':'val-danger'}">${bExtra>=0?'+':''}${fmt(bExtra)}원</td>
+      <td class="val-up">${fmt(prem.net)}원</td>
+      <td class="${pExtra>=0?'val-gold':'val-danger'}">${pExtra>=0?'+':''}${fmt(pExtra)}원</td>
+      <td>월 ${fmt(m12)}원</td>
+      <td>${fmt(perSess)}원</td>
+    </tr>`;
+  });
+  document.getElementById('ptTable').innerHTML=ptHTML;
+
+  /* ── Summary ── */
+  const m12cur=parseInt(document.getElementById('m12').value)||0;
+  const m12raised=Math.round(m12cur*(1+markup));
+  const m12paid=Math.round(m12raised*(1-disc));
+  const m12basic=net(m12paid,pg,safe,0);
+  const m12prem=net(m12paid,pg,safe,longR);
+  document.getElementById('summaryRow').innerHTML=`
+    <div class="sum-card basic">
+      <div class="sum-label">베이직안심권 비용률</div>
+      <div class="sum-value">${((pg+safe)*100).toFixed(1)}%</div>
+      <div class="sum-sub">결제수수료 + 안심서비스</div>
+    </div>
+    <div class="sum-card danger">
+      <div class="sum-label">프리미엄 비용률</div>
+      <div class="sum-value">${((pg+safe+longR)*100).toFixed(1)}%</div>
+      <div class="sum-sub">베이직 + 12개월 추가</div>
+    </div>
+    <div class="sum-card premium">
+      <div class="sum-label">12개월권 실수령 비교</div>
+      <div class="sum-value">${fmtW(m12basic.net)}<br style="display:none"> → ${fmtW(m12prem.net)}</div>
+      <div class="sum-sub">베이직 → 프리미엄</div>
+    </div>
+    <div class="sum-card info">
+      <div class="sum-label">12개월 고객 월부담</div>
+      <div class="sum-value">월 ${fmtW(Math.round(m12paid/12))}</div>
+      <div class="sum-sub">프리미엄안심12개월권 기준</div>
+    </div>
+  `;
+
+  /* ── Scenario ── */
+  const pgRates=[0.025,0.029,0.033];
+  let scHTML='';
+  pgRates.forEach((rate,idx)=>{
+    const b=net(m12paid,rate,safe,0);
+    const p=net(m12paid,rate,safe,longR);
+    const cls=Math.abs(rate-pg)<0.001?'scenario-row-active':'';
+    scHTML+=`<tr class="${cls}">
+      <td><strong>${(rate*100).toFixed(1)}%</strong>${Math.abs(rate-pg)<0.001?' ★':''}</td>
+      <td>${((rate+safe)*100).toFixed(1)}%</td>
+      <td>${((rate+safe+longR)*100).toFixed(1)}%</td>
+      <td class="val-up">${fmtW(b.net)}</td>
+      <td class="val-up">${fmtW(p.net)}</td>
+      <td class="val-gold">+${fmtW(p.net-m12cur)}</td>
+      <td>월 ${fmtW(Math.round(m12paid/12))}</td>
+    </tr>`;
+  });
+  document.getElementById('scenarioTable').innerHTML=scHTML;
+
+  /* ── Customer Pitch ── */
+  const discFeel=m12raised-m12paid;
+  document.getElementById('customerPitch').innerHTML=`
+    <div class="pitch-head">현장 2트랙 세일즈 멘트</div>
+    <p>"현재 이 상품은 안심보장서비스가 포함된 정가 기준 <strong>${fmtW(m12raised)}</strong>입니다.<br>
+    베이직안심권으로는 카드사 무이자 구간 기준 <strong>${fmtW(m12paid)}</strong>에 진행됩니다.<br>
+    금액이 부담스러우시면 프리미엄안심12개월권으로 월 <strong>${fmtW(Math.round(m12paid/12))}</strong>씩 나눠 내실 수 있어요."</p>
+    <div class="mini-stats">
+      <div class="mini-stat"><div class="mini-label">할인 체감</div><div class="mini-value" style="color:var(--danger);">-${fmtW(discFeel)}</div></div>
+      <div class="mini-stat"><div class="mini-label">베이직 비용률</div><div class="mini-value" style="color:var(--success);">${((pg+safe)*100).toFixed(1)}%</div></div>
+      <div class="mini-stat"><div class="mini-label">월 부담</div><div class="mini-value" style="color:var(--gold);">${fmtW(Math.round(m12paid/12))}</div></div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--gray);margin-top:12px;">포인트: 베이직=저항↓, 프리미엄=객단가↑. 두 상품을 나란히 제시해야 단순 인상이 아닌 레벨 선택으로 인식됩니다.</p>
+  `;
+
+  /* ── Sales Pitch ── */
+  document.getElementById('salesPitch').innerHTML=`
+    <div class="pitch-head">가맹점 수익 구조 해석</div>
+    <p><strong>1.</strong> 결제수수료 ${(pg*100).toFixed(1)}% + 안심서비스 ${(safe*100).toFixed(1)}%를 가격에 선반영하여 구조적으로 올립니다.<br>
+    <strong>2.</strong> 베이직안심권은 문화공제형 무이자 구간 활용 → 단기권 저항 최소화.<br>
+    <strong>3.</strong> 프리미엄안심12개월권은 추가 ${(longR*100).toFixed(1)}% 반영해도 월납 구조로 전환율↑.<br>
+    <strong>4.</strong> 가장 공격적으로 밀 수 있는 PT: <strong>${bestLabel||'-'}</strong> (월 ${bestLabel?fmtW(bestMonthly):'-'})</p>
+    <p style="font-size:0.78rem;color:var(--gray);margin-top:12px;">권장: 상담 첫 제시는 베이직안심권으로 저항 낮추고, 마감 단계에서 프리미엄권의 <strong style="color:var(--gold-l);">${bestLabel?fmtW(bestPaid):'-'}</strong>을 월납으로 전환.</p>
+  `;
+
+  /* ── Tip ── */
+  document.getElementById('tipBox').innerHTML=`
+    <strong>핵심 해석:</strong>
+    회원권을 전부 인상하되, 고객에게는 단순 인상이 아닌 <strong>안심보장서비스 포함 레벨 상품</strong>으로 제시하세요.
+    베이직안심권은 카드사 무이자 구간 단기권, 프리미엄안심12개월권은 월납형 고액권 역할입니다.<br>
+    <strong>미국식 레벨 전략:</strong> Basic / Premium 등급 분리 시 고객은 "왜 올랐나"보다 "어느 레벨을 선택할까"로 사고가 전환됩니다.
+    이 구조가 가격 인상을 <strong>프리미엄화</strong>로 바꾸는 핵심입니다.
+  `;
+
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ── Auto-calculate on load ── */
+window.addEventListener('DOMContentLoaded',calculate);
+</script>
+</body>
+</html>
