@@ -1216,10 +1216,10 @@ export default function HomePage() {
               {/* 결제 터미널 버튼 (Payment Terminal) */}
               <button
                 onClick={() => window.location.href = '/payment-terminal'}
-                className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover-elevate text-sm font-medium"
+                className="flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-lg hover-elevate active-elevate-2 text-sm font-medium"
               >
                 <CreditCard className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Pay</span>
+                <span className="hidden md:inline">결제</span>
               </button>
 
               {/* AI 챗봇 버튼 — 모바일 숨김 (Hidden on mobile) */}

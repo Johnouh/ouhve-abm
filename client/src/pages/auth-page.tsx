@@ -829,9 +829,9 @@ export default function AuthPage() {
         <AuthCard>
           {/* Logo */}
           <div className="text-center space-y-4">
-            <div className="flex justify-center items-center space-x-1">
-              <span className="text-3xl font-bold text-black">GL</span>
-              <span className="text-3xl font-bold text-primary">Pay</span>
+            <div className="flex justify-center items-center space-x-1 tracking-tight">
+              <span className="text-3xl font-bold text-black">OUHVE</span>
+              <span className="text-3xl font-bold text-primary"> ABM</span>
             </div>
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-primary/80 mx-auto rounded-full"></div>
           </div>
