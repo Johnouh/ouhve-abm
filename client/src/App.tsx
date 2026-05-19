@@ -16,6 +16,7 @@ import PaymentCallbackPage from "@/pages/payment-callback-page";
 import PayPage from "@/pages/pay-page";
 import KioskAuthPage from "@/pages/kiosk-auth-page";
 import KioskHomePage from "@/pages/kiosk-home-page";
+import BusinessProfilePage from "@/pages/business-profile-page";
 import { ProtectedRoute } from "./lib/protected-route";
 import { Loader2 } from "lucide-react";
 
@@ -59,6 +60,8 @@ function CrmRouter() {
       <ProtectedRoute path="/payment-callback" component={PaymentCallbackPage} />
       <ProtectedRoute path="/group-lessons/:id/edit" component={GroupLessonEditPage} />
       <ProtectedRoute path="/group-lesson-add" component={GroupLessonAddPage} />
+      {/* OUHVE ABM — Module 1 Business Profile */}
+      <ProtectedRoute path="/business-profile" component={BusinessProfilePage} />
       <ProtectedRoute path="/" component={HomePage} />
       <ProtectedRoute path="/:rest*" component={HomePage} />
       <Route component={NotFound} />
