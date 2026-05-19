@@ -74,7 +74,7 @@ function AuthCard({ children }: { children: React.ReactNode }) {
   return (
     <Card className="bg-white rounded-2xl shadow-2xl border-0 overflow-hidden">
       <CardAccentLine />
-      <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-1">
+      <div className="bg-gradient-to-r from-primary to-primary/80 p-1">
         <div className="bg-white rounded-2xl">
           <CardContent className="p-8 space-y-6">
             {children}
@@ -98,9 +98,9 @@ function LogoHeader({ subtitle, onBack }: { subtitle: string; onBack?: () => voi
             <ArrowLeft className="w-5 h-5" />
           </button>
         )}
-        <div className="text-2xl font-bold">
-          <span className="text-gray-900">GL</span>
-          <span className="text-blue-500">Pay</span>
+        <div className="text-2xl font-bold tracking-tight">
+          <span className="text-gray-900">OUHVE</span>
+          <span className="text-primary"> ABM</span>
         </div>
       </div>
       <h2 className="text-xl font-semibold text-gray-900">{subtitle}</h2>
@@ -118,7 +118,7 @@ function ProgressBar({ step, total, labels }: { step: number; total: number; lab
             key={i}
             className={`flex-1 h-2 rounded-full ${
               i < step
-                ? "bg-gradient-to-r from-blue-500 to-blue-600"
+                ? "bg-gradient-to-r from-primary to-primary/80"
                 : "bg-gray-200"
             }`}
           />
@@ -148,7 +148,7 @@ function AuthFooter() {
 }
 
 // Styled input class
-const inputClass = "w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-blue-300 transition-all duration-200";
+const inputClass = "w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary hover:border-primary/40 transition-all duration-200";
 
 export default function AuthPage() {
   const [, setLocation] = useLocation();
@@ -287,20 +287,20 @@ export default function AuthPage() {
     total: number,
     labels: string[],
   ) => (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-background to-background flex items-center justify-center p-4">
       <div className="w-full max-w-md mx-auto">
         <AuthCard>
           <LogoHeader subtitle="회원가입" onBack={onBack} />
           <ProgressBar step={step} total={total} labels={labels} />
 
           <div className="space-y-4">
-            <div className="border-b border-blue-200 pb-3">
+            <div className="border-b border-primary/20 pb-3">
               <h3 className="text-lg font-semibold text-gray-900">약관 동의</h3>
               <p className="text-sm text-gray-600 mt-1">서비스 이용을 위해 필요한 약관에 동의해주세요</p>
             </div>
 
             {/* All terms */}
-            <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl border border-blue-200">
+            <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl border border-primary/20">
               <Checkbox
                 id="all-terms"
                 checked={allRequired && agreed.marketing}
@@ -308,7 +308,7 @@ export default function AuthPage() {
                   const v = checked === true;
                   setAgreed({ service: v, privacy: v, personalInfo: v, marketing: v });
                 }}
-                className="border-2 border-blue-300 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
+                className="border-2 border-primary/40 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
               />
               <Label htmlFor="all-terms" className="text-sm font-semibold text-gray-900 cursor-pointer">
                 모든 약관에 동의 합니다
@@ -329,7 +329,7 @@ export default function AuthPage() {
                     onCheckedChange={(checked) =>
                       setAgreed((prev) => ({ ...prev, [term.key]: checked === true }))
                     }
-                    className="border-2 border-gray-300 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
+                    className="border-2 border-gray-300 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                   />
                   <Label htmlFor={term.id} className="text-sm text-gray-700 flex-1 cursor-pointer">
                     <span className="font-medium">{term.label}</span>{" "}
@@ -338,7 +338,7 @@ export default function AuthPage() {
                     </span>
                   </Label>
                   {term.showLink && (
-                    <button className="text-blue-500 text-sm hover:text-blue-600 font-medium hover:underline">
+                    <button className="text-primary text-sm hover:text-primary font-medium hover:underline">
                       전문 보기
                     </button>
                   )}
@@ -351,7 +351,7 @@ export default function AuthPage() {
             onClick={onNext}
             className={`w-full py-4 font-semibold transition-all duration-200 rounded-xl text-lg ${
               allRequired
-                ? "bg-gradient-to-r from-blue-500 to-blue-600 hover-elevate text-white shadow-lg hover:shadow-xl transform hover:scale-105"
+                ? "bg-gradient-to-r from-primary to-primary/80 hover-elevate text-white shadow-lg hover:shadow-xl transform hover:scale-105"
                 : "bg-gray-200 text-gray-500 cursor-not-allowed"
             }`}
             disabled={!allRequired}
@@ -368,7 +368,7 @@ export default function AuthPage() {
   // ===== REGISTRATION TYPE SELECTION =====
   if (showRegister && regType === null) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-background to-background flex items-center justify-center p-4">
         <div className="w-full max-w-md mx-auto">
           <AuthCard>
             <LogoHeader subtitle="회원가입" onBack={handleBackToLogin} />
@@ -378,35 +378,35 @@ export default function AuthPage() {
               {/* Franchise */}
               <button
                 onClick={() => setRegType("franchise")}
-                className="w-full p-4 border-2 border-gray-200 rounded-xl hover:border-blue-300 hover-elevate hover:shadow-md transition-all duration-200 flex items-center justify-between group"
+                className="w-full p-4 border-2 border-gray-200 rounded-xl hover:border-primary/40 hover-elevate hover:shadow-md transition-all duration-200 flex items-center justify-between group"
               >
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-200">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-200">
                     <Building2 className="w-5 h-5 text-white" />
                   </div>
                   <div className="text-left">
-                    <div className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">프랜차이즈 가입</div>
-                    <div className="text-sm text-gray-500 group-hover:text-blue-500 transition-colors">새로운 프랜차이즈를 등록합니다</div>
+                    <div className="font-semibold text-gray-900 group-hover:text-primary transition-colors">프랜차이즈 가입</div>
+                    <div className="text-sm text-gray-500 group-hover:text-primary transition-colors">새로운 프랜차이즈를 등록합니다</div>
                   </div>
                 </div>
-                <ArrowLeft className="w-5 h-5 text-gray-400 group-hover:text-blue-500 rotate-180 transition-all duration-200 group-hover:translate-x-1 shrink-0" />
+                <ArrowLeft className="w-5 h-5 text-gray-400 group-hover:text-primary rotate-180 transition-all duration-200 group-hover:translate-x-1 shrink-0" />
               </button>
 
               {/* Branch */}
               <button
                 onClick={() => setRegType("branch")}
-                className="w-full p-4 border-2 border-gray-200 rounded-xl hover:border-blue-300 hover-elevate hover:shadow-md transition-all duration-200 flex items-center justify-between group"
+                className="w-full p-4 border-2 border-gray-200 rounded-xl hover:border-primary/40 hover-elevate hover:shadow-md transition-all duration-200 flex items-center justify-between group"
               >
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-200">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-200">
                     <Store className="w-5 h-5 text-white" />
                   </div>
                   <div className="text-left">
-                    <div className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">지점 가입</div>
-                    <div className="text-sm text-gray-500 group-hover:text-blue-500 transition-colors">기존 프랜차이즈의 지점을 등록합니다</div>
+                    <div className="font-semibold text-gray-900 group-hover:text-primary transition-colors">지점 가입</div>
+                    <div className="text-sm text-gray-500 group-hover:text-primary transition-colors">기존 프랜차이즈의 지점을 등록합니다</div>
                   </div>
                 </div>
-                <ArrowLeft className="w-5 h-5 text-gray-400 group-hover:text-blue-500 rotate-180 transition-all duration-200 group-hover:translate-x-1 shrink-0" />
+                <ArrowLeft className="w-5 h-5 text-gray-400 group-hover:text-primary rotate-180 transition-all duration-200 group-hover:translate-x-1 shrink-0" />
               </button>
 
               {/* Trainer - Coming Soon */}
@@ -429,7 +429,7 @@ export default function AuthPage() {
             <Button
               type="button"
               variant="outline"
-              className="w-full py-4 font-medium border-2 border-blue-200 text-blue-600 hover-elevate hover:border-blue-300 transition-all duration-200 rounded-xl"
+              className="w-full py-4 font-medium border-2 border-primary/20 text-primary hover-elevate hover:border-primary/40 transition-all duration-200 rounded-xl"
               onClick={handleBackToLogin}
             >
               이미 계정이 있으신가요? 로그인
@@ -456,14 +456,14 @@ export default function AuthPage() {
     // Info
     if (franchiseStep === "info") {
       return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gradient-to-br from-background to-background flex items-center justify-center p-4">
           <div className="w-full max-w-md mx-auto">
             <AuthCard>
               <LogoHeader subtitle="프랜차이즈 정보 입력" onBack={() => setFranchiseStep("terms")} />
               <ProgressBar step={2} total={3} labels={["약관동의", "정보입력", "완료"]} />
 
               <div className="space-y-4">
-                <div className="border-b border-blue-200 pb-3">
+                <div className="border-b border-primary/20 pb-3">
                   <h3 className="text-lg font-semibold text-gray-900">사업자 정보</h3>
                   <p className="text-sm text-gray-600 mt-1">프랜차이즈 등록을 위한 정보를 입력해주세요</p>
                 </div>
@@ -502,7 +502,7 @@ export default function AuthPage() {
                     )}
                   </div>
 
-                  <div className="border-t border-blue-200 pt-3">
+                  <div className="border-t border-primary/20 pt-3">
                     <p className="text-sm text-gray-600">로그인 계정 정보</p>
                   </div>
 
@@ -541,7 +541,7 @@ export default function AuthPage() {
 
                   <Button
                     type="submit"
-                    className="w-full py-4 bg-gradient-to-r from-blue-500 to-blue-600 hover-elevate text-white font-semibold transition-all duration-200 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 text-lg"
+                    className="w-full py-4 bg-gradient-to-r from-primary to-primary/80 hover-elevate text-white font-semibold transition-all duration-200 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 text-lg"
                     disabled={franchiseRegMutation.isPending}
                   >
                     {franchiseRegMutation.isPending ? (
@@ -560,7 +560,7 @@ export default function AuthPage() {
 
     // Done
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-background to-background flex items-center justify-center p-4">
         <div className="w-full max-w-md mx-auto">
           <AuthCard>
             <ProgressBar step={3} total={3} labels={["약관동의", "정보입력", "완료"]} />
@@ -578,7 +578,7 @@ export default function AuthPage() {
 
             <Button
               onClick={handleBackToLogin}
-              className="w-full py-4 bg-gradient-to-r from-blue-500 to-blue-600 hover-elevate text-white font-semibold transition-all duration-200 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 text-lg"
+              className="w-full py-4 bg-gradient-to-r from-primary to-primary/80 hover-elevate text-white font-semibold transition-all duration-200 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 text-lg"
             >
               로그인 페이지로
             </Button>
@@ -595,13 +595,13 @@ export default function AuthPage() {
     // Code input
     if (branchStep === "code") {
       return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gradient-to-br from-background to-background flex items-center justify-center p-4">
           <div className="w-full max-w-md mx-auto">
             <AuthCard>
               <LogoHeader subtitle="프랜차이즈 코드 입력" onBack={() => setRegType(null)} />
 
               <div className="space-y-4">
-                <div className="border-b border-blue-200 pb-3">
+                <div className="border-b border-primary/20 pb-3">
                   <p className="text-sm text-gray-600">소속 프랜차이즈에서 발급받은 코드를 입력하세요.</p>
                 </div>
 
@@ -620,7 +620,7 @@ export default function AuthPage() {
                   disabled={!branchCode.trim() || verifyCodeMutation.isPending}
                   className={`w-full py-4 font-semibold transition-all duration-200 rounded-xl text-lg ${
                     branchCode.trim()
-                      ? "bg-gradient-to-r from-blue-500 to-blue-600 hover-elevate text-white shadow-lg hover:shadow-xl transform hover:scale-105"
+                      ? "bg-gradient-to-r from-primary to-primary/80 hover-elevate text-white shadow-lg hover:shadow-xl transform hover:scale-105"
                       : "bg-gray-200 text-gray-500 cursor-not-allowed"
                   }`}
                 >
@@ -642,12 +642,12 @@ export default function AuthPage() {
     // Confirm franchise
     if (branchStep === "confirm") {
       return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gradient-to-br from-background to-background flex items-center justify-center p-4">
           <div className="w-full max-w-md mx-auto">
             <AuthCard>
               <LogoHeader subtitle="프랜차이즈 확인" onBack={() => { setBranchStep("code"); setVerifiedFranchise(null); }} />
 
-              <div className="p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl border border-blue-200 flex items-center space-x-3">
+              <div className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl border border-primary/20 flex items-center space-x-3">
                 <CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0" />
                 <div className="min-w-0">
                   <div className="font-semibold text-gray-900 truncate">{verifiedFranchise?.name}</div>
@@ -662,7 +662,7 @@ export default function AuthPage() {
 
               <Button
                 onClick={() => setBranchStep("terms")}
-                className="w-full py-4 bg-gradient-to-r from-blue-500 to-blue-600 hover-elevate text-white font-semibold transition-all duration-200 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 text-lg"
+                className="w-full py-4 bg-gradient-to-r from-primary to-primary/80 hover-elevate text-white font-semibold transition-all duration-200 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 text-lg"
               >
                 다음 단계
               </Button>
@@ -686,20 +686,20 @@ export default function AuthPage() {
     // Info
     if (branchStep === "info") {
       return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gradient-to-br from-background to-background flex items-center justify-center p-4">
           <div className="w-full max-w-md mx-auto">
             <AuthCard>
               <LogoHeader subtitle="지점 정보 입력" onBack={() => setBranchStep("terms")} />
               <ProgressBar step={3} total={4} labels={["코드입력", "약관동의", "정보입력", "완료"]} />
 
               {/* Franchise info badge */}
-              <div className="flex items-center space-x-2 p-3 bg-blue-50 rounded-xl border border-blue-200">
-                <Building2 className="w-4 h-4 text-blue-500 shrink-0" />
-                <span className="text-sm text-blue-700 truncate">{verifiedFranchise?.name}</span>
+              <div className="flex items-center space-x-2 p-3 bg-primary/5 rounded-xl border border-primary/20">
+                <Building2 className="w-4 h-4 text-primary shrink-0" />
+                <span className="text-sm text-primary truncate">{verifiedFranchise?.name}</span>
               </div>
 
               <div className="space-y-4">
-                <div className="border-b border-blue-200 pb-3">
+                <div className="border-b border-primary/20 pb-3">
                   <h3 className="text-lg font-semibold text-gray-900">지점 정보</h3>
                   <p className="text-sm text-gray-600 mt-1">지점 등록을 위한 정보를 입력해주세요</p>
                 </div>
@@ -738,7 +738,7 @@ export default function AuthPage() {
                     )}
                   </div>
 
-                  <div className="border-t border-blue-200 pt-3">
+                  <div className="border-t border-primary/20 pt-3">
                     <p className="text-sm text-gray-600">로그인 계정 정보</p>
                   </div>
 
@@ -777,7 +777,7 @@ export default function AuthPage() {
 
                   <Button
                     type="submit"
-                    className="w-full py-4 bg-gradient-to-r from-blue-500 to-blue-600 hover-elevate text-white font-semibold transition-all duration-200 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 text-lg"
+                    className="w-full py-4 bg-gradient-to-r from-primary to-primary/80 hover-elevate text-white font-semibold transition-all duration-200 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 text-lg"
                     disabled={branchRegMutation.isPending}
                   >
                     {branchRegMutation.isPending ? (
@@ -796,7 +796,7 @@ export default function AuthPage() {
 
     // Done
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-background to-background flex items-center justify-center p-4">
         <div className="w-full max-w-md mx-auto">
           <AuthCard>
             <ProgressBar step={4} total={4} labels={["코드입력", "약관동의", "정보입력", "완료"]} />
@@ -827,16 +827,16 @@ export default function AuthPage() {
 
   // ===== DEFAULT LOGIN SCREEN =====
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-background to-background flex items-center justify-center p-4">
       <div className="w-full max-w-md mx-auto">
         <AuthCard>
           {/* Logo */}
           <div className="text-center space-y-4">
             <div className="flex justify-center items-center space-x-1">
               <span className="text-3xl font-bold text-black">GL</span>
-              <span className="text-3xl font-bold text-blue-500">Pay</span>
+              <span className="text-3xl font-bold text-primary">Pay</span>
             </div>
-            <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto rounded-full"></div>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-primary/80 mx-auto rounded-full"></div>
           </div>
 
           {/* Login Form Title */}
@@ -891,7 +891,7 @@ export default function AuthPage() {
               type="submit"
               className={`w-full py-4 font-semibold transition-all duration-200 rounded-xl text-lg ${
                 isLoginFormValid
-                  ? "bg-gradient-to-r from-blue-500 to-blue-600 hover-elevate text-white shadow-lg hover:shadow-xl transform hover:scale-105"
+                  ? "bg-gradient-to-r from-primary to-primary/80 hover-elevate text-white shadow-lg hover:shadow-xl transform hover:scale-105"
                   : "bg-gray-200 text-gray-500 cursor-not-allowed"
               }`}
               disabled={loginMutation.isPending || !isLoginFormValid}
@@ -904,7 +904,7 @@ export default function AuthPage() {
             <Button
               type="button"
               variant="outline"
-              className="w-full py-4 font-medium border-2 border-blue-200 text-blue-600 hover-elevate hover:border-blue-300 transition-all duration-200 rounded-xl"
+              className="w-full py-4 font-medium border-2 border-primary/20 text-primary hover-elevate hover:border-primary/40 transition-all duration-200 rounded-xl"
               onClick={() => setShowRegister(true)}
             >
               회원가입

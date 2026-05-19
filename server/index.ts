@@ -2,11 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import {
-  ensureSiteGateConfig,
   searchEngineBlockHeader,
-  siteGateMiddleware,
-  siteLoginHandler,
-  siteLogoutHandler,
   robotsTxtHandler,
 } from "./middleware/site-gate";
 // Security middleware imports moved to routes.ts
@@ -18,14 +14,10 @@ const app = express();
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: false, limit: '10mb' }));
 
-// 🔒 Site Gate: 전체 사이트 비밀번호 보호
-// fail-closed (prod에서 SITE_PASSWORD/SITE_AUTH_SECRET 미설정 시 시작 throw)
-ensureSiteGateConfig();
+// 검색엔진 차단 헤더 + robots.txt는 유지 (OUHVE ABM 초기 — 공개 색인 원치 않음)
+// 사이트 비밀번호 게이트는 비활성화 (2026-05-20 사용자 결정 — 입장 비번 없앰)
 app.use(searchEngineBlockHeader);
 app.get("/robots.txt", robotsTxtHandler);
-app.post("/api/site-login", siteLoginHandler);
-app.post("/api/site-logout", siteLogoutHandler);
-app.use(siteGateMiddleware);
 
 app.use((req, res, next) => {
   const start = Date.now();
