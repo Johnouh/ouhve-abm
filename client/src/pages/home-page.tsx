@@ -915,7 +915,7 @@ export default function HomePage() {
             <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
               <Building2 className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-lg">GL Pay</span>
+            <span className="font-bold text-lg">OUHVE ABM</span>
             <span className="text-xs bg-blue-500 text-white px-2 py-1 rounded">PRO</span>
           </div>
         </div>
@@ -924,7 +924,7 @@ export default function HomePage() {
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center space-x-2 mb-4">
             <Building2 className="w-4 h-4 text-gray-500" />
-            <span className="text-xs text-gray-800">(주)GL Pay 창업센터/2F</span>
+            <span className="text-xs text-gray-800"></span>
           </div>
           
           {/* Tab Buttons */}
@@ -2063,7 +2063,7 @@ function CenterInfoContent() {
               <h3 className="text-lg font-medium mb-4">센터 사진</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-gray-800 rounded-lg p-4 flex items-center justify-center h-24 relative">
-                  <span className="text-white text-xs font-medium">GL Pay</span>
+                  <span className="text-white text-xs font-medium">OUHVE ABM</span>
                   {showCenterEdit && (
                     <Button 
                       size="sm" 
@@ -2075,7 +2075,7 @@ function CenterInfoContent() {
                   )}
                 </div>
                 <div className="bg-gray-600 rounded-lg p-4 flex items-center justify-center h-24 relative">
-                  <span className="text-white text-xs font-medium">GL Pay</span>
+                  <span className="text-white text-xs font-medium">OUHVE ABM</span>
                   {showCenterEdit && (
                     <Button
                       size="sm"
@@ -2780,7 +2780,7 @@ function CenterInfoContent() {
                   <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium mb-2">지점명</label>
-                      <Input defaultValue="(주)GL Pay 월리스터스점" />
+                      <Input defaultValue="OUHVE ABM 데모점" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">운영 시간</label>
@@ -2801,7 +2801,7 @@ function CenterInfoContent() {
                     <label className="block text-sm font-medium mb-2">센터 사진</label>
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <div className="bg-gray-800 rounded-lg p-4 flex items-center justify-center h-24 relative">
-                        <span className="text-white text-xs font-medium">GL Pay</span>
+                        <span className="text-white text-xs font-medium">OUHVE ABM</span>
                         <Button
                           size="sm"
                           variant="outline"
@@ -2811,7 +2811,7 @@ function CenterInfoContent() {
                         </Button>
                       </div>
                       <div className="bg-gray-600 rounded-lg p-4 flex items-center justify-center h-24 relative">
-                        <span className="text-white text-xs font-medium">GL Pay</span>
+                        <span className="text-white text-xs font-medium">OUHVE ABM</span>
                         <Button
                           size="sm"
                           variant="outline"

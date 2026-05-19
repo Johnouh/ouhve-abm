@@ -191,7 +191,7 @@ export default function GroupLessonAddPage() {
             <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">A</span>
             </div>
-            <span className="font-bold text-lg">GL Pay</span>
+            <span className="font-bold text-lg">OUHVE ABM</span>
             <span className="text-xs bg-blue-500 text-white px-2 py-1 rounded">PRO</span>
           </div>
         </div>

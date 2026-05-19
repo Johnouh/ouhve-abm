@@ -133,13 +133,10 @@ function ProgressBar({ step, total, labels }: { step: number; total: number; lab
   );
 }
 
-// Footer
+// Footer — 사업자 정보는 OUHVE 법인 확정 시 채움
 function AuthFooter() {
   return (
     <div className="text-center pt-6 space-y-1">
-      <p className="text-[10px] text-gray-400">OUHVE ABM | 대표 강용신</p>
-      <p className="text-[10px] text-gray-400">사업자등록번호 112-88-03313</p>
-      <p className="text-[10px] text-gray-400">Tel. 070-8828-1001</p>
       <p className="text-[10px] text-gray-300 mt-1">
         &copy; {new Date().getFullYear()} OUHVE ABM. All rights reserved.
       </p>
@@ -842,7 +839,7 @@ export default function AuthPage() {
           {/* Login Form Title */}
           <div className="text-center space-y-2">
             <h2 className="text-2xl font-semibold text-gray-900">로그인</h2>
-            <p className="text-sm text-gray-600">GL Pay에 오신 것을 환영합니다</p>
+            <p className="text-sm text-gray-600">OUHVE ABM에 오신 것을 환영합니다</p>
           </div>
 
           <form onSubmit={loginForm.handleSubmit(onLoginSubmit)} className="space-y-5">
