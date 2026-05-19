@@ -242,6 +242,8 @@ export interface IStorage {
 
   // 🏢 프랜차이즈 PG 설정 (Franchise PG config)
   updateFranchisePgConfig(id: number, config: { pgProvider?: string; pgServiceId?: string; pgMode?: string; pgApiKey?: string; pgApiIv?: string }): Promise<Franchise>;
+  // OUHVE ABM — Module 1: Business Profile
+  updateBusinessProfile(id: number, profile: Partial<InsertFranchise>): Promise<Franchise>;
 
   // 🖥️ 결제 단말기 관리 (Payment Terminal management)
   getTerminals(franchiseId: number): Promise<PaymentTerminal[]>;
@@ -1707,6 +1709,17 @@ export class DatabaseStorage implements IStorage {
   async updateFranchisePgConfig(id: number, config: { pgProvider?: string; pgServiceId?: string; pgMode?: string; pgApiKey?: string; pgApiIv?: string }): Promise<Franchise> {
     const [franchise] = await db.update(franchises)
       .set(config)
+      .where(eq(franchises.id, id))
+      .returning();
+    return franchise;
+  }
+
+  // OUHVE ABM — Module 1: Business Profile
+  // 운영자 정체성 데이터를 갱신. AI Operation Assistant(Module 7)가 이 데이터를
+  // 기반으로 맥락 있는 제안을 생성한다.
+  async updateBusinessProfile(id: number, profile: Partial<InsertFranchise>): Promise<Franchise> {
+    const [franchise] = await db.update(franchises)
+      .set(profile)
       .where(eq(franchises.id, id))
       .returning();
     return franchise;

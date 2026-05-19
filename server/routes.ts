@@ -4,6 +4,7 @@ import { setupAuth } from "./auth";
 import { setupHealthCheck } from "./health-check";
 import { storage } from "./storage";
 import { analyzeChurnRisk, analyzeRevenueInsights } from "./services/ai-service";
+import { computeProfileCompletion } from "./services/business-profile-helper";
 import { preparePayment, cancelPayment as billgateCancelPayment, verifyCallbackHash, generateLinkPaymentUrl, generateOrderId, generateOrderDate, generateHashKey, SERVICE_CODES, PAYMENT_METHOD_LABELS, type BillgatePgConfig } from "./services/billgate-service";
 import { smsProvider, buildLinkPaymentSmsMessage } from "./services/sms-service";
 import { insertPgTransactionSchema, insertPgProductSchema } from "@shared/schema";
@@ -14,7 +15,7 @@ import { validateSchema, validateFranchiseId, validatePagination } from "./middl
 import { securityHeaders, apiRateLimit, loginRateLimit, sensitiveRateLimit, detectSuspiciousActivity } from "./middleware/security";
 import { performanceMonitor, metricsEndpoint, reportEndpoint } from "./middleware/performance-monitor";
 import { logger, requestLogger } from "./middleware/logging";
-import { insertFranchiseSchema, insertMemberSchema, insertStaffSchema, insertProductSchema, insertLockerSchema, insertAttendanceSchema, insertScheduleSchema, insertPersonalTrainingSchema, insertPtSessionSchema, insertOtApplicationSchema, insertTrainerRecordSchema, insertMemberMeasurementSchema, insertConsultationSchema, insertPostSchema, insertGroupLessonSchema, insertContractSchema, insertRefundSchema, insertOtherSaleSchema, insertSuspensionSchema, insertMemberModificationSchema, insertGroupExtensionSchema } from "@shared/schema";
+import { insertFranchiseSchema, insertMemberSchema, insertStaffSchema, insertProductSchema, insertLockerSchema, insertAttendanceSchema, insertScheduleSchema, insertPersonalTrainingSchema, insertPtSessionSchema, insertOtApplicationSchema, insertTrainerRecordSchema, insertMemberMeasurementSchema, insertConsultationSchema, insertPostSchema, insertGroupLessonSchema, insertContractSchema, insertRefundSchema, insertOtherSaleSchema, insertSuspensionSchema, insertMemberModificationSchema, insertGroupExtensionSchema, businessProfileSchema } from "@shared/schema";
 import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
 import { z } from "zod";
@@ -360,6 +361,57 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const validatedData = insertFranchiseSchema.parse(req.body);
     const franchise = await storage.createFranchise(validatedData);
     res.status(201).json(franchise);
+  }));
+
+  // ================================================================
+  // OUHVE ABM — Module 1: Business Profile
+  // 운영자 정체성 + AI Operation Assistant(Module 7)의 컨텍스트 소스
+  // ================================================================
+
+  // GET /api/business-profile — 현재 사용자의 센터 프로필 + 완성도
+  app.get("/api/business-profile", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const franchise = await storage.getFranchise(franchiseId);
+    if (!franchise) {
+      return res.status(404).json({ error: "Franchise not found" });
+    }
+    const completion = computeProfileCompletion(franchise);
+    res.json({ franchise, completion });
+  }));
+
+  // PUT /api/business-profile — 프로필 갱신 (부분 업데이트 허용)
+  app.put("/api/business-profile", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    // 부분 업데이트 허용 (필드별 점진적 입력 지원)
+    const allowedKeys = [
+      "name", "description", "ownerName", "ownerPhone", "businessName",
+      "wellnessCategory", "region", "operatingHours", "mainPrograms",
+      "primaryAudience", "philosophy", "topConcern",
+    ] as const;
+    const update: Record<string, unknown> = {};
+    for (const key of allowedKeys) {
+      if (req.body[key] !== undefined) {
+        update[key] = req.body[key];
+      }
+    }
+    // 모든 핵심 필드가 채워졌으면 completedAt 자동 설정
+    const merged = { ...await storage.getFranchise(franchiseId), ...update };
+    const isComplete = businessProfileSchema.safeParse(merged).success;
+    if (isComplete && !(merged as any).profileCompletedAt) {
+      update.profileCompletedAt = new Date();
+    }
+    const updated = await storage.updateBusinessProfile(franchiseId, update);
+    res.json({ franchise: updated, completion: computeProfileCompletion(updated) });
+  }));
+
+  // GET /api/business-profile/completion — 완성도만 (대시보드 진척 표시용)
+  app.get("/api/business-profile/completion", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const franchise = await storage.getFranchise(franchiseId);
+    if (!franchise) {
+      return res.status(404).json({ error: "Franchise not found" });
+    }
+    res.json(computeProfileCompletion(franchise));
   }));
 
   // Username availability check
