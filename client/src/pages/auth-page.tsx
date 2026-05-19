@@ -85,7 +85,7 @@ function AuthCard({ children }: { children: React.ReactNode }) {
   );
 }
 
-// GLPay logo header
+// OUHVE ABM logo header
 function LogoHeader({ subtitle, onBack }: { subtitle: string; onBack?: () => void }) {
   return (
     <div className="text-center space-y-2">
@@ -137,11 +137,11 @@ function ProgressBar({ step, total, labels }: { step: number; total: number; lab
 function AuthFooter() {
   return (
     <div className="text-center pt-6 space-y-1">
-      <p className="text-[10px] text-gray-400">(주)지엘올페이 | 대표 강용신</p>
+      <p className="text-[10px] text-gray-400">OUHVE ABM | 대표 강용신</p>
       <p className="text-[10px] text-gray-400">사업자등록번호 112-88-03313</p>
       <p className="text-[10px] text-gray-400">Tel. 070-8828-1001</p>
       <p className="text-[10px] text-gray-300 mt-1">
-        &copy; {new Date().getFullYear()} GLAllPay. All rights reserved.
+        &copy; {new Date().getFullYear()} OUHVE ABM. All rights reserved.
       </p>
     </div>
   );

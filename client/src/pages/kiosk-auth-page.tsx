@@ -1,5 +1,5 @@
 // 🏪 키오스크 전용 로그인 페이지 (Kiosk Login Page)
-// 🎯 Purpose: kiosk.glallpay.com 전용 로그인 UI — 로그인 후 /kiosk/home으로 이동
+// 🎯 Purpose: kiosk.ouhve.app 전용 로그인 UI — 로그인 후 /kiosk/home으로 이동
 
 import { useEffect } from "react";
 import { useLocation } from "wouter";

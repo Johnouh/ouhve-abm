@@ -581,15 +581,15 @@ export default function KioskPaymentView({ onBack, franchiseId, kioskMode = fals
 
           <button
             onClick={handleManualPayment}
-            className="w-full rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 p-5 text-white shadow-md hover-elevate transition-all"
+            className="w-full rounded-xl bg-gradient-to-br from-primary to-primary/80 p-5 text-primary-foreground shadow-md hover-elevate active-elevate-2 transition-all"
           >
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
-                <CreditCard className="w-6 h-6 text-white shrink-0" />
+                <CreditCard className="w-6 h-6 text-primary-foreground shrink-0" />
               </div>
               <div className="text-left min-w-0">
                 <p className="font-bold text-base">수기결제</p>
-                <p className="text-xs text-blue-100 mt-0.5">QR / SMS / 카드결제 / 링크복사</p>
+                <p className="text-xs text-primary-foreground/80 mt-0.5">QR / SMS / 카드결제 / 링크복사</p>
               </div>
             </div>
           </button>

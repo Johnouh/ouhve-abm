@@ -557,7 +557,7 @@ export default function HelpPage({ onBack }: HelpPageProps) {
                 <Mail className="w-8 h-8 text-blue-600 mx-auto mb-2" />
                 <h4 className="font-medium text-gray-900">기술 지원</h4>
                 <p className="text-sm text-gray-600 mt-1">시스템 오류 및 기술 문의</p>
-                <p className="text-sm font-medium text-blue-600 mt-2">tech@glpay.com</p>
+                <p className="text-sm font-medium text-blue-600 mt-2">tech@ouhve.app</p>
                 <p className="text-xs text-gray-500 mt-1">24시간 접수</p>
               </div>
               <div className="text-center p-4 bg-green-50 rounded-lg border border-green-200">

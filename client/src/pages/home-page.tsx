@@ -2788,11 +2788,11 @@ function CenterInfoContent() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">인스타그램 주소</label>
-                      <Input defaultValue="https://www.instagram.com/glpay_center/" />
+                      <Input defaultValue="https://www.instagram.com/ouhve_center/" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">웹사이트 주소</label>
-                      <Input defaultValue="https://www.glpay.kr/" />
+                      <Input defaultValue="https://www.ouhve.app/" />
                     </div>
                   </div>
                   

@@ -104,8 +104,8 @@ export default function StaffRegistrationPage({ onBack }: StaffRegistrationPageP
             {/* Profile Section */}
             <div className="flex items-center justify-center mb-8">
               <div className="flex items-center space-x-4">
-                <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
-                  <User className="w-10 h-10 text-blue-500" />
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                  <User className="w-10 h-10 text-primary" />
                 </div>
                 <Button variant="outline" size="sm">
                   사진 등록
@@ -357,7 +357,7 @@ export default function StaffRegistrationPage({ onBack }: StaffRegistrationPageP
                   </Button>
                   <Button 
                     type="submit" 
-                    className="bg-blue-500 hover-elevate px-8"
+                    className="bg-primary text-primary-foreground hover-elevate active-elevate-2 px-8"
                     disabled={createStaffMutation.isPending}
                     data-testid="button-staff-submit"
                   >

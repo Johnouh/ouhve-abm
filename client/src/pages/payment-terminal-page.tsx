@@ -677,7 +677,7 @@ export default function PaymentTerminalPage() {
             <Button
               onClick={handlePay}
               disabled={prepareMutation.isPending}
-              className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base"
+              className="w-full h-12 bg-primary text-primary-foreground hover-elevate active-elevate-2 font-semibold text-base"
             >
               {prepareMutation.isPending ? (
                 <><Loader2 className="w-4 h-4 mr-2 animate-spin shrink-0" />처리 중...</>

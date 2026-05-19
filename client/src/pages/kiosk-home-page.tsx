@@ -1,5 +1,5 @@
 // 🏪 키오스크 전용 홈 페이지 (Kiosk Home Page)
-// 🎯 Purpose: kiosk.glallpay.com 전용 — 단말기 결제만, 미니멀 UI
+// 🎯 Purpose: kiosk.ouhve.app 전용 — 단말기 결제만, 미니멀 UI
 // 🔒 Auth: 미인증 시 /kiosk로 리다이렉트
 
 import { useEffect } from "react";

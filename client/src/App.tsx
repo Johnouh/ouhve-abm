@@ -1,4 +1,3 @@
-import { lazy, Suspense } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -19,38 +18,15 @@ import KioskHomePage from "@/pages/kiosk-home-page";
 import BusinessProfilePage from "@/pages/business-profile-page";
 import OwnerReportPage from "@/pages/owner-report-page";
 import { ProtectedRoute } from "./lib/protected-route";
-import { Loader2 } from "lucide-react";
 
-// Landing pages (lazy loaded)
-const LandingIndex = lazy(() => import("@/pages/landing/index"));
-const LandingService = lazy(() => import("@/pages/landing/service"));
-const LandingSettlement = lazy(() => import("@/pages/landing/settlement"));
-const LandingAssurance = lazy(() => import("@/pages/landing/assurance"));
-const LandingMap = lazy(() => import("@/pages/landing/map"));
-const LandingContact = lazy(() => import("@/pages/landing/contact"));
-const LandingSimulator = lazy(() => import("@/pages/landing/simulator"));
-
-/** Domain detection: business.glallpay.com = CRM, otherwise = Landing */
-const isCrmDomain = window.location.hostname === "business.glallpay.com";
-
-function LandingFallback() {
-  return (
-    <div className="flex items-center justify-center min-h-screen bg-[#0A1628]">
-      <Loader2 className="h-8 w-8 animate-spin text-[#C9A84C]" />
-    </div>
-  );
-}
-
-function LazyLanding({ Component }: { Component: React.LazyExoticComponent<() => React.JSX.Element> }) {
-  return (
-    <Suspense fallback={<LandingFallback />}>
-      <Component />
-    </Suspense>
-  );
-}
-
-/** CRM Router — business.glallpay.com */
-function CrmRouter() {
+/**
+ * OUHVE ABM Router
+ *
+ * 첫 화면(`/`)은 Module 8 Owner Report — AI 운영 리포트.
+ * 브리프 #15: "기존 CRM형 첫 화면이 아니라, AI 운영 리포트형 첫 화면".
+ * 기존 GLFAV HomePage는 `/dashboard`로 이동 (Phase 2에서 OUHVE 톤으로 재정렬 예정).
+ */
+function AppRouter() {
   return (
     <Switch>
       <Route path="/pay/:orderId" component={PayPage} />
@@ -63,29 +39,12 @@ function CrmRouter() {
       <ProtectedRoute path="/group-lesson-add" component={GroupLessonAddPage} />
       {/* OUHVE ABM — Module 1 Business Profile */}
       <ProtectedRoute path="/business-profile" component={BusinessProfilePage} />
-      {/* OUHVE ABM — Module 8 Owner Report (첫 화면 후보 — HomePage 대체 예정) */}
+      {/* OUHVE ABM — Module 8 Owner Report — 첫 화면 (root) + alias /report */}
+      <ProtectedRoute path="/" component={OwnerReportPage} />
       <ProtectedRoute path="/report" component={OwnerReportPage} />
-      <ProtectedRoute path="/" component={HomePage} />
+      {/* GLFAV 자산 — 회원/직원/상품 등 (Phase 2에서 톤 재정렬) */}
+      <ProtectedRoute path="/dashboard" component={HomePage} />
       <ProtectedRoute path="/:rest*" component={HomePage} />
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
-
-/** Landing Router — www.glallpay.com / glallpay.com / localhost */
-function LandingRouter() {
-  return (
-    <Switch>
-      <Route path="/">{() => <LazyLanding Component={LandingIndex} />}</Route>
-      <Route path="/service">{() => <LazyLanding Component={LandingService} />}</Route>
-      <Route path="/settlement">{() => <LazyLanding Component={LandingSettlement} />}</Route>
-      <Route path="/assurance">{() => <LazyLanding Component={LandingAssurance} />}</Route>
-      <Route path="/map">{() => <LazyLanding Component={LandingMap} />}</Route>
-      <Route path="/contact">{() => <LazyLanding Component={LandingContact} />}</Route>
-      <Route path="/simulator">{() => <LazyLanding Component={LandingSimulator} />}</Route>
-      {/* CRM 접근 시 business 도메인으로 안내 */}
-      <Route path="/auth" component={AuthPage} />
-      <Route path="/pay/:orderId" component={PayPage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -98,7 +57,7 @@ function App() {
         <AuthProvider>
           <TooltipProvider>
             <Toaster />
-            {isCrmDomain ? <CrmRouter /> : <LandingRouter />}
+            <AppRouter />
           </TooltipProvider>
         </AuthProvider>
       </QueryClientProvider>
