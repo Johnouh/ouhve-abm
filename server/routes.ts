@@ -5,6 +5,7 @@ import { setupHealthCheck } from "./health-check";
 import { storage } from "./storage";
 import { analyzeChurnRisk, analyzeRevenueInsights } from "./services/ai-service";
 import { computeProfileCompletion } from "./services/business-profile-helper";
+import { summarizeMemberStatuses } from "./services/member-status-engine";
 import { preparePayment, cancelPayment as billgateCancelPayment, verifyCallbackHash, generateLinkPaymentUrl, generateOrderId, generateOrderDate, generateHashKey, SERVICE_CODES, PAYMENT_METHOD_LABELS, type BillgatePgConfig } from "./services/billgate-service";
 import { smsProvider, buildLinkPaymentSmsMessage } from "./services/sms-service";
 import { insertPgTransactionSchema, insertPgProductSchema } from "@shared/schema";
@@ -412,6 +413,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(404).json({ error: "Franchise not found" });
     }
     res.json(computeProfileCompletion(franchise));
+  }));
+
+  // ================================================================
+  // OUHVE ABM — Module 2 + Module 7 (preview): Member Status Engine
+  // ================================================================
+
+  // GET /api/members/status-summary — 회원 derived status 집계 + 상위 10명
+  // 대시보드 "오늘 봐야 할 회원" 위젯과 AI Assistant가 호출
+  app.get("/api/members/status-summary", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const summary = await summarizeMemberStatuses(franchiseId);
+    res.json(summary);
   }));
 
   // Username availability check
