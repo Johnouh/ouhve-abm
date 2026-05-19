@@ -32,6 +32,16 @@ export const franchises = pgTable("franchises", {
   pgMode: text("pg_mode").default("test"), // "test" | "production"
   pgApiKey: text("pg_api_key"), // 암호화 키 (Base64)
   pgApiIv: text("pg_api_iv"), // 암호화 IV
+  // OUHVE ABM — Business Profile (Module 1)
+  // 센터 운영자 정체성 + AI 운영 제안의 베이스 데이터
+  wellnessCategory: text("wellness_category"), // 헬스장 | PT샵 | 필라테스 | 요가 | 뷰티샵 | 복합
+  region: text("region"), // 시/구 (예: "서울 강남구")
+  operatingHours: jsonb("operating_hours"), // {mon: "09:00-22:00", tue: ..., ...} 요일별
+  mainPrograms: text("main_programs").array(), // ["PT", "그룹수업", "필라테스"]
+  primaryAudience: text("primary_audience"), // "30대 여성", "40-50대 직장인" 등 자유 텍스트
+  philosophy: text("philosophy"), // 운영 철학 (한 문단)
+  topConcern: text("top_concern"), // 현재 가장 큰 운영 문제 (AI 진단의 시드)
+  profileCompletedAt: timestamp("profile_completed_at"), // 프로필 입력 완료 시점 (온보딩 진척 트래킹)
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -537,6 +547,14 @@ export const insertFranchiseSchema = createInsertSchema(franchises).pick({
   ownerName: true,
   ownerPhone: true,
   businessName: true,
+  wellnessCategory: true,
+  region: true,
+  operatingHours: true,
+  mainPrograms: true,
+  primaryAudience: true,
+  philosophy: true,
+  topConcern: true,
+  profileCompletedAt: true,
 }).extend({
   status: z.string().optional(),
   code: z.string().optional().nullable(),
@@ -544,7 +562,28 @@ export const insertFranchiseSchema = createInsertSchema(franchises).pick({
   ownerName: z.string().optional().nullable(),
   ownerPhone: z.string().optional().nullable(),
   businessName: z.string().optional().nullable(),
+  // OUHVE ABM Business Profile
+  wellnessCategory: z.enum(["헬스장", "PT샵", "필라테스", "요가", "뷰티샵", "복합"]).optional().nullable(),
+  region: z.string().optional().nullable(),
+  operatingHours: z.record(z.string()).optional().nullable(),
+  mainPrograms: z.array(z.string()).optional().nullable(),
+  primaryAudience: z.string().optional().nullable(),
+  philosophy: z.string().optional().nullable(),
+  topConcern: z.string().optional().nullable(),
+  profileCompletedAt: z.date().optional().nullable(),
 });
+
+// OUHVE ABM — Business Profile completion check
+export const businessProfileSchema = z.object({
+  wellnessCategory: z.enum(["헬스장", "PT샵", "필라테스", "요가", "뷰티샵", "복합"]),
+  region: z.string().min(1),
+  operatingHours: z.record(z.string()),
+  mainPrograms: z.array(z.string()).min(1),
+  primaryAudience: z.string().min(1),
+  philosophy: z.string().min(10),
+  topConcern: z.string().min(10),
+});
+export type BusinessProfile = z.infer<typeof businessProfileSchema>;
 
 export const insertMemberSchema = createInsertSchema(members).pick({
   name: true,
