@@ -39,11 +39,10 @@ function AppRouter() {
       <ProtectedRoute path="/group-lesson-add" component={GroupLessonAddPage} />
       {/* OUHVE ABM — Module 1 Business Profile */}
       <ProtectedRoute path="/business-profile" component={BusinessProfilePage} />
-      {/* OUHVE ABM — Module 8 Owner Report — 첫 화면 (root) + alias /report */}
-      <ProtectedRoute path="/" component={OwnerReportPage} />
+      {/* OUHVE ABM — Module 8 Owner Report — /report 에서 접근 */}
       <ProtectedRoute path="/report" component={OwnerReportPage} />
-      {/* GLFAV 자산 — 회원/직원/상품 등 (Phase 2에서 톤 재정렬) */}
-      <ProtectedRoute path="/dashboard" component={HomePage} />
+      {/* 루트(/) 는 HomePage — 사이드바 메뉴 + 모든 OUHVE 기능 접근점. Owner Report 링크는 사이드바에 추가됨. */}
+      <ProtectedRoute path="/" component={HomePage} />
       <ProtectedRoute path="/:rest*" component={HomePage} />
       <Route component={NotFound} />
     </Switch>

@@ -5,7 +5,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useAuth } from "@/hooks/use-auth";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -108,7 +108,8 @@ import {
   Trash2,
   Brain,
   CreditCard,
-  Menu
+  Menu,
+  Sparkles
 } from "lucide-react";
 
 // 최근 활동 모달 컴포넌트 (Recent Activities Modal Component)
@@ -912,12 +913,38 @@ export default function HomePage() {
         {/* Logo */}
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-              <Building2 className="w-5 h-5 text-white" />
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <Building2 className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="font-bold text-lg">OUHVE ABM</span>
-            <span className="text-xs bg-blue-500 text-white px-2 py-1 rounded">PRO</span>
+            <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded">AI</span>
           </div>
+        </div>
+
+        {/* OUHVE 신기능 — AI 운영 리포트 + 센터 프로필 */}
+        <div className="p-3 border-b border-gray-200 space-y-1">
+          <Link href="/report">
+            <a className="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover-elevate active-elevate-2 text-gray-900 group" onClick={() => setSidebarOpen(false)}>
+              <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
+                <Sparkles className="w-4 h-4 text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="font-semibold text-sm truncate">AI 운영 리포트</div>
+                <div className="text-[10px] text-gray-500 truncate">오늘 봐야 할 것</div>
+              </div>
+            </a>
+          </Link>
+          <Link href="/business-profile">
+            <a className="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover-elevate active-elevate-2 text-gray-900" onClick={() => setSidebarOpen(false)}>
+              <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
+                <Building2 className="w-4 h-4 text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="font-semibold text-sm truncate">센터 프로필</div>
+                <div className="text-[10px] text-gray-500 truncate">AI 컨텍스트 채우기</div>
+              </div>
+            </a>
+          </Link>
         </div>
 
         {/* Center Info */}
