@@ -51,7 +51,12 @@ OUH Inc.
 | 4. Customer App | 회원용 AI 헬스·뷰티 케어 |
 | 5. Creator/Pay/Market | 경제권 확장 |
 
-## 6. OUHVE ABM 핵심 모듈 (9개)
+## 6. OUHVE ABM 핵심 모듈 (12개 — 2026-05-20 AssistFit 흡수 후 9→12 확장)
+
+> **확장 사유**: AssistFit 크롤 분석(`docs/research/active/2026-05-20-assistfit-absorb/iteration-0.md`)에서
+> 회원앱/강사앱/그룹수업이 한국 시장 진입 차단을 만들 정도로 결정적이라 판단. 기존 9 모듈은 유지하고 M10~M12 신축.
+
+### 6.1 기존 9 모듈
 
 | # | 모듈 | 역할 |
 |---|---|---|
@@ -64,6 +69,21 @@ OUH Inc.
 | 7 | AI Operation Assistant | 운영 상황 요약 + 누락 감지 + 다음 액션 추천 (**핵심**) |
 | 8 | Owner Report | 대표 전용 매일/매주 리포트 |
 | 9 | Council Feedback | 사용자 피드백 수집 (제품 진화용) |
+
+### 6.2 신규 3 모듈 (AssistFit 흡수)
+| # | 모듈 | 역할 | 흡수 GAP |
+|---|---|---|---|
+| **10** | **회원앱 (Member App)** | 회원 모바일 — 예약/결제/푸시/안면인식/보호자 | GAP-01 외 9개 |
+| **11** | **강사앱 (Trainer App)** | 강사 모바일 — 회원 등록/상품 판매/현장 처리 | GAP-02/20/84/85 |
+| **12** | **그룹수업 스케줄** | 그룹/OT/PT 통합 캘린더 + 예약/노쇼 정책 | GAP-11/12/24/25 외 |
+
+### 6.3 GAP 흡수 30종 (별도 인덱스)
+상세는 `docs/research/crawl/2026-05-20-assistfit/analysis_features.md` 참조.
+
+### 6.4 OUHVE 차별 축 (모방 금지)
+- M7 AI Operation Assistant — AssistFit 95p에 AI 운영 제안 0건
+- M9 Council Feedback — AssistFit 단일 센터 SaaS, 협의체 개념 없음
+- M8 자동 인사이트형 Owner Report — AssistFit은 "조회"만, 의사결정 제안 없음
 
 ## 7. AI 직원 구조 (5종)
 
