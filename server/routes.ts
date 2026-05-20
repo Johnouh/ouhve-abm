@@ -7,6 +7,7 @@ import { analyzeChurnRisk, analyzeRevenueInsights } from "./services/ai-service"
 import { computeProfileCompletion } from "./services/business-profile-helper";
 import { summarizeMemberStatuses } from "./services/member-status-engine";
 import { generateOwnerReport } from "./services/owner-report-service";
+import { computeAttendanceAnalytics } from "./services/attendance-analytics";
 import { preparePayment, cancelPayment as billgateCancelPayment, verifyCallbackHash, generateLinkPaymentUrl, generateOrderId, generateOrderDate, generateHashKey, SERVICE_CODES, PAYMENT_METHOD_LABELS, type BillgatePgConfig } from "./services/billgate-service";
 import { smsProvider, buildLinkPaymentSmsMessage } from "./services/sms-service";
 import { insertPgTransactionSchema, insertPgProductSchema } from "@shared/schema";
@@ -436,6 +437,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const franchiseId = (req as any).franchiseId;
     const report = await generateOwnerReport(franchiseId);
     res.json(report);
+  }));
+
+  // GAP-19 (AssistFit 흡수) — 시간대별 출석 통계 (M8 보강)
+  // 운영 시간/인력 배치 최적화의 데이터 베이스
+  app.get("/api/attendance-analytics", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const periodDays = Math.min(Math.max(Number(req.query.days) || 30, 7), 90);
+    const analytics = await computeAttendanceAnalytics(franchiseId, periodDays);
+    res.json(analytics);
   }));
 
   // Username availability check

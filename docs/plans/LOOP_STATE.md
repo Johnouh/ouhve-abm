@@ -76,6 +76,7 @@
 - 2026-05-19 Rebrand: Full GLFAV → OUHVE sweep + first-screen swap + site-gate drop + GL Pay/회사정보 wipe (1ee25bd, 8e4564f, 7b41899, 7c79c0e)
 - 2026-05-20 AssistFit 크롤 흡수: 95p / 309img / 48 video → 96 features / 30 GAP / 12 패턴 → 12 모듈로 확장 (iter-0)
 - 다음: Cycle 6 — GAP-19 출석 시간대 통계 + 빅 KPI 도넛 패턴 (M8 보강)
+- 2026-05-20 Cycle 6: GAP-19 attendance-analytics service + /api/attendance-analytics + AttendanceHeatmapCard 위젯 (Owner Report에 임베드). AssistFit page-082/033 빅KPI+24h 막대+피크/한산 칩+요일 분포 패턴 흡수. Persimmon 솔리드 + Teal 점 (도형 전용 규칙). 다음: Cycle 7 — GAP-13 보호자 등록
 
 ## 완성 기준 (Done Definition)
 

@@ -8,6 +8,7 @@ import {
   ArrowRight, ChevronRight, CheckCircle2, AlertCircle,
   Phone, MessageSquare, Heart, Building2,
 } from "lucide-react";
+import { AttendanceHeatmapCard } from "@/components/attendance-heatmap-card";
 
 /**
  * OUHVE ABM — Module 8: Owner Report (첫 화면)
@@ -202,6 +203,11 @@ export default function OwnerReportPage() {
           )}
         </CardContent>
       </Card>
+
+      {/* GAP-19 (AssistFit 흡수) — 시간대별 출석 패턴 */}
+      <div className="mb-6">
+        <AttendanceHeatmapCard />
+      </div>
 
       {/* 리스크 분해 — 배지 그리드 */}
       <Card className="hover-elevate overflow-visible">
