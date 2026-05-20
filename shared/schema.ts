@@ -61,6 +61,11 @@ export const members = pgTable("members", {
   joinDate: timestamp("join_date").defaultNow().notNull(),
   lastVisit: timestamp("last_visit"),
   productId: integer("product_id"), // 구매한 상품 ID (통계용)
+  // OUHVE ABM — GAP-13 (AssistFit 흡수): 보호자 정보 (키즈/청소년 회원용)
+  guardianName: text("guardian_name"), // 보호자 이름
+  guardianPhone: text("guardian_phone"), // 보호자 연락처
+  guardianRelation: text("guardian_relation"), // 관계 (부/모/조부모/기타)
+  attendancePushEnabled: boolean("attendance_push_enabled").default(false), // 출석 시 보호자 알림
   franchiseId: integer("franchise_id").references(() => franchises.id),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
@@ -598,6 +603,11 @@ export const insertMemberSchema = createInsertSchema(members).pick({
   joinSource: true,
   notes: true,
   franchiseId: true,
+  // OUHVE ABM — GAP-13: 보호자
+  guardianName: true,
+  guardianPhone: true,
+  guardianRelation: true,
+  attendancePushEnabled: true,
 }).extend({
   // Make optional fields truly optional for form handling
   gender: z.string().optional(),
@@ -608,6 +618,19 @@ export const insertMemberSchema = createInsertSchema(members).pick({
   occupation: z.string().optional(),
   joinSource: z.string().optional(),
   notes: z.string().optional(),
+  // OUHVE ABM — GAP-13
+  guardianName: z.string().optional().nullable(),
+  guardianPhone: z.string().optional().nullable(),
+  guardianRelation: z.enum(["부", "모", "조부", "조모", "기타"]).optional().nullable(),
+  attendancePushEnabled: z.boolean().optional(),
+});
+
+// 보호자 출석 푸시 발송용 (Module 6 Task & Workflow 연동 예정)
+export const guardianAttendanceNoticeSchema = z.object({
+  memberId: z.number(),
+  guardianPhone: z.string().min(10),
+  memberName: z.string(),
+  checkInTime: z.date(),
 });
 
 export const insertMembershipSchema = createInsertSchema(memberships).pick({

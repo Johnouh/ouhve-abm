@@ -8,6 +8,7 @@ import { computeProfileCompletion } from "./services/business-profile-helper";
 import { summarizeMemberStatuses } from "./services/member-status-engine";
 import { generateOwnerReport } from "./services/owner-report-service";
 import { computeAttendanceAnalytics } from "./services/attendance-analytics";
+import { notifyGuardianOnCheckIn, countGuardianPushEnabled } from "./services/guardian-notification";
 import { preparePayment, cancelPayment as billgateCancelPayment, verifyCallbackHash, generateLinkPaymentUrl, generateOrderId, generateOrderDate, generateHashKey, SERVICE_CODES, PAYMENT_METHOD_LABELS, type BillgatePgConfig } from "./services/billgate-service";
 import { smsProvider, buildLinkPaymentSmsMessage } from "./services/sms-service";
 import { insertPgTransactionSchema, insertPgProductSchema } from "@shared/schema";
@@ -1262,12 +1263,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertAttendanceSchema.parse(req.body);
       const attendance = await storage.createAttendance(validatedData);
+      // GAP-13 (AssistFit 흡수): 보호자 출석 푸시 트리거 (실패해도 출석 응답은 성공)
+      notifyGuardianOnCheckIn(validatedData.memberId).catch((err) => {
+        console.error("[guardian-notify] failed:", err);
+      });
       res.status(201).json(attendance);
     } catch (error) {
       console.error("Error creating attendance:", error);
       res.status(400).json({ error: "Invalid attendance data" });
     }
   });
+
+  // GAP-13: 보호자 푸시 통계 (Owner Report 위젯용)
+  app.get("/api/guardian-notification/stats", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const enabledCount = await countGuardianPushEnabled(franchiseId);
+    res.json({ enabledMembers: enabledCount });
+  }));
 
   // 🔄 출석 업데이트 (체크아웃 등) (Update attendance - checkout, etc.)
   // 🔒 소유권 검증 추가 (Added ownership verification)

@@ -1,0 +1,15 @@
+node_modules
+dist
+.git
+.DS_Store
+*.log
+logs/
+docs/research/crawl/*/pages
+docs/research/crawl/*/pages-v2
+docs/research/crawl/*/images
+docs/research/crawl/*/videos
+/tmp/
+scripts/crawl*.mjs
+scripts/download-videos.sh
+.env
+.claude

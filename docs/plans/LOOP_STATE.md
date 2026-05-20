@@ -77,6 +77,8 @@
 - 2026-05-20 AssistFit 크롤 흡수: 95p / 309img / 48 video → 96 features / 30 GAP / 12 패턴 → 12 모듈로 확장 (iter-0)
 - 다음: Cycle 6 — GAP-19 출석 시간대 통계 + 빅 KPI 도넛 패턴 (M8 보강)
 - 2026-05-20 Cycle 6: GAP-19 attendance-analytics service + /api/attendance-analytics + AttendanceHeatmapCard 위젯 (Owner Report에 임베드). AssistFit page-082/033 빅KPI+24h 막대+피크/한산 칩+요일 분포 패턴 흡수. Persimmon 솔리드 + Teal 점 (도형 전용 규칙). 다음: Cycle 7 — GAP-13 보호자 등록
+- 2026-05-20 Deploy: Railway upload API timeout 지속 → GitHub repo 생성 (Johnouh/ouhve-abm public) + Railway 신규 service ouhve-app-gh GitHub-linked → git push 자동 배포로 전환. 새 URL: https://ouhve-app-gh-production.up.railway.app
+- 2026-05-20 Cycle 7: GAP-13 보호자 등록 schema + migration 0002 + guardian-notification service + /api/attendance POST에 트리거 통합 + /api/guardian-notification/stats. AssistFit page-050 흡수, 키즈/청소년 시장 차별. 다음: Cycle 8 — GAP-14 락커 회수/배정 보드
 
 ## 완성 기준 (Done Definition)
 
