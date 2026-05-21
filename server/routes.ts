@@ -9,6 +9,7 @@ import { summarizeMemberStatuses } from "./services/member-status-engine";
 import { generateOwnerReport } from "./services/owner-report-service";
 import { computeAttendanceAnalytics } from "./services/attendance-analytics";
 import { notifyGuardianOnCheckIn, countGuardianPushEnabled } from "./services/guardian-notification";
+import { getLockerOverview } from "./services/locker-overview";
 import { preparePayment, cancelPayment as billgateCancelPayment, verifyCallbackHash, generateLinkPaymentUrl, generateOrderId, generateOrderDate, generateHashKey, SERVICE_CODES, PAYMENT_METHOD_LABELS, type BillgatePgConfig } from "./services/billgate-service";
 import { smsProvider, buildLinkPaymentSmsMessage } from "./services/sms-service";
 import { insertPgTransactionSchema, insertPgProductSchema } from "@shared/schema";
@@ -1279,6 +1280,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const franchiseId = (req as any).franchiseId;
     const enabledCount = await countGuardianPushEnabled(franchiseId);
     res.json({ enabledMembers: enabledCount });
+  }));
+
+  // GAP-14 (AssistFit 흡수) — 락커 회수/배정 보드 데이터
+  // 점유율 + 만료 임박 + 빈 락커 + 회수 이력
+  app.get("/api/locker-overview", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const overview = await getLockerOverview(franchiseId);
+    res.json(overview);
   }));
 
   // 🔄 출석 업데이트 (체크아웃 등) (Update attendance - checkout, etc.)

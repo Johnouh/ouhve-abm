@@ -1,0 +1,13 @@
+{
+  "visited": [
+    "https://www.mindbodyonline.com/"
+  ],
+  "failed": [
+    {
+      "url": "https://www.mindbodyonline.com/",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://www.mindbodyonline.com/\", waiting until \"networkidle\"\n"
+    }
+  ],
+  "images": [],
+  "videos": []
+}

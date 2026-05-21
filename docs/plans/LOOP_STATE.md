@@ -79,6 +79,8 @@
 - 2026-05-20 Cycle 6: GAP-19 attendance-analytics service + /api/attendance-analytics + AttendanceHeatmapCard 위젯 (Owner Report에 임베드). AssistFit page-082/033 빅KPI+24h 막대+피크/한산 칩+요일 분포 패턴 흡수. Persimmon 솔리드 + Teal 점 (도형 전용 규칙). 다음: Cycle 7 — GAP-13 보호자 등록
 - 2026-05-20 Deploy: Railway upload API timeout 지속 → GitHub repo 생성 (Johnouh/ouhve-abm public) + Railway 신규 service ouhve-app-gh GitHub-linked → git push 자동 배포로 전환. 새 URL: https://ouhve-app-gh-production.up.railway.app
 - 2026-05-20 Cycle 7: GAP-13 보호자 등록 schema + migration 0002 + guardian-notification service + /api/attendance POST에 트리거 통합 + /api/guardian-notification/stats. AssistFit page-050 흡수, 키즈/청소년 시장 차별. 다음: Cycle 8 — GAP-14 락커 회수/배정 보드
+- 2026-05-21 Visibility fix (a0ebeef): Cycle 6/7 UI 완성 — HomePage 대시보드에 AttendanceHeatmapCard + 회원 등록 폼에 보호자 4필드 섹션. DOD 원칙 박음 (feedback_cycle_dod.md)
+- 2026-05-21 Cycle 8: GAP-14 락커 보드 — locker-overview service + /api/locker-overview + LockerOverviewCard 위젯 (점유율/섹션별/만료임박/회수). HomePage 대시보드 2컬럼 그리드로 임베드. AssistFit page-067/080 흡수. 다음: Cycle 9 (HiCC 타임아웃 → Mindbody crawl 진행 중)
 
 ## 완성 기준 (Done Definition)
 

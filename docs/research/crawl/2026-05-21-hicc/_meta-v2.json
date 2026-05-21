@@ -1,0 +1,13 @@
+{
+  "visited": [
+    "https://hicc.co.kr/"
+  ],
+  "failed": [
+    {
+      "url": "https://hicc.co.kr/",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://hicc.co.kr/\", waiting until \"networkidle\"\n"
+    }
+  ],
+  "images": [],
+  "videos": []
+}
