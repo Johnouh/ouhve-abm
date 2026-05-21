@@ -983,6 +983,17 @@ export default function HomePage() {
               </div>
             </a>
           </Link>
+          <Link href="/audit-log">
+            <a className="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover-elevate active-elevate-2 text-gray-900" onClick={() => setSidebarOpen(false)}>
+              <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
+                <Sparkles className="w-4 h-4 text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="font-semibold text-sm truncate">감사로그</div>
+                <div className="text-[10px] text-gray-500 truncate">변경 이력 추적</div>
+              </div>
+            </a>
+          </Link>
         </div>
 
         {/* Center Info */}

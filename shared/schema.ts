@@ -519,6 +519,22 @@ export const groupExtensions = pgTable("group_extensions", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+// OUHVE ABM — AssistFit GAP-29 (Cycle 16): 감사로그 (Audit Log)
+// 분쟁/내부 통제: 회원·결제·이용권 등 핵심 데이터 변경 이력 추적
+export const auditLogs = pgTable("audit_logs", {
+  id: serial("id").primaryKey(),
+  entityType: text("entity_type").notNull(), // "member" | "membership" | "payment" | "locker" | "consultation" | "franchise" 등
+  entityId: integer("entity_id").notNull(),
+  action: text("action").notNull(), // "create" | "update" | "delete" | "restore"
+  changesJson: jsonb("changes_json"), // { before: {...}, after: {...}, fields: [...] }
+  performedBy: text("performed_by"), // username 또는 user_id 문자열
+  performedByRole: text("performed_by_role"), // superadmin / admin / staff / member
+  ipAddress: text("ip_address"),
+  reason: text("reason"), // 선택 — 변경 사유 (특히 환불/삭제)
+  franchiseId: integer("franchise_id").references(() => franchises.id),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 // 키오스크 공지 테이블 (Kiosk notices table)
 export const kioskNotices = pgTable("kiosk_notices", {
   id: serial("id").primaryKey(),
@@ -1707,3 +1723,7 @@ export const insertPaymentTerminalSchema = createInsertSchema(paymentTerminals).
 
 export type InsertPaymentTerminal = z.infer<typeof insertPaymentTerminalSchema>;
 export type PaymentTerminal = typeof paymentTerminals.$inferSelect;
+
+// OUHVE ABM — Cycle 16: AuditLog 타입
+export type AuditLog = typeof auditLogs.$inferSelect;
+export type InsertAuditLog = typeof auditLogs.$inferInsert;

@@ -1332,6 +1332,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json(payload);
   }));
 
+  // AssistFit GAP-29 흡수 (Cycle 16) — 감사로그 조회/요약
+  app.get("/api/audit-logs", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const rows = await queryAuditLogs({
+      franchiseId,
+      entityType: req.query.entityType as EntityType | undefined,
+      entityId: req.query.entityId ? Number(req.query.entityId) : undefined,
+      performedBy: req.query.performedBy as string | undefined,
+      action: req.query.action as AuditAction | undefined,
+      sinceDays: req.query.days ? Math.min(Math.max(Number(req.query.days), 1), 90) : 30,
+      limit: req.query.limit ? Number(req.query.limit) : 50,
+    });
+    res.json({ items: rows, count: rows.length });
+  }));
+
+  app.get("/api/audit-logs/summary", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const days = req.query.days ? Math.min(Math.max(Number(req.query.days), 1), 90) : 7;
+    const summary = await summarizeAudit(franchiseId, days);
+    res.json(summary);
+  }));
+
   // GAP-14 (AssistFit 흡수) — 락커 회수/배정 보드 데이터
   // 점유율 + 만료 임박 + 빈 락커 + 회수 이력
   app.get("/api/locker-overview", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
