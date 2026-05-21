@@ -81,6 +81,16 @@
 - 2026-05-20 Cycle 7: GAP-13 보호자 등록 schema + migration 0002 + guardian-notification service + /api/attendance POST에 트리거 통합 + /api/guardian-notification/stats. AssistFit page-050 흡수, 키즈/청소년 시장 차별. 다음: Cycle 8 — GAP-14 락커 회수/배정 보드
 - 2026-05-21 Visibility fix (a0ebeef): Cycle 6/7 UI 완성 — HomePage 대시보드에 AttendanceHeatmapCard + 회원 등록 폼에 보호자 4필드 섹션. DOD 원칙 박음 (feedback_cycle_dod.md)
 - 2026-05-21 Cycle 8: GAP-14 락커 보드 — locker-overview service + /api/locker-overview + LockerOverviewCard 위젯 (점유율/섹션별/만료임박/회수). HomePage 대시보드 2컬럼 그리드로 임베드. AssistFit page-067/080 흡수. 다음: Cycle 9 (HiCC 타임아웃 → Mindbody crawl 진행 중)
+- 2026-05-21 Cycle 9 (f0966a4): GAP-21 단체 연장 — bulk-extension service + POST /api/memberships/bulk-extend + /bulk-extend 페이지 (회원 검색/다중선택, 일수 빠른선택, 사유/메모, 처리결과 시각화). AssistFit page-009 흡수.
+- 2026-05-21 신규 크롤 결과:
+  * Glofox 40p / 57 features / 15 고유 GAP (AI Churn 30일, Intelligent Billing, Behavior Upsell, Spot Booking, Lead Pipeline, Family Membership, Royalty)
+  * PushPress 40p / 47 features / 29 고유 GAP (AI Assistant 4-Level, Multi-Channel Nurture, Live Pipeline, Failed Payment Recovery, Trial→Member 시퀀스, Family Plan, Retention Signals, Daily Priorities, WOD Leaderboard, Habit Tracking, Affiliate Marketplace, GymHappy 리뷰자동화, White-label App, Priority Booking, Progressive Programming)
+- 다음 사이클 큐 (Glofox+PushPress 통합 반영):
+  * Cycle 10: **Daily Priorities — Owner Report 실행형 전환** (PushPress GAP-8, Member Status Engine 재활용, 가장 가시성 + 빠른 임팩트)
+  * Cycle 11: GAP-06 미수금 관리 + Failed Payment Recovery (PushPress GAP-4 결합)
+  * Cycle 12: Live Sales Pipeline (예비회원 칸반) — M5 강화
+  * Cycle 13: AI Assistant Level 3 (M7 Decision 제안형) — Anthropic SDK
+  * Cycle 14: Family Plan + Sibling Discount
 
 ## 완성 기준 (Done Definition)
 

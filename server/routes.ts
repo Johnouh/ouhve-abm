@@ -11,6 +11,7 @@ import { computeAttendanceAnalytics } from "./services/attendance-analytics";
 import { notifyGuardianOnCheckIn, countGuardianPushEnabled } from "./services/guardian-notification";
 import { getLockerOverview } from "./services/locker-overview";
 import { bulkExtendMemberships } from "./services/bulk-extension";
+import { buildDailyPriorities } from "./services/daily-priorities";
 import { preparePayment, cancelPayment as billgateCancelPayment, verifyCallbackHash, generateLinkPaymentUrl, generateOrderId, generateOrderDate, generateHashKey, SERVICE_CODES, PAYMENT_METHOD_LABELS, type BillgatePgConfig } from "./services/billgate-service";
 import { smsProvider, buildLinkPaymentSmsMessage } from "./services/sms-service";
 import { insertPgTransactionSchema, insertPgProductSchema } from "@shared/schema";
@@ -1306,6 +1307,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       notes: typeof notes === "string" ? notes.trim() : undefined,
     });
     res.json(result);
+  }));
+
+  // PushPress GAP-8 흡수 — Daily Priorities (Owner Report 실행형 전환)
+  app.get("/api/daily-priorities", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const payload = await buildDailyPriorities(franchiseId);
+    res.json(payload);
   }));
 
   // GAP-14 (AssistFit 흡수) — 락커 회수/배정 보드 데이터

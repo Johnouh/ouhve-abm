@@ -15,6 +15,7 @@ import type { Member, Staff, Product, Locker, Attendance, GroupLesson, PersonalT
 import { AppFooter } from "@/components/app-footer";
 import { AttendanceHeatmapCard } from "@/components/attendance-heatmap-card";
 import { LockerOverviewCard } from "@/components/locker-overview-card";
+import { DailyPrioritiesCard } from "@/components/daily-priorities-card";
 import MembersPage from "./members-page";
 import MemberDeletePage from "./member-delete-page";
 import StaffPage from "./staff-page";
@@ -693,7 +694,10 @@ export default function HomePage() {
 
     return (
       <div className="space-y-6">
-        {/* OUHVE ABM — 시간대별 출석 통계 (GAP-19, AssistFit 흡수) */}
+        {/* OUHVE ABM — Daily Priorities (PushPress GAP-8 흡수) — 오늘 할 액션 최상단 */}
+        <DailyPrioritiesCard />
+
+        {/* OUHVE ABM — 시간대별 출석 + 락커 운영 (AssistFit GAP-19/14) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <AttendanceHeatmapCard />
           <LockerOverviewCard />
