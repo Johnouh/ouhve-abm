@@ -13,6 +13,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import type { Member, Staff, Product, Locker, Attendance, GroupLesson, PersonalTraining, Consultation, OtApplication, Membership, PtSession } from "@shared/schema";
 import { AppFooter } from "@/components/app-footer";
+import { AttendanceHeatmapCard } from "@/components/attendance-heatmap-card";
 import MembersPage from "./members-page";
 import MemberDeletePage from "./member-delete-page";
 import StaffPage from "./staff-page";
@@ -691,6 +692,9 @@ export default function HomePage() {
 
     return (
       <div className="space-y-6">
+        {/* OUHVE ABM — 시간대별 출석 통계 (GAP-19, AssistFit 흡수) */}
+        <AttendanceHeatmapCard />
+
         {/* 통계 카드 (Statistics Cards) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => handleTabChange("회원")}>

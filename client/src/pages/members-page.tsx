@@ -346,6 +346,11 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
       occupation: "",
       joinSource: "",
       notes: "",
+      // OUHVE ABM — GAP-13 보호자
+      guardianName: "",
+      guardianPhone: "",
+      guardianRelation: undefined,
+      attendancePushEnabled: false,
       franchiseId: user?.franchiseId || 1, // 🔒 현재 사용자의 프랜차이즈 ID 사용 (Use current user's franchise ID)
     },
   });
@@ -964,6 +969,87 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
                         </FormItem>
                       )}
                     />
+
+                    {/* OUHVE ABM — GAP-13 보호자 정보 (키즈/청소년 회원용) */}
+                    <div className="pt-4 mt-4 border-t border-gray-200">
+                      <h4 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true" />
+                        보호자 정보 (선택 — 키즈/청소년 회원)
+                      </h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <FormField
+                          control={form.control}
+                          name="guardianName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>보호자 이름</FormLabel>
+                              <FormControl>
+                                <Input placeholder="예: 김부모" {...field} value={field.value || ""} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="guardianPhone"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>보호자 연락처</FormLabel>
+                              <FormControl>
+                                <Input placeholder="010-0000-0000" {...field} value={field.value || ""} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="guardianRelation"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>관계</FormLabel>
+                              <FormControl>
+                                <select
+                                  className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                                  value={field.value || ""}
+                                  onChange={(e) => field.onChange(e.target.value || undefined)}
+                                >
+                                  <option value="">선택</option>
+                                  <option value="부">부</option>
+                                  <option value="모">모</option>
+                                  <option value="조부">조부</option>
+                                  <option value="조모">조모</option>
+                                  <option value="기타">기타</option>
+                                </select>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="attendancePushEnabled"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>출석 시 보호자 알림</FormLabel>
+                              <FormControl>
+                                <label className="flex items-center gap-2 h-10 px-3 rounded-md border border-input bg-background cursor-pointer hover-elevate">
+                                  <input
+                                    type="checkbox"
+                                    checked={!!field.value}
+                                    onChange={(e) => field.onChange(e.target.checked)}
+                                    className="w-4 h-4 accent-primary"
+                                  />
+                                  <span className="text-sm">SMS 자동 발송</span>
+                                </label>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
