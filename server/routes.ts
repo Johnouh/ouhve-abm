@@ -12,6 +12,7 @@ import { notifyGuardianOnCheckIn, countGuardianPushEnabled } from "./services/gu
 import { getLockerOverview } from "./services/locker-overview";
 import { bulkExtendMemberships } from "./services/bulk-extension";
 import { buildDailyPriorities } from "./services/daily-priorities";
+import { buildRetentionSignals } from "./services/retention-signals";
 import { preparePayment, cancelPayment as billgateCancelPayment, verifyCallbackHash, generateLinkPaymentUrl, generateOrderId, generateOrderDate, generateHashKey, SERVICE_CODES, PAYMENT_METHOD_LABELS, type BillgatePgConfig } from "./services/billgate-service";
 import { smsProvider, buildLinkPaymentSmsMessage } from "./services/sms-service";
 import { insertPgTransactionSchema, insertPgProductSchema } from "@shared/schema";
@@ -1313,6 +1314,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/daily-priorities", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
     const franchiseId = (req as any).franchiseId;
     const payload = await buildDailyPriorities(franchiseId);
+    res.json(payload);
+  }));
+
+  // PushPress GAP-7 흡수 — Retention Signals (At-Risk 7일 전 행동 시그널 점수화)
+  app.get("/api/retention-signals", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const payload = await buildRetentionSignals(franchiseId);
     res.json(payload);
   }));
 
