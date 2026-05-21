@@ -10,6 +10,7 @@ import { generateOwnerReport } from "./services/owner-report-service";
 import { computeAttendanceAnalytics } from "./services/attendance-analytics";
 import { notifyGuardianOnCheckIn, countGuardianPushEnabled } from "./services/guardian-notification";
 import { getLockerOverview } from "./services/locker-overview";
+import { bulkExtendMemberships } from "./services/bulk-extension";
 import { preparePayment, cancelPayment as billgateCancelPayment, verifyCallbackHash, generateLinkPaymentUrl, generateOrderId, generateOrderDate, generateHashKey, SERVICE_CODES, PAYMENT_METHOD_LABELS, type BillgatePgConfig } from "./services/billgate-service";
 import { smsProvider, buildLinkPaymentSmsMessage } from "./services/sms-service";
 import { insertPgTransactionSchema, insertPgProductSchema } from "@shared/schema";
@@ -1280,6 +1281,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const franchiseId = (req as any).franchiseId;
     const enabledCount = await countGuardianPushEnabled(franchiseId);
     res.json({ enabledMembers: enabledCount });
+  }));
+
+  // GAP-21 (AssistFit 흡수) — 회원 단체 연장 (휴장·사고·이벤트 보상)
+  app.post("/api/memberships/bulk-extend", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const { memberIds, days, reason, notes } = req.body;
+
+    if (!Array.isArray(memberIds) || memberIds.length === 0) {
+      return res.status(400).json({ error: "memberIds 배열이 비어있습니다" });
+    }
+    if (typeof days !== "number" || days <= 0 || days > 365) {
+      return res.status(400).json({ error: "days는 1~365 사이여야 합니다" });
+    }
+    if (typeof reason !== "string" || reason.trim().length < 2) {
+      return res.status(400).json({ error: "reason은 2글자 이상이어야 합니다" });
+    }
+
+    const result = await bulkExtendMemberships({
+      franchiseId,
+      memberIds: memberIds.map(Number).filter((n) => Number.isInteger(n)),
+      days,
+      reason: reason.trim(),
+      notes: typeof notes === "string" ? notes.trim() : undefined,
+    });
+    res.json(result);
   }));
 
   // GAP-14 (AssistFit 흡수) — 락커 회수/배정 보드 데이터

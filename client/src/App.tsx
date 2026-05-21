@@ -17,6 +17,7 @@ import KioskAuthPage from "@/pages/kiosk-auth-page";
 import KioskHomePage from "@/pages/kiosk-home-page";
 import BusinessProfilePage from "@/pages/business-profile-page";
 import OwnerReportPage from "@/pages/owner-report-page";
+import BulkExtendPage from "@/pages/bulk-extend-page";
 import { ProtectedRoute } from "./lib/protected-route";
 
 /**
@@ -41,6 +42,8 @@ function AppRouter() {
       <ProtectedRoute path="/business-profile" component={BusinessProfilePage} />
       {/* OUHVE ABM — Module 8 Owner Report — /report 에서 접근 */}
       <ProtectedRoute path="/report" component={OwnerReportPage} />
+      {/* OUHVE ABM — GAP-21 단체 연장 */}
+      <ProtectedRoute path="/bulk-extend" component={BulkExtendPage} />
       {/* 루트(/) 는 HomePage — 사이드바 메뉴 + 모든 OUHVE 기능 접근점. Owner Report 링크는 사이드바에 추가됨. */}
       <ProtectedRoute path="/" component={HomePage} />
       <ProtectedRoute path="/:rest*" component={HomePage} />
