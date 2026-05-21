@@ -13,6 +13,7 @@ import { getLockerOverview } from "./services/locker-overview";
 import { bulkExtendMemberships } from "./services/bulk-extension";
 import { buildDailyPriorities } from "./services/daily-priorities";
 import { buildRetentionSignals } from "./services/retention-signals";
+import { buildSalesPipeline } from "./services/sales-pipeline";
 import { preparePayment, cancelPayment as billgateCancelPayment, verifyCallbackHash, generateLinkPaymentUrl, generateOrderId, generateOrderDate, generateHashKey, SERVICE_CODES, PAYMENT_METHOD_LABELS, type BillgatePgConfig } from "./services/billgate-service";
 import { smsProvider, buildLinkPaymentSmsMessage } from "./services/sms-service";
 import { insertPgTransactionSchema, insertPgProductSchema } from "@shared/schema";
@@ -1321,6 +1322,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/retention-signals", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
     const franchiseId = (req as any).franchiseId;
     const payload = await buildRetentionSignals(franchiseId);
+    res.json(payload);
+  }));
+
+  // PushPress GAP-3 흡수 — Live Sales Pipeline (예비회원 칸반)
+  app.get("/api/sales-pipeline", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {
+    const franchiseId = (req as any).franchiseId;
+    const payload = await buildSalesPipeline(franchiseId);
     res.json(payload);
   }));
 
