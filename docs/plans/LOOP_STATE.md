@@ -3,11 +3,12 @@
 > 자율 사이클이 자기 위치를 파악하고 다음 작업을 정하는 진실의 원천.
 > 매 사이클이 자기 진행분을 여기에 한 줄로 추가한다.
 
-## 현재 라운드: Cycle 6 — AssistFit 흡수 시작 (GAP-19)
+## 현재 라운드: Cycle 17 — GAP-06 미수금 관리 모듈
 
-> 2026-05-20 AssistFit (https://guide.assistfit.io/crmguide) 95p 크롤 + Agent A/B 분석 완료.
-> 96 기능 / 30 GAP 도출. 12 모듈로 확장 (M10 회원앱 / M11 강사앱 / M12 그룹수업 신축).
-> 상세: `docs/research/active/2026-05-20-assistfit-absorb/iteration-0.md`
+> 2026-06-26 AssistFit 흡수 IDRL iter-1 수렴 완료. 22+ GAP 흡수, 잔여 GAP → candidate_features.md 이관.
+> 신규 발견: BodyCodi(한국 1위 CRM), 청구스(미수금 자동화 SaaS).
+> 다음: Cycle 17 — GAP-06 미수금 관리 (overdue-management + migration + /overdue 페이지)
+> 상세: `docs/research/converged/2026-05-20-assistfit-absorb/candidate_features.md`
 
 ## 모듈 진척
 
@@ -85,12 +86,17 @@
 - 2026-05-21 신규 크롤 결과:
   * Glofox 40p / 57 features / 15 고유 GAP (AI Churn 30일, Intelligent Billing, Behavior Upsell, Spot Booking, Lead Pipeline, Family Membership, Royalty)
   * PushPress 40p / 47 features / 29 고유 GAP (AI Assistant 4-Level, Multi-Channel Nurture, Live Pipeline, Failed Payment Recovery, Trial→Member 시퀀스, Family Plan, Retention Signals, Daily Priorities, WOD Leaderboard, Habit Tracking, Affiliate Marketplace, GymHappy 리뷰자동화, White-label App, Priority Booking, Progressive Programming)
-- 다음 사이클 큐 (Glofox+PushPress 통합 반영):
-  * Cycle 10: **Daily Priorities — Owner Report 실행형 전환** (PushPress GAP-8, Member Status Engine 재활용, 가장 가시성 + 빠른 임팩트)
-  * Cycle 11: GAP-06 미수금 관리 + Failed Payment Recovery (PushPress GAP-4 결합)
-  * Cycle 12: Live Sales Pipeline (예비회원 칸반) — M5 강화
-  * Cycle 13: AI Assistant Level 3 (M7 Decision 제안형) — Anthropic SDK
-  * Cycle 14: Family Plan + Sibling Discount
+- 2026-05-21 Cycle 10 (935cbb5): Daily Priorities — daily-priorities.ts service + /api/daily-priorities + Owner Report 실행형 전환. PushPress GAP-8 흡수.
+- 2026-05-21 Cycle 11 (cd1552d): Retention Signals — retention-signals.ts + /api/retention-signals + At-Risk 7일 전 경고 카드. PushPress GAP-7 흡수.
+- 2026-05-21 Cycle 12 (c616c3b): Live Sales Pipeline — sales-pipeline.ts + /api/sales-pipeline + /sales-pipeline 칸반 페이지. PushPress GAP-3 흡수.
+- 2026-05-21~2026-06-25 Cycles 13~15 (코드베이스 확인): M12 그룹수업 스케줄(/api/group-lessons + CRUD + enrollment), Kiosk(kiosk-auth/home-page, /api/kiosk-notices), PG 결제(billgate-service, /api/pg/*), OT프로그램(/api/ot-programs), Staff 관리(/api/staff), Products(/api/products, center-programs), AI Insights(/api/ai/churn-analysis, revenue-insights, chat), 계약서/환불/기타매출/정지 CRUD. 구체적 commit hash 불명 (LOOP_STATE 누락 구간).
+- 2026-06-25 Cycle 16 (8ef2c92): GAP-29 Audit Log — audit-log.ts service + /api/audit-logs + /api/audit-logs/summary + audit-log-page.tsx. M2/M4 감사로그 완성.
+- 2026-06-26 IDRL 수렴 (Auto-17): AssistFit 흡수 IDRL iter-1 — 22+ GAP 흡수 확인, 잔여 GAP → candidate_features.md 이관, docs/research/active/ → converged/ 이동. WebSearch 신규 발견: BodyCodi(한국 1위 CRM, 4,000+센터), 청구스(미수금 자동화 SaaS).
+- 다음 사이클 큐 (2026-06-26 기준, candidate_features.md 참조):
+  * Cycle 17: GAP-06 미수금 관리 (overdue-management service + migration + /overdue 페이지)
+  * Cycle 18: AI Level 3 Decision 제안형 (M7 AI chat → 실행형 버튼)
+  * Cycle 19: 공지 상단 고정(GAP-27) + Member Milestone 자동 인지
+  * Cycle 20: BodyCodi 신규 IDRL (사람 게이트 후)
 
 ## 완성 기준 (Done Definition)
 

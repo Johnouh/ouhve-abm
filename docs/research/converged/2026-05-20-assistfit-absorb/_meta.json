@@ -1,0 +1,19 @@
+{
+  "topic": "AssistFit 흡수 정의 연구 (IDRL)",
+  "description": "AssistFit, Glofox, PushPress, Mindbody, HiCC, BodyCodi 경쟁사 흡수 — 기능 GAP 정의 + axmeax 변형 매핑",
+  "created": "2026-05-20",
+  "current_iteration": 1,
+  "status": "converged",
+  "search_axes_used": [
+    "AssistFit 95p 가이드 크롤 + Agent A/B 분석 (iter-0)",
+    "Glofox 40p / PushPress 47p 추가 크롤 (LOOP_STATE 업데이트)",
+    "한국 헬스장 CRM 미수금 자동화 2026 (iter-1 WebSearch)",
+    "Korean gym family membership plan sibling discount 2026 (iter-1 WebSearch)"
+  ],
+  "iterations": [
+    { "id": 0, "file": "iteration-0.md", "verdict": "seed — 30 GAP 도출, 12 모듈 확장, 사이클 큐 수립" },
+    { "id": 1, "file": "iteration-1.md", "verdict": "converged — 10+ 사이클 흡수 완료, 잔여 GAP candidate_features로 이관" }
+  ],
+  "converged_at": "2026-06-26",
+  "candidate_features_file": "candidate_features.md"
+}
