@@ -1,6 +1,6 @@
 import { db } from "../db";
 import { members, memberships, attendance, consultations } from "@shared/schema";
-import { and, eq, gte, lte, desc, sql, isNull, or } from "drizzle-orm";
+import { and, eq, gte, lte, desc, sql, isNull, or, inArray } from "drizzle-orm";
 
 /**
  * OUHVE ABM — Module 2 + Module 7 결합
@@ -219,7 +219,7 @@ export async function summarizeMemberStatuses(franchiseId: number): Promise<Stat
   if (memberList.length > 0) {
     const memberIds = memberList.map((m) => m.id);
     const allMemberships = await db.select().from(memberships)
-      .where(sql`${memberships.memberId} = ANY(${memberIds})`)
+      .where(inArray(memberships.memberId, memberIds))
       .orderBy(desc(memberships.endDate));
     for (const ms of allMemberships) {
       if (!membershipMap.has(ms.memberId)) {
@@ -241,7 +241,7 @@ export async function summarizeMemberStatuses(franchiseId: number): Promise<Stat
     })
       .from(attendance)
       .where(and(
-        sql`${attendance.memberId} = ANY(${memberIds})`,
+        inArray(attendance.memberId, memberIds),
         gte(attendance.date, sixtyDaysAgo),
       ))
       .orderBy(desc(attendance.date));

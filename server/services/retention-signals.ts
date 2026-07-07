@@ -1,7 +1,7 @@
 import { summarizeMemberStatuses } from "./member-status-engine";
 import { db } from "../db";
 import { members, attendance, memberships } from "@shared/schema";
-import { and, eq, gte, sql, desc } from "drizzle-orm";
+import { and, eq, gte, desc, inArray } from "drizzle-orm";
 
 /**
  * OUHVE ABM — PushPress GAP-7 흡수
@@ -84,7 +84,7 @@ export async function buildRetentionSignals(franchiseId: number): Promise<Retent
     const ms = await db
       .select({ memberId: memberships.memberId, endDate: memberships.endDate })
       .from(memberships)
-      .where(sql`${memberships.memberId} = ANY(${memberIds})`)
+      .where(inArray(memberships.memberId, memberIds))
       .orderBy(desc(memberships.endDate));
     for (const m of ms) {
       if (!membershipMap.has(m.memberId)) {
