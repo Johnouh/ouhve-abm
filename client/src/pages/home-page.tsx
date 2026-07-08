@@ -646,16 +646,17 @@ export default function HomePage() {
       staleTime: 60 * 1000,
     });
     const byStatus = statusSummary?.byStatus ?? {};
+    const careNeeded = (byStatus["관심필요"] ?? 0) + (byStatus["이탈위험"] ?? 0) + (byStatus["출석감소"] ?? 0) + (byStatus["휴면"] ?? 0);
     const aiKpis = [
-      { label: "휴면 회원", value: byStatus["휴면"] ?? 0, hint: "재활성화 대상", tone: "text-orange-600" },
-      { label: "관심·이탈 위험", value: (byStatus["관심필요"] ?? 0) + (byStatus["이탈위험"] ?? 0) + (byStatus["출석감소"] ?? 0), hint: "케어 필요", tone: "text-red-600" },
-      { label: "만료 임박", value: byStatus["만료임박"] ?? 0, hint: "갱신 안내", tone: "text-amber-600" },
+      { label: "케어 필요", value: careNeeded, hint: "이탈 방지 접촉", tone: "text-red-600" },
+      { label: "상담 미처리", value: (byStatus["상담미처리"] ?? 0), hint: "후속 연락 필요", tone: "text-amber-600" },
+      { label: "정상 관리", value: (byStatus["정상관리"] ?? 0), hint: "안정 회원", tone: "text-emerald-600" },
       { label: "AI 처리", value: ouhveActivities.length, hint: "승인 후 자동 실행", tone: "text-orange-600" },
     ];
 
     // 통계 계산 (Statistics calculation)
     const totalMembers = membersList.length;
-    const activeMembers = membersList.filter(member => member.status === "active").length;
+    const activeMembers = membersList.filter(member => member.status === "active" || member.status === "활성 회원").length;
     const totalStaff = staffList.filter(staff => staff.status !== "퇴사").length;
     const occupiedLockers = lockersList.filter(locker => locker.status === "occupied").length;
     
