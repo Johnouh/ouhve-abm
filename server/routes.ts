@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { setupAuth } from "./auth";
 import { setupHealthCheck } from "./health-check";
 import { storage } from "./storage";
+import { pool } from "./db";
 import { analyzeChurnRisk, analyzeRevenueInsights } from "./services/ai-service";
 import { computeProfileCompletion } from "./services/business-profile-helper";
 import { summarizeMemberStatuses } from "./services/member-status-engine";
@@ -1317,6 +1318,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const payload = await buildDailyPriorities(franchiseId);
     res.json(payload);
   }));
+
+  // Ouhve AI 작업 내역 — Ouhve가 MCP로 실행한 작업을 ABM에서 따로 조회
+  app.get("/api/ouhve-activities", requireFranchiseAuth, async (req, res) => {
+    try {
+      const r = await pool.query(
+        "SELECT id, tool, action_type, summary, target_type, target_ref, created_at FROM ouhve_activities WHERE franchise_id = $1 ORDER BY created_at DESC LIMIT 100",
+        [req.franchiseId],
+      );
+      res.json(r.rows);
+    } catch (error) {
+      console.error("Error getting ouhve activities:", error);
+      res.json([]);
+    }
+  });
+
+  app.post("/api/ouhve-activities", requireFranchiseAuth, setFranchiseId, async (req, res) => {
+    try {
+      const { tool, actionType, summary, targetType, targetRef } = req.body;
+      if (!tool || !summary) return res.status(400).json({ error: "tool, summary 필수" });
+      const r = await pool.query(
+        "INSERT INTO ouhve_activities (tool, action_type, summary, target_type, target_ref, franchise_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id",
+        [tool, actionType ?? null, summary, targetType ?? null, targetRef ?? null, req.franchiseId],
+      );
+      res.status(201).json({ id: r.rows[0].id });
+    } catch (error) {
+      console.error("Error logging ouhve activity:", error);
+      res.status(400).json({ error: "invalid" });
+    }
+  });
 
   // PushPress GAP-7 흡수 — Retention Signals (At-Risk 7일 전 행동 시그널 점수화)
   app.get("/api/retention-signals", requireFranchiseAuth, catchAsync(async (req: Request, res: Response) => {

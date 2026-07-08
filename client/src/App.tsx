@@ -20,6 +20,7 @@ import OwnerReportPage from "@/pages/owner-report-page";
 import BulkExtendPage from "@/pages/bulk-extend-page";
 import SalesPipelinePage from "@/pages/sales-pipeline-page";
 import AuditLogPage from "@/pages/audit-log-page";
+import OuhveActivityPage from "@/pages/ouhve-activity-page";
 import { ProtectedRoute } from "./lib/protected-route";
 
 /**
@@ -50,6 +51,7 @@ function AppRouter() {
       <ProtectedRoute path="/sales-pipeline" component={SalesPipelinePage} />
       {/* OUHVE ABM — Cycle 16 AssistFit GAP-29 감사로그 */}
       <ProtectedRoute path="/audit-log" component={AuditLogPage} />
+      <ProtectedRoute path="/ouhve-activity" component={OuhveActivityPage} />
       {/* 루트(/) 는 HomePage — 사이드바 메뉴 + 모든 OUHVE 기능 접근점. Owner Report 링크는 사이드바에 추가됨. */}
       <ProtectedRoute path="/" component={HomePage} />
       <ProtectedRoute path="/:rest*" component={HomePage} />
