@@ -635,6 +635,24 @@ export default function HomePage() {
       staleTime: 5 * 60 * 1000,
     });
 
+    // AI 대시보드 데이터 (Ouhve AI — 이탈 신호·우선순위·처리 내역)
+    const [dashTab, setDashTab] = useState<"ai" | "normal">("ai");
+    const { data: statusSummary } = useQuery<{ total?: number; byStatus?: Record<string, number> }>({
+      queryKey: ["/api/members/status-summary"],
+      staleTime: 5 * 60 * 1000,
+    });
+    const { data: ouhveActivities = [] } = useQuery<Array<{ id: number; tool: string; summary: string; created_at: string }>>({
+      queryKey: ["/api/ouhve-activities"],
+      staleTime: 60 * 1000,
+    });
+    const byStatus = statusSummary?.byStatus ?? {};
+    const aiKpis = [
+      { label: "휴면 회원", value: byStatus["휴면"] ?? 0, hint: "재활성화 대상", tone: "text-orange-600" },
+      { label: "관심·이탈 위험", value: (byStatus["관심필요"] ?? 0) + (byStatus["이탈위험"] ?? 0) + (byStatus["출석감소"] ?? 0), hint: "케어 필요", tone: "text-red-600" },
+      { label: "만료 임박", value: byStatus["만료임박"] ?? 0, hint: "갱신 안내", tone: "text-amber-600" },
+      { label: "AI 처리", value: ouhveActivities.length, hint: "승인 후 자동 실행", tone: "text-orange-600" },
+    ];
+
     // 통계 계산 (Statistics calculation)
     const totalMembers = membersList.length;
     const activeMembers = membersList.filter(member => member.status === "active").length;
@@ -695,18 +713,90 @@ export default function HomePage() {
 
     return (
       <div className="space-y-6">
-        {/* OUHVE ABM — Daily Priorities (PushPress GAP-8 흡수) — 오늘 할 액션 최상단 */}
-        <DailyPrioritiesCard />
-
-        {/* OUHVE ABM — Retention Signals (PushPress GAP-7) — 이탈 시그널 */}
-        <RetentionSignalsCard />
-
-        {/* OUHVE ABM — 시간대별 출석 + 락커 운영 (AssistFit GAP-19/14) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <AttendanceHeatmapCard />
-          <LockerOverviewCard />
+        {/* 대시보드 탭 — AI 기능 / 일반 운영 분리 */}
+        <div className="flex items-center gap-1 border-b border-gray-200">
+          {([["ai", "AI 대시보드"], ["normal", "일반 대시보드"]] as const).map(([key, label]) => (
+            <button
+              key={key}
+              onClick={() => setDashTab(key)}
+              className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors focus-visible:outline-none ${
+                dashTab === key ? "border-primary text-primary" : "border-transparent text-gray-400 hover:text-gray-600"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
         </div>
 
+        {dashTab === "ai" ? (
+        <div className="space-y-6">
+          {/* AI 요약 KPI — Ouhve가 분석·처리한 것 */}
+          <div className="rounded-xl border border-primary/20 bg-primary/[0.03] p-5">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
+                <Sparkles className="w-4 h-4 text-primary" />
+              </div>
+              <h3 className="text-base font-semibold text-gray-900">Ouhve AI 운영 요약</h3>
+              <span className="text-xs text-gray-500">전체 회원 {statusSummary?.total ?? membersList.length}명 분석 · 실시간</span>
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+              {aiKpis.map((k) => (
+                <div key={k.label} className="rounded-lg border border-gray-100 bg-white p-4">
+                  <p className="text-xs text-gray-500">{k.label}</p>
+                  <p className={`text-2xl font-bold tabular-nums ${k.tone}`}>{k.value}<span className="text-sm font-medium text-gray-400">명</span></p>
+                  <p className="text-[11px] text-gray-400 mt-0.5">{k.hint}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 오늘 할 액션 (우선순위) */}
+          <DailyPrioritiesCard />
+
+          {/* 이탈 시그널 */}
+          <RetentionSignalsCard />
+
+          {/* Ouhve AI 처리 내역 — 승인 후 실제 실행된 작업 */}
+          <Card>
+            <CardAccentLine />
+            <CardContent className="p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <Sparkles className="w-4 h-4 text-primary shrink-0" />
+                <h3 className="text-base font-semibold text-gray-900">Ouhve AI 처리 내역</h3>
+                <span className="text-xs text-gray-400">원장 승인 후 자동 실행된 작업</span>
+              </div>
+              {ouhveActivities.length > 0 ? (
+                <div className="space-y-2">
+                  {ouhveActivities.slice(0, 6).map((a) => (
+                    <div key={a.id} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50">
+                      <span className="mt-0.5 w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
+                        <Sparkles className="w-3.5 h-3.5 text-primary" />
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-medium text-gray-900 truncate">{a.summary}</p>
+                        <p className="text-[11px] text-gray-400 font-mono">{a.tool} · {new Date(a.created_at).toLocaleString("ko-KR")}</p>
+                      </div>
+                      <span className="shrink-0 text-[10px] font-medium text-primary bg-primary/10 rounded px-1.5 py-0.5">Ouhve AI</span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-gray-500">
+                  <Sparkles className="mx-auto h-8 w-8 text-gray-300 mb-2" />
+                  <p className="text-sm">아직 실행된 AI 작업이 없습니다. 승인 탭에서 제안을 승인하면 여기에 기록됩니다.</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* 시간대별 출석 + 락커 운영 */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <AttendanceHeatmapCard />
+            <LockerOverviewCard />
+          </div>
+        </div>
+        ) : (
+        <div className="space-y-6">
         {/* 통계 카드 (Statistics Cards) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => handleTabChange("회원")}>
@@ -919,6 +1009,8 @@ export default function HomePage() {
             </div>
           </CardContent>
         </Card>
+        </div>
+        )}
       </div>
     );
   };
