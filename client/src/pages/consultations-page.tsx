@@ -415,7 +415,7 @@ export default function ConsultationsPage() {
               placeholder="이름 및 연락처로 검색"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-white border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+              className="pl-10 bg-white border-gray-200 focus:border-orange-400 focus:ring-orange-400"
             />
             {searchTerm && (
               <Button
@@ -505,7 +505,7 @@ export default function ConsultationsPage() {
                       <TableCell className="text-gray-700 hidden md:table-cell">
                         {formatDate(consultation.consultationDate)}
                       </TableCell>
-                      <TableCell className="text-blue-600 hidden lg:table-cell">
+                      <TableCell className="text-orange-600 hidden lg:table-cell">
                         {getCounselorName(consultation.counselorId)}
                       </TableCell>
                       <TableCell className="text-gray-700 hidden lg:table-cell">{consultation.consultationType}</TableCell>
@@ -521,7 +521,7 @@ export default function ConsultationsPage() {
                             onClick={(e) => { e.stopPropagation(); handleEditConsultation(consultation); }}
                             data-testid={`btn-edit-consultation-${consultation.id}`}
                           >
-                            <Edit className="h-4 w-4 text-blue-500" />
+                            <Edit className="h-4 w-4 text-orange-500" />
                           </Button>
                           <Button
                             variant="ghost"
@@ -562,7 +562,7 @@ export default function ConsultationsPage() {
                       variant={currentPage === page ? "default" : "outline"}
                       size="sm"
                       onClick={() => setCurrentPage(page)}
-                      className={currentPage === page ? "bg-blue-500 hover-elevate" : ""}
+                      className={currentPage === page ? "bg-orange-500 hover-elevate" : ""}
                     >
                       {page}
                     </Button>
@@ -584,7 +584,7 @@ export default function ConsultationsPage() {
         {/* Action Buttons */}
         <div className="flex justify-end space-x-3">
           <Button
-            className="bg-gradient-to-r from-blue-500 to-blue-600 hover-elevate text-white shadow-lg"
+            className="bg-gradient-to-r from-orange-500 to-orange-600 hover-elevate text-white shadow-lg"
             onClick={handleAddConsultation}
             data-testid="btn-add-consultation"
           >
@@ -837,7 +837,7 @@ export default function ConsultationsPage() {
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 hover-elevate text-white"
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover-elevate text-white"
                   disabled={createConsultationMutation.isPending || updateConsultationMutation.isPending}
                 >
                   {createConsultationMutation.isPending || updateConsultationMutation.isPending 
@@ -916,7 +916,7 @@ export default function ConsultationsPage() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">상담자</span>
-                    <span className="font-medium text-blue-600">{getCounselorName(selectedConsultation.counselorId)}</span>
+                    <span className="font-medium text-orange-600">{getCounselorName(selectedConsultation.counselorId)}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">상담 유형</span>

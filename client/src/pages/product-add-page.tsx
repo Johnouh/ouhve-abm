@@ -180,7 +180,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
           <Card className="p-6 bg-white shadow-sm border-0 shadow-lg">
             <CardAccentLine />
             <div className="flex items-center gap-2 mb-6">
-              <Tag className="w-5 h-5 text-blue-500" />
+              <Tag className="w-5 h-5 text-orange-500" />
               <h2 className="text-lg font-semibold text-gray-900">상품 정보</h2>
             </div>
 
@@ -197,7 +197,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                         value="회원권"
                         checked={productType === "회원권"}
                         onChange={() => setProductType("회원권")}
-                        className="w-4 h-4 text-blue-500 border-gray-300 focus:ring-blue-500"
+                        className="w-4 h-4 text-orange-500 border-gray-300 focus:ring-orange-500"
                       />
                       <span className="text-sm font-medium text-gray-700">회원권</span>
                     </label>
@@ -208,7 +208,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                         value="개인 레슨"
                         checked={productType === "개인 레슨"}
                         onChange={() => setProductType("개인 레슨")}
-                        className="w-4 h-4 text-blue-500 border-gray-300 focus:ring-blue-500"
+                        className="w-4 h-4 text-orange-500 border-gray-300 focus:ring-orange-500"
                       />
                       <span className="text-sm font-medium text-gray-700">개인 레슨</span>
                     </label>
@@ -219,7 +219,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                         value="락커 상품"
                         checked={productType === "락커 상품"}
                         onChange={() => setProductType("락커 상품")}
-                        className="w-4 h-4 text-blue-500 border-gray-300 focus:ring-blue-500"
+                        className="w-4 h-4 text-orange-500 border-gray-300 focus:ring-orange-500"
                       />
                       <span className="text-sm font-medium text-gray-700">락커 상품</span>
                     </label>
@@ -230,7 +230,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                         value="운동 용품"
                         checked={productType === "운동 용품"}
                         onChange={() => setProductType("운동 용품")}
-                        className="w-4 h-4 text-blue-500 border-gray-300 focus:ring-blue-500"
+                        className="w-4 h-4 text-orange-500 border-gray-300 focus:ring-orange-500"
                       />
                       <span className="text-sm font-medium text-gray-700">운동 용품</span>
                     </label>
@@ -240,10 +240,10 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
 
               {/* 🆕 수업 상품 추가 설정 (Lesson product additional settings) */}
               {productType === "개인 레슨" && (
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
                   <div className="flex items-center gap-2 mb-4">
-                    <Users className="w-4 h-4 text-blue-500" />
-                    <Label className="text-sm font-semibold text-blue-700">수업 설정</Label>
+                    <Users className="w-4 h-4 text-orange-500" />
+                    <Label className="text-sm font-semibold text-orange-700">수업 설정</Label>
                   </div>
                   
                   <div className="space-y-4">
@@ -278,7 +278,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                             value="개인"
                             checked={lessonType === "개인"}
                             onChange={() => setLessonType("개인")}
-                            className="w-4 h-4 text-blue-500"
+                            className="w-4 h-4 text-orange-500"
                             data-testid="radio-lesson-type-private"
                           />
                           <span className="text-sm">개인 레슨</span>
@@ -290,7 +290,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                             value="그룹"
                             checked={lessonType === "그룹"}
                             onChange={() => setLessonType("그룹")}
-                            className="w-4 h-4 text-blue-500"
+                            className="w-4 h-4 text-orange-500"
                             data-testid="radio-lesson-type-group"
                           />
                           <span className="text-sm">그룹 수업</span>
@@ -334,7 +334,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                           value="기간제"
                           checked={usageType === "기간제"}
                           onChange={() => setUsageType("기간제")}
-                          className="w-4 h-4 text-blue-500"
+                          className="w-4 h-4 text-orange-500"
                         />
                         <span className="text-sm">기간제</span>
                       </label>
@@ -345,7 +345,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                           value="수건"
                           checked={usageType === "수건"}
                           onChange={() => setUsageType("수건")}
-                          className="w-4 h-4 text-blue-500"
+                          className="w-4 h-4 text-orange-500"
                         />
                         <span className="text-sm">수건</span>
                       </label>
@@ -356,7 +356,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                           value="기타"
                           checked={usageType === "기타"}
                           onChange={() => setUsageType("기타")}
-                          className="w-4 h-4 text-blue-500"
+                          className="w-4 h-4 text-orange-500"
                         />
                         <span className="text-sm">기타</span>
                       </label>
@@ -375,7 +375,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                             value="운동복"
                             checked={categoryType === "운동복"}
                             onChange={() => setCategoryType("운동복")}
-                            className="w-4 h-4 text-blue-500"
+                            className="w-4 h-4 text-orange-500"
                           />
                           <span className="text-sm">운동복</span>
                         </label>
@@ -386,7 +386,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                             value="수건"
                             checked={categoryType === "수건"}
                             onChange={() => setCategoryType("수건")}
-                            className="w-4 h-4 text-blue-500"
+                            className="w-4 h-4 text-orange-500"
                           />
                           <span className="text-sm">수건</span>
                         </label>
@@ -399,7 +399,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                             value="기타"
                             checked={categoryType === "기타"}
                             onChange={() => setCategoryType("기타")}
-                            className="w-4 h-4 text-blue-500"
+                            className="w-4 h-4 text-orange-500"
                           />
                           <span className="text-sm">기타</span>
                         </label>
@@ -417,7 +417,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                   <Input
                     {...form.register("name")}
                     placeholder="추가할 상품명을 입력해 주세요"
-                    className="bg-white border-gray-200 focus:border-blue-400 focus:ring-blue-400 text-gray-900"
+                    className="bg-white border-gray-200 focus:border-orange-400 focus:ring-orange-400 text-gray-900"
                   />
                 </div>
               </div>
@@ -430,7 +430,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
             <Card className="p-6 bg-white shadow-sm border-0 shadow-lg">
               <CardAccentLine />
               <div className="flex items-center gap-2 mb-6">
-                <Calendar className="w-5 h-5 text-blue-500" />
+                <Calendar className="w-5 h-5 text-orange-500" />
                 <h2 className="text-lg font-semibold text-gray-900">기간 및 횟수 설정</h2>
               </div>
 
@@ -443,7 +443,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                       <Label className="text-sm font-medium mb-2 block text-gray-600">기간 *</Label>
                       <div className="flex items-center gap-2">
                         <Select value={durationType} onValueChange={setDurationType}>
-                          <SelectTrigger className="w-32 bg-white border-gray-200 focus:border-blue-400 focus:ring-blue-400">
+                          <SelectTrigger className="w-32 bg-white border-gray-200 focus:border-orange-400 focus:ring-orange-400">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -465,7 +465,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                           value={duration}
                           onChange={(e) => setDuration(e.target.value)}
                           placeholder="0"
-                          className="bg-white border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                          className="bg-white border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                         />
                         <span className="text-sm text-gray-600 font-medium">월</span>
                       </div>
@@ -484,7 +484,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                         placeholder="0"
-                        className="bg-white border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                        className="bg-white border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                       />
                       <span className="text-sm text-gray-600 font-medium">원</span>
                     </div>
@@ -497,7 +497,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
             <Card className="p-6 bg-white shadow-sm border-0 shadow-lg">
               <CardAccentLine />
               <div className="flex items-center gap-2 mb-6">
-                <Clock className="w-5 h-5 text-blue-500" />
+                <Clock className="w-5 h-5 text-orange-500" />
                 <h2 className="text-lg font-semibold text-gray-900">정시/근무 설정</h2>
               </div>
 
@@ -510,7 +510,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                   <Switch
                     checked={customSettings}
                     onCheckedChange={setCustomSettings}
-                    className="data-[state=checked]:bg-blue-500"
+                    className="data-[state=checked]:bg-orange-500"
                   />
                 </div>
               </div>
@@ -521,17 +521,17 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
           <Card className="p-6 bg-white shadow-sm border-0 shadow-lg">
             <CardAccentLine />
             <div className="flex items-center gap-2 mb-6">
-              <FileText className="w-5 h-5 text-blue-500" />
+              <FileText className="w-5 h-5 text-orange-500" />
               <h2 className="text-lg font-semibold text-gray-900">상품 설명</h2>
             </div>
 
             <div className="space-y-4">
-              <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                <div className="text-sm text-blue-800 space-y-2">
+              <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                <div className="text-sm text-orange-800 space-y-2">
                   <p className="font-medium">상품 설명 작성 가이드</p>
                   <p>• 상품의 특징과 이용 방법을 상세히 설명해주세요</p>
                   <p>• 유의사항이나 제한사항이 있다면 명시해주세요</p>
-                  <p className="text-xs text-blue-600 mt-2">최대 1,000자까지 입력 가능합니다.</p>
+                  <p className="text-xs text-orange-600 mt-2">최대 1,000자까지 입력 가능합니다.</p>
                 </div>
               </div>
               
@@ -542,7 +542,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="추가할 상품의 이용방법과 상세 정보를 입력해 주세요"
-                    className="min-h-[200px] bg-white border-gray-200 focus:border-blue-400 focus:ring-blue-400 resize-none text-gray-900 placeholder-gray-400"
+                    className="min-h-[200px] bg-white border-gray-200 focus:border-orange-400 focus:ring-orange-400 resize-none text-gray-900 placeholder-gray-400"
                     maxLength={1000}
                   />
                   <div className="absolute bottom-3 right-3 text-xs text-gray-400 bg-white px-2 py-1 rounded">
@@ -568,7 +568,7 @@ export default function ProductAddPage({ onBack, defaultCategory = "회원권" }
             type="button"
             onClick={onSubmit}
             disabled={createProductMutation.isPending}
-            className="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover-elevate text-white font-medium shadow-lg transition-all duration-200 transform hover:scale-105"
+            className="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover-elevate text-white font-medium shadow-lg transition-all duration-200 transform hover:scale-105"
           >
             {createProductMutation.isPending ? (
               <div className="flex items-center gap-2">

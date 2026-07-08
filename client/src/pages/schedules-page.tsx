@@ -33,7 +33,7 @@ const scheduleFormSchema = z.object({
   dayOfWeek: z.string().min(1, "요일을 선택해주세요"),
   startTime: z.string().min(1, "시작 시간을 선택해주세요"),
   endTime: z.string().min(1, "종료 시간을 선택해주세요"),
-  color: z.string().default("#3B82F6"),
+  color: z.string().default("#F97316"),
   isRecurring: z.boolean().default(true),
 }).refine((data) => {
   if (data.startTime && data.endTime) {
@@ -88,7 +88,7 @@ export default function SchedulesPage() {
       dayOfWeek: "1",
       startTime: "09:00",
       endTime: "10:00",
-      color: "#3B82F6",
+      color: "#F97316",
       isRecurring: true,
     },
   });
@@ -167,7 +167,7 @@ export default function SchedulesPage() {
         dayOfWeek: originalSchedule.dayOfWeek?.toString() || "1",
         startTime: originalSchedule.startTime || "09:00",
         endTime: originalSchedule.endTime || "10:00",
-        color: originalSchedule.color || "#3B82F6",
+        color: originalSchedule.color || "#F97316",
         isRecurring: (originalSchedule as any).isRecurring ?? true
       });
       setShowEditDialog(true);
@@ -366,7 +366,7 @@ export default function SchedulesPage() {
         dayOfWeek: dayOfWeek,
         isRecurring: false,
         isActive: true,
-        color: '#8b5cf6',
+        color: '#fb923c',
         type: 'pt-session',
         ptSessionId: session.id,
         status: session.status
@@ -404,7 +404,7 @@ export default function SchedulesPage() {
         dayOfWeek: dayOfWeek,
         isRecurring: true,
         isActive: true,
-        color: '#a855f7', // 보라색 - PT 정기 일정
+        color: '#fdba74', // 보라색 - PT 정기 일정
         type: 'pt-registration',
         ptRegistrationId: pt.id,
         remainingSessions: pt.remainingSessions,
@@ -495,7 +495,7 @@ export default function SchedulesPage() {
             variant={scheduleFilter === "personal" ? "default" : "outline"}
             size="sm"
             onClick={() => setScheduleFilter("personal")}
-            className={scheduleFilter === "personal" ? "bg-purple-500 hover-elevate" : ""}
+            className={scheduleFilter === "personal" ? "bg-orange-500 hover-elevate" : ""}
             data-testid="filter-personal"
           >
             <Dumbbell className="w-4 h-4 mr-1" />
@@ -515,7 +515,7 @@ export default function SchedulesPage() {
             variant={scheduleFilter === "schedule" ? "default" : "outline"}
             size="sm"
             onClick={() => setScheduleFilter("schedule")}
-            className={scheduleFilter === "schedule" ? "bg-blue-500 hover-elevate" : ""}
+            className={scheduleFilter === "schedule" ? "bg-orange-500 hover-elevate" : ""}
             data-testid="filter-schedule"
           >
             <Clock className="w-4 h-4 mr-1" />
@@ -552,11 +552,11 @@ export default function SchedulesPage() {
                               day.getMonth() === today.getMonth() && 
                               day.getFullYear() === today.getFullYear();
               return (
-                <div key={index} className={`p-2 md:p-4 text-center border-r ${isToday ? 'bg-blue-50' : ''}`}>
-                  <div className={`text-xs md:text-sm font-medium ${isToday ? 'text-blue-600' : 'text-gray-900'}`}>
+                <div key={index} className={`p-2 md:p-4 text-center border-r ${isToday ? 'bg-orange-50' : ''}`}>
+                  <div className={`text-xs md:text-sm font-medium ${isToday ? 'text-orange-600' : 'text-gray-900'}`}>
                     {dayNames[day.getDay()]}
                   </div>
-                  <div className={`text-xs md:text-sm ${isToday ? 'text-blue-600 font-semibold' : 'text-gray-500'}`}>
+                  <div className={`text-xs md:text-sm ${isToday ? 'text-orange-600 font-semibold' : 'text-gray-500'}`}>
                     {day.getDate()}
                   </div>
                 </div>
@@ -583,7 +583,7 @@ export default function SchedulesPage() {
                                   day.getFullYear() === today.getFullYear();
                   
                   return (
-                    <div key={dayIndex} className={`border-r relative h-12 ${isToday ? 'bg-blue-50/50' : ''}`}>
+                    <div key={dayIndex} className={`border-r relative h-12 ${isToday ? 'bg-orange-50/50' : ''}`}>
                       {schedulesForHour.map((schedule) => {
                         const instructor = getInstructorName(schedule.instructorId);
                         const startHour = parseInt(schedule.startTime?.split(':')[0] || '0', 10);
@@ -723,7 +723,7 @@ export default function SchedulesPage() {
 
       <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8">
         <Button
-          className="bg-blue-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg shadow-lg hover-elevate"
+          className="bg-orange-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg shadow-lg hover-elevate"
           size="lg"
           onClick={() => { form.reset(); setShowCreateDialog(true); }}
           data-testid="button-create-schedule"
@@ -883,7 +883,7 @@ export default function SchedulesPage() {
                 <Button
                   type="submit"
                   disabled={createMutation.isPending}
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                   data-testid="button-submit-schedule"
                 >
                   {createMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
@@ -1040,7 +1040,7 @@ export default function SchedulesPage() {
                 <Button
                   type="submit"
                   disabled={updateMutation.isPending}
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                   data-testid="button-update-schedule"
                 >
                   {updateMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}

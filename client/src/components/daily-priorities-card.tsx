@@ -38,7 +38,7 @@ interface Payload {
 const CATEGORY_STYLE: Record<ActionCategory, string> = {
   긴급:   "bg-red-500/10 text-red-400 border-red-500/20",
   재등록: "bg-primary/10 text-primary border-primary/20",
-  케어:   "bg-blue-500/10 text-blue-400 border-blue-500/20",
+  케어:   "bg-orange-500/10 text-orange-400 border-orange-500/20",
   운영:   "bg-muted text-muted-foreground border-border",
   기회:   "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
 };

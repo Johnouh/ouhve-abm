@@ -61,14 +61,14 @@ export function Chatbot() {
         onClick={() => setIsOpen(v => !v)}
         className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
           isOpen
-            ? "bg-purple-100 text-purple-700"
+            ? "bg-orange-100 text-orange-700"
             : "text-gray-600 hover:text-gray-900 hover-elevate"
         }`}
       >
         <MessageCircle className="w-4 h-4 shrink-0" />
         <span>AI 챗봇</span>
         {!isOpen && (
-          <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-purple-500" />
+          <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-orange-500" />
         )}
       </button>
 
@@ -76,11 +76,11 @@ export function Chatbot() {
       {isOpen && (
         <div className="fixed top-[56px] right-4 z-50 w-[380px] h-[520px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
           {/* 헤더 */}
-          <div className="flex items-center justify-between px-4 py-3 bg-purple-600 text-white">
+          <div className="flex items-center justify-between px-4 py-3 bg-orange-600 text-white">
             <div className="flex items-center gap-2">
               <Bot className="w-5 h-5 shrink-0" />
               <span className="font-semibold text-sm">AI 어시스턴트</span>
-              <span className="text-xs bg-purple-500 px-1.5 py-0.5 rounded-full">Claude</span>
+              <span className="text-xs bg-orange-500 px-1.5 py-0.5 rounded-full">Claude</span>
             </div>
             <button onClick={() => setIsOpen(false)} className="hover-elevate rounded-lg p-1 transition-colors">
               <X className="w-4 h-4" />
@@ -92,14 +92,14 @@ export function Chatbot() {
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                 {msg.role === "assistant" && (
-                  <div className="w-7 h-7 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
-                    <Bot className="w-4 h-4 text-purple-600" />
+                  <div className="w-7 h-7 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
+                    <Bot className="w-4 h-4 text-orange-600" />
                   </div>
                 )}
                 <div
                   className={`max-w-[75%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${
                     msg.role === "user"
-                      ? "bg-purple-600 text-white rounded-tr-sm"
+                      ? "bg-orange-600 text-white rounded-tr-sm"
                       : "bg-gray-100 text-gray-800 rounded-tl-sm"
                   }`}
                 >
@@ -109,8 +109,8 @@ export function Chatbot() {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="w-7 h-7 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
-                  <Bot className="w-4 h-4 text-purple-600" />
+                <div className="w-7 h-7 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
+                  <Bot className="w-4 h-4 text-orange-600" />
                 </div>
                 <div className="bg-gray-100 text-gray-500 px-3 py-2 rounded-2xl rounded-tl-sm text-sm flex items-center gap-1">
                   <Loader2 className="w-3.5 h-3.5 animate-spin shrink-0" />
@@ -128,7 +128,7 @@ export function Chatbot() {
                 <button
                   key={q}
                   onClick={() => { setInput(q); inputRef.current?.focus(); }}
-                  className="text-xs px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 hover-elevate transition-colors"
+                  className="text-xs px-2.5 py-1 rounded-full bg-orange-50 text-orange-700 border border-orange-200 hover-elevate transition-colors"
                 >
                   {q}
                 </button>
@@ -145,14 +145,14 @@ export function Chatbot() {
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="메시지를 입력하세요..."
-              className="flex-1 text-sm bg-gray-100 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-purple-300 placeholder-gray-400"
+              className="flex-1 text-sm bg-gray-100 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-orange-300 placeholder-gray-400"
               disabled={isLoading}
             />
             <Button
               size="sm"
               onClick={sendMessage}
               disabled={!input.trim() || isLoading}
-              className="bg-purple-600 hover-elevate text-white rounded-xl h-8 w-8 p-0 flex-shrink-0"
+              className="bg-orange-600 hover-elevate text-white rounded-xl h-8 w-8 p-0 flex-shrink-0"
             >
               <Send className="w-3.5 h-3.5" />
             </Button>

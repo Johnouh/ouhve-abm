@@ -178,17 +178,17 @@ const RecentActivitiesModal = ({ onClose }: { onClose: () => void }) => {
             {recentActivities.length > 0 ? (
               recentActivities.map((activity, index) => (
                 <div key={index} className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg hover-elevate">
-                  <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                    <activity.icon className="w-5 h-5 text-blue-600" />
+                  <div className="flex-shrink-0 w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                    <activity.icon className="w-5 h-5 text-orange-600" />
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-medium text-gray-900">{activity.message}</p>
                     <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
                     <div className="mt-2">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        activity.type === 'member' ? 'bg-blue-100 text-blue-800' :
+                        activity.type === 'member' ? 'bg-orange-100 text-orange-800' :
                         activity.type === 'lesson' ? 'bg-green-100 text-green-800' :
-                        'bg-purple-100 text-purple-800'
+                        'bg-orange-100 text-orange-800'
                       }`}>
                         {activity.type === 'member' ? '회원 관리' :
                          activity.type === 'lesson' ? '수업 관리' : '상담 관리'}
@@ -267,7 +267,7 @@ const CustomConfirmDialog = ({
           </button>
           <button
             onClick={onConfirm}
-            className="flex-1 py-3 px-4 bg-blue-500 text-white rounded-xl font-medium hover-elevate"
+            className="flex-1 py-3 px-4 bg-orange-500 text-white rounded-xl font-medium hover-elevate"
           >
             {confirmText}
           </button>
@@ -438,7 +438,7 @@ export default function HomePage() {
     { icon: MessageCircle, name: "상담", color: "text-gray-500" },
     { icon: DollarSign, name: "기타 매출", color: "text-gray-500" },
     { icon: BarChart3, name: "통계", color: "text-gray-500" },
-    { icon: Brain, name: "AI 인사이트", color: "text-purple-500" },
+    { icon: Brain, name: "AI 인사이트", color: "text-primary" },
     ...(user?.role === 'superadmin' ? [
       { icon: Shield, name: "프랜차이즈 관리", color: "text-red-500" },
     ] : []),
@@ -718,7 +718,7 @@ export default function HomePage() {
                   <p className="text-3xl font-bold text-gray-900 tabular-nums">{totalMembers}</p>
                   <p className="text-xs text-green-600 mt-1 tabular-nums">활성 회원: {activeMembers}</p>
                 </div>
-                <Users className="h-8 w-8 text-blue-500 shrink-0" />
+                <Users className="h-8 w-8 text-orange-500 shrink-0" />
               </div>
             </CardContent>
           </Card>
@@ -730,9 +730,9 @@ export default function HomePage() {
                 <div className="min-w-0">
                   <p className="text-sm font-medium text-gray-600">직원 수</p>
                   <p className="text-3xl font-bold text-gray-900 tabular-nums">{totalStaff}</p>
-                  <p className="text-xs text-blue-600 mt-1 tabular-nums">오늘 출석: {todayAttendance}</p>
+                  <p className="text-xs text-orange-600 mt-1 tabular-nums">오늘 출석: {todayAttendance}</p>
                 </div>
-                <UserCircle className="h-8 w-8 text-purple-500 shrink-0" />
+                <UserCircle className="h-8 w-8 text-orange-500 shrink-0" />
               </div>
             </CardContent>
           </Card>
@@ -760,7 +760,7 @@ export default function HomePage() {
                   <p className="text-3xl font-bold text-gray-900 tabular-nums">{occupiedLockers}</p>
                   <p className="text-xs text-gray-600 mt-1 tabular-nums">전체: {lockersList.length}</p>
                 </div>
-                <Lock className="h-8 w-8 text-blue-500 shrink-0" />
+                <Lock className="h-8 w-8 text-orange-500 shrink-0" />
               </div>
             </CardContent>
           </Card>
@@ -784,28 +784,28 @@ export default function HomePage() {
             )}
             {pendingOtList.length > 0 && (
               <div
-                className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg cursor-pointer hover-elevate"
+                className="flex items-center gap-3 p-4 bg-orange-50 border border-orange-200 rounded-lg cursor-pointer hover-elevate"
                 onClick={() => handleTabChange("OT 신청")}
               >
-                <UserCheck className="w-5 h-5 text-blue-500 shrink-0" />
+                <UserCheck className="w-5 h-5 text-orange-500 shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-blue-800">대기 중 OT 신청</p>
-                  <p className="text-xs text-blue-600 truncate">승인 대기 {pendingOtList.length}건</p>
+                  <p className="text-sm font-semibold text-orange-800">대기 중 OT 신청</p>
+                  <p className="text-xs text-orange-600 truncate">승인 대기 {pendingOtList.length}건</p>
                 </div>
-                <span className="ml-auto text-lg font-bold text-blue-700 tabular-nums">{pendingOtList.length}</span>
+                <span className="ml-auto text-lg font-bold text-orange-700 tabular-nums">{pendingOtList.length}</span>
               </div>
             )}
             {todayPtSessions.length > 0 && (
               <div
-                className="flex items-center gap-3 p-4 bg-purple-50 border border-purple-200 rounded-lg cursor-pointer hover-elevate"
+                className="flex items-center gap-3 p-4 bg-orange-50 border border-orange-200 rounded-lg cursor-pointer hover-elevate"
                 onClick={() => handleTabChange("개인 레슨")}
               >
-                <Activity className="w-5 h-5 text-purple-500 shrink-0" />
+                <Activity className="w-5 h-5 text-orange-500 shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-purple-800">오늘의 PT 세션</p>
-                  <p className="text-xs text-purple-600 truncate">예약된 세션 {todayPtSessions.length}건</p>
+                  <p className="text-sm font-semibold text-orange-800">오늘의 PT 세션</p>
+                  <p className="text-xs text-orange-600 truncate">예약된 세션 {todayPtSessions.length}건</p>
                 </div>
-                <span className="ml-auto text-lg font-bold text-purple-700 tabular-nums">{todayPtSessions.length}</span>
+                <span className="ml-auto text-lg font-bold text-orange-700 tabular-nums">{todayPtSessions.length}</span>
               </div>
             )}
           </div>
@@ -820,12 +820,12 @@ export default function HomePage() {
               </div>
               
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+                <div className="flex items-center justify-between p-4 bg-orange-50 rounded-lg">
                   <div className="flex items-center space-x-3 min-w-0">
-                    <UserCheck className="w-5 h-5 text-blue-600 shrink-0" />
+                    <UserCheck className="w-5 h-5 text-orange-600 shrink-0" />
                     <div className="min-w-0">
-                      <p className="font-medium text-blue-900">출석 현황</p>
-                      <p className="text-sm text-blue-700">오늘 {todayAttendance}명 출석</p>
+                      <p className="font-medium text-orange-900">출석 현황</p>
+                      <p className="text-sm text-orange-700">오늘 {todayAttendance}명 출석</p>
                     </div>
                   </div>
                   <Button variant="ghost" size="sm" onClick={() => handleTabChange("출석")}>
@@ -846,12 +846,12 @@ export default function HomePage() {
                   </Button>
                 </div>
                 
-                <div className="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
+                <div className="flex items-center justify-between p-4 bg-orange-50 rounded-lg">
                   <div className="flex items-center space-x-3 min-w-0">
-                    <MessageCircle className="w-5 h-5 text-purple-600 shrink-0" />
+                    <MessageCircle className="w-5 h-5 text-orange-600 shrink-0" />
                     <div className="min-w-0">
-                      <p className="font-medium text-purple-900">상담 현황</p>
-                      <p className="text-sm text-purple-700">{consultationsList.length}건 상담 대기중</p>
+                      <p className="font-medium text-orange-900">상담 현황</p>
+                      <p className="text-sm text-orange-700">{consultationsList.length}건 상담 대기중</p>
                     </div>
                   </div>
                   <Button variant="ghost" size="sm" onClick={() => handleTabChange("상담")}>
@@ -937,74 +937,21 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* OUHVE 신기능 — AI 운영 리포트 + 센터 프로필 */}
-        <div className="p-3 border-b border-gray-200 space-y-1">
-          <Link href="/report">
-            <a className="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover-elevate active-elevate-2 text-gray-900 group" onClick={() => setSidebarOpen(false)}>
-              <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
-                <Sparkles className="w-4 h-4 text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-semibold text-sm truncate">AI 운영 리포트</div>
-                <div className="text-[10px] text-gray-500 truncate">오늘 봐야 할 것</div>
-              </div>
-            </a>
-          </Link>
-          <Link href="/business-profile">
-            <a className="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover-elevate active-elevate-2 text-gray-900" onClick={() => setSidebarOpen(false)}>
-              <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
-                <Building2 className="w-4 h-4 text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-semibold text-sm truncate">센터 프로필</div>
-                <div className="text-[10px] text-gray-500 truncate">AI 컨텍스트 채우기</div>
-              </div>
-            </a>
-          </Link>
-          <Link href="/sales-pipeline">
-            <a className="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover-elevate active-elevate-2 text-gray-900" onClick={() => setSidebarOpen(false)}>
-              <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
-                <Sparkles className="w-4 h-4 text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-semibold text-sm truncate">예비회원 파이프라인</div>
-                <div className="text-[10px] text-gray-500 truncate">상담 칸반 보드</div>
-              </div>
-            </a>
-          </Link>
-          <Link href="/bulk-extend">
-            <a className="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover-elevate active-elevate-2 text-gray-900" onClick={() => setSidebarOpen(false)}>
-              <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
-                <Users className="w-4 h-4 text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-semibold text-sm truncate">단체 연장</div>
-                <div className="text-[10px] text-gray-500 truncate">휴장/이벤트 보상</div>
-              </div>
-            </a>
-          </Link>
-          <Link href="/audit-log">
-            <a className="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover-elevate active-elevate-2 text-gray-900" onClick={() => setSidebarOpen(false)}>
-              <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
-                <Sparkles className="w-4 h-4 text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-semibold text-sm truncate">감사로그</div>
-                <div className="text-[10px] text-gray-500 truncate">변경 이력 추적</div>
-              </div>
-            </a>
-          </Link>
-          <Link href="/ouhve-activity">
-            <a className="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover-elevate active-elevate-2 text-gray-900" onClick={() => setSidebarOpen(false)}>
-              <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
-                <Sparkles className="w-4 h-4 text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-semibold text-sm truncate">Ouhve AI 작업 내역</div>
-                <div className="text-[10px] text-gray-500 truncate">AI가 처리한 작업</div>
-              </div>
-            </a>
-          </Link>
+        {/* OUHVE 신기능 — AI 인사이트 단일 진입점 (세부 기능은 탭으로 통합) */}
+        <div className="p-3 border-b border-gray-200">
+          <button
+            type="button"
+            onClick={() => handleTabChange("AI 인사이트")}
+            className="w-full flex items-center gap-2 px-3 py-2.5 text-sm rounded-md hover-elevate active-elevate-2 text-gray-900 border border-primary/20 bg-primary/5"
+          >
+            <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
+              <Sparkles className="w-4 h-4 text-primary" />
+            </div>
+            <div className="flex-1 min-w-0 text-left">
+              <div className="font-semibold text-sm truncate">AI 인사이트</div>
+              <div className="text-[10px] text-gray-500 truncate">작업 내역·리포트·센터 프로필·예비회원·단체 연장·감사로그</div>
+            </div>
+          </button>
         </div>
 
         {/* Center Info */}
@@ -1020,7 +967,7 @@ export default function HomePage() {
               onClick={() => setMenuTab("전체 메뉴")}
               className={`flex-1 py-2 px-3 text-xs font-medium rounded-md transition-colors ${
                 menuTab === "전체 메뉴"
-                  ? "bg-blue-500 text-white shadow-sm"
+                  ? "bg-orange-500 text-white shadow-sm"
                   : "text-gray-600 hover:text-gray-800"
               }`}
             >
@@ -1030,7 +977,7 @@ export default function HomePage() {
               onClick={() => setMenuTab("즐겨찾기")}
               className={`flex-1 py-2 px-3 text-xs font-medium rounded-md transition-colors ${
                 menuTab === "즐겨찾기"
-                  ? "bg-blue-500 text-white shadow-sm"
+                  ? "bg-orange-500 text-white shadow-sm"
                   : "text-gray-600 hover:text-gray-800"
               }`}
             >
@@ -1325,7 +1272,7 @@ export default function HomePage() {
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="block w-64 pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="block w-64 pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 />
                 
                 {/* 검색 결과 드롭다운 (Search results dropdown) */}
@@ -1342,7 +1289,7 @@ export default function HomePage() {
                         }}
                         className={`w-full px-3 py-2 text-left border-b last:border-b-0 border-gray-100 flex items-center space-x-3 transition-colors ${
                           selectedSearchResult === index
-                            ? "bg-blue-50 text-blue-900"
+                            ? "bg-orange-50 text-orange-900"
                             : "hover-elevate"
                         }`}
                       >
@@ -1352,7 +1299,7 @@ export default function HomePage() {
                           <div className="text-xs text-gray-500">{result.path}</div>
                         </div>
                         {result.type === "subtab" && (
-                          <div className="text-xs text-blue-600 font-medium">하위 탭</div>
+                          <div className="text-xs text-orange-600 font-medium">하위 탭</div>
                         )}
                       </button>
                     ))}
@@ -1368,8 +1315,8 @@ export default function HomePage() {
                       className="flex items-center space-x-2 bg-gray-50 hover-elevate px-2 md:px-3 py-2 rounded-lg cursor-pointer"
                       data-testid="button-user-profile-menu"
                     >
-                      <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-                        <UserCircle className="w-5 h-5 text-blue-600" />
+                      <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center shrink-0">
+                        <UserCircle className="w-5 h-5 text-orange-600" />
                       </div>
                       <div className="text-sm text-left hidden md:block">
                         <p className="font-medium text-gray-900">{user.username}</p>
@@ -1506,13 +1453,13 @@ export default function HomePage() {
               <div className="grid grid-cols-2 gap-4">
                 <Button
                   variant="outline"
-                  className="h-24 flex-col space-y-2 hover-elevate hover:border-blue-300"
+                  className="h-24 flex-col space-y-2 hover-elevate hover:border-orange-300"
                   onClick={() => {
                     setShowLessonTypeModal(false);
                     handleTabChange("그룹 수업");
                   }}
                 >
-                  <Users className="w-8 h-8 text-blue-500" />
+                  <Users className="w-8 h-8 text-orange-500" />
                   <span className="text-sm font-medium">그룹 수업</span>
                 </Button>
                 <Button
@@ -1752,7 +1699,7 @@ function CenterInfoContent() {
                         onClick={() => refetchPosts()}
                         variant="outline"
                         size="sm"
-                        className="text-blue-500 border-blue-500 hover-elevate mr-2"
+                        className="text-orange-500 border-orange-500 hover-elevate mr-2"
                       >
                         다시 시도
                       </Button>
@@ -1775,12 +1722,12 @@ function CenterInfoContent() {
                       <div key={item.id} className="grid grid-cols-5 gap-4 p-4 border-b text-sm hover-elevate">
                         <div className="flex items-center space-x-2">
                           {item.isImportant && (
-                            <Star className="w-4 h-4 text-blue-500 fill-blue-500" />
+                            <Star className="w-4 h-4 text-orange-500 fill-orange-500" />
                           )}
                           <span>{item.id}</span>
                         </div>
                         <div 
-                          className="text-blue-600 hover:underline cursor-pointer"
+                          className="text-orange-600 hover:underline cursor-pointer"
                           onClick={() => {
                             setSelectedPost(item);
                             setShowPostDetail(true);
@@ -1816,7 +1763,7 @@ function CenterInfoContent() {
                             variant={currentPage === page ? "default" : "outline"}
                             size="sm"
                             onClick={() => setCurrentPage(page)}
-                            className={currentPage === page ? "bg-blue-500 hover-elevate" : ""}
+                            className={currentPage === page ? "bg-orange-500 hover-elevate" : ""}
                           >
                             {page}
                           </Button>
@@ -1839,7 +1786,7 @@ function CenterInfoContent() {
               <div className="flex justify-end">
                 <Button 
                   onClick={() => setShowPostCreation(true)}
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                   data-testid="button-create-post"
                 >
                   게시글 작성
@@ -1892,7 +1839,7 @@ function CenterInfoContent() {
                         onClick={() => refetchKioskNotices()}
                         variant="outline"
                         size="sm"
-                        className="text-blue-500 border-blue-500 hover-elevate mr-2"
+                        className="text-orange-500 border-orange-500 hover-elevate mr-2"
                         data-testid="button-retry-kiosk-notices"
                       >
                         다시 시도
@@ -1916,12 +1863,12 @@ function CenterInfoContent() {
                       <div key={item.id} className="grid grid-cols-5 gap-4 p-4 border-b text-sm hover-elevate" data-testid={`row-kiosk-notice-${item.id}`}>
                         <div className="flex items-center space-x-2">
                           {item.isImportant && (
-                            <Star className="w-4 h-4 text-blue-500 fill-blue-500" />
+                            <Star className="w-4 h-4 text-orange-500 fill-orange-500" />
                           )}
                           <span>{item.id}</span>
                         </div>
                         <div 
-                          className="text-blue-600 hover:underline cursor-pointer"
+                          className="text-orange-600 hover:underline cursor-pointer"
                           onClick={() => {
                             setEditingKioskNotice(item);
                             setShowKioskNoticeForm(true);
@@ -1975,7 +1922,7 @@ function CenterInfoContent() {
                     setEditingKioskNotice(null);
                     setShowKioskNoticeForm(true);
                   }}
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                   data-testid="button-create-kiosk-notice"
                 >
                   키오스크 공지 작성
@@ -2218,7 +2165,7 @@ function CenterInfoContent() {
                     }}
                     className={`w-12 h-12 rounded-lg flex items-center justify-center transition-colors ${
                       activeServices.includes(service.key) 
-                        ? 'bg-blue-500 text-white' 
+                        ? 'bg-orange-500 text-white' 
                         : 'bg-gray-100 text-gray-400 hover-elevate'
                     }`}
                   >
@@ -2227,7 +2174,7 @@ function CenterInfoContent() {
                 ) : (
                   <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                     activeServices.includes(service.key) 
-                      ? 'bg-blue-500 text-white' 
+                      ? 'bg-orange-500 text-white' 
                       : 'bg-gray-100 text-gray-400'
                   }`}>
                     {service.icon}
@@ -2262,7 +2209,7 @@ function CenterInfoContent() {
                     }}
                     className={`w-12 h-12 rounded-lg flex items-center justify-center transition-colors ${
                       activeServices.includes(service.key) 
-                        ? 'bg-blue-500 text-white' 
+                        ? 'bg-orange-500 text-white' 
                         : 'bg-gray-100 text-gray-400 hover-elevate'
                     }`}
                   >
@@ -2271,7 +2218,7 @@ function CenterInfoContent() {
                 ) : (
                   <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                     activeServices.includes(service.key) 
-                      ? 'bg-blue-500 text-white' 
+                      ? 'bg-orange-500 text-white' 
                       : 'bg-gray-100 text-gray-400'
                   }`}>
                     {service.icon}
@@ -2295,7 +2242,7 @@ function CenterInfoContent() {
                 <Button 
                   size="sm" 
                   variant="outline" 
-                  className="text-blue-600"
+                  className="text-orange-600"
                   onClick={() => setShowServiceModal('free')}
                 >
                   서비스 추가
@@ -2305,8 +2252,8 @@ function CenterInfoContent() {
             <div className="space-y-3">
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Coffee className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <Coffee className="w-5 h-5 text-orange-600" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900">음료 무제한</p>
@@ -2321,8 +2268,8 @@ function CenterInfoContent() {
               </div>
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Wifi className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <Wifi className="w-5 h-5 text-orange-600" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900">무료 WiFi</p>
@@ -2364,7 +2311,7 @@ function CenterInfoContent() {
                 <Button 
                   size="sm" 
                   variant="outline" 
-                  className="text-blue-600"
+                  className="text-orange-600"
                   onClick={() => setShowServiceModal('paid')}
                 >
                   서비스 추가
@@ -2374,8 +2321,8 @@ function CenterInfoContent() {
             <div className="space-y-3">
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <Zap className="w-5 h-5 text-purple-600" />
+                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <Zap className="w-5 h-5 text-orange-600" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900">운동복/수건 대여</p>
@@ -2390,8 +2337,8 @@ function CenterInfoContent() {
               </div>
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Lock className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <Lock className="w-5 h-5 text-orange-600" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900">락커 대여</p>
@@ -2415,7 +2362,7 @@ function CenterInfoContent() {
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-medium">OT 안내</h3>
             <div className="flex items-center space-x-2">
-              <div className="w-12 h-6 bg-blue-500 rounded-full relative">
+              <div className="w-12 h-6 bg-orange-500 rounded-full relative">
                 <div className="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
               </div>
             </div>
@@ -2452,7 +2399,7 @@ function CenterInfoContent() {
                 <Button 
                   size="sm" 
                   variant="outline" 
-                  className="text-blue-600"
+                  className="text-orange-600"
                   onClick={() => setShowServiceModal('program')}
                 >
                   프로그램 추가
@@ -2493,14 +2440,14 @@ function CenterInfoContent() {
           {displayPersonalTrainings.length > 0 && (
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
-                <Dumbbell className="w-4 h-4 mr-1 text-blue-600" />
+                <Dumbbell className="w-4 h-4 mr-1 text-orange-600" />
                 개인 레슨 (PT)
               </h4>
               <div className="grid grid-cols-3 gap-3">
                 {displayPersonalTrainings.slice(0, 6).map((pt) => (
-                  <div key={pt.id} className="p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200">
+                  <div key={pt.id} className="p-3 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg border border-orange-200">
                     <div className="flex items-center space-x-2 mb-1">
-                      <Dumbbell className="w-4 h-4 text-blue-600" />
+                      <Dumbbell className="w-4 h-4 text-orange-600" />
                       <h4 className="font-medium text-gray-900 text-sm truncate">{getMemberName(pt.memberId)}</h4>
                     </div>
                     <p className="text-xs text-gray-600">
@@ -2538,7 +2485,7 @@ function CenterInfoContent() {
               돌아가기
             </Button>
             <Button 
-              className="bg-blue-500 hover-elevate"
+              className="bg-orange-500 hover-elevate"
               onClick={() => setShowCenterEdit(false)}
             >
               저장
@@ -2546,7 +2493,7 @@ function CenterInfoContent() {
           </div>
         ) : (
           <Button 
-            className="bg-blue-500 hover-elevate"
+            className="bg-orange-500 hover-elevate"
             onClick={() => setShowCenterEdit(true)}
           >
             내용 수정
@@ -2712,7 +2659,7 @@ function CenterInfoContent() {
               <div className="flex space-x-2">
                 <Button variant="outline" disabled={isSaving}>임시 저장</Button>
                 <Button 
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                   onClick={handleSavePost}
                   disabled={isSaving}
                 >
@@ -2825,7 +2772,7 @@ function CenterInfoContent() {
                 취소
               </Button>
               <Button 
-                className="bg-blue-500 hover-elevate" 
+                className="bg-orange-500 hover-elevate" 
                 onClick={handleSave} 
                 disabled={isSaving} 
                 data-testid="button-save-kiosk-form"
@@ -2922,20 +2869,20 @@ function CenterInfoContent() {
                 <div className="grid grid-cols-10 gap-4">
                   {/* 편의 서비스 아이콘들 - 클릭 가능하도록 수정 */}
                   <div className="flex flex-col items-center space-y-2 cursor-pointer">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center border-2 border-blue-200">
-                      <Car className="w-6 h-6 text-blue-500" />
+                    <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center border-2 border-orange-200">
+                      <Car className="w-6 h-6 text-orange-500" />
                     </div>
                     <span className="text-xs text-gray-600">주차</span>
                   </div>
                   <div className="flex flex-col items-center space-y-2 cursor-pointer">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center border-2 border-blue-200">
-                      <Smartphone className="w-6 h-6 text-blue-500" />
+                    <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center border-2 border-orange-200">
+                      <Smartphone className="w-6 h-6 text-orange-500" />
                     </div>
                     <span className="text-xs text-gray-600">앱</span>
                   </div>
                   <div className="flex flex-col items-center space-y-2 cursor-pointer">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center border-2 border-blue-200">
-                      <Coffee className="w-6 h-6 text-blue-500" />
+                    <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center border-2 border-orange-200">
+                      <Coffee className="w-6 h-6 text-orange-500" />
                     </div>
                     <span className="text-xs text-gray-600">음료</span>
                   </div>
@@ -2946,26 +2893,26 @@ function CenterInfoContent() {
                     <span className="text-xs text-gray-600">위치</span>
                   </div>
                   <div className="flex flex-col items-center space-y-2 cursor-pointer">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center border-2 border-blue-200">
-                      <Zap className="w-6 h-6 text-blue-500" />
+                    <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center border-2 border-orange-200">
+                      <Zap className="w-6 h-6 text-orange-500" />
                     </div>
                     <span className="text-xs text-gray-600">수건</span>
                   </div>
                   <div className="flex flex-col items-center space-y-2 cursor-pointer">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center border-2 border-blue-200">
-                      <Wifi className="w-6 h-6 text-blue-500" />
+                    <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center border-2 border-orange-200">
+                      <Wifi className="w-6 h-6 text-orange-500" />
                     </div>
                     <span className="text-xs text-gray-600">와이파이</span>
                   </div>
                   <div className="flex flex-col items-center space-y-2 cursor-pointer">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center border-2 border-blue-200">
-                      <Dumbbell className="w-6 h-6 text-blue-500" />
+                    <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center border-2 border-orange-200">
+                      <Dumbbell className="w-6 h-6 text-orange-500" />
                     </div>
                     <span className="text-xs text-gray-600">헬스</span>
                   </div>
                   <div className="flex flex-col items-center space-y-2 cursor-pointer">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center border-2 border-blue-200">
-                      <Music className="w-6 h-6 text-blue-500" />
+                    <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center border-2 border-orange-200">
+                      <Music className="w-6 h-6 text-orange-500" />
                     </div>
                     <span className="text-xs text-gray-600">음악</span>
                   </div>
@@ -3119,7 +3066,7 @@ function CenterInfoContent() {
               >
                 취소
               </Button>
-              <Button className="bg-blue-500 hover-elevate">
+              <Button className="bg-orange-500 hover-elevate">
                 변경사항 저장
               </Button>
             </div>
@@ -3323,8 +3270,8 @@ function CenterInfoContent() {
                         key={pt.id}
                         className={`p-3 rounded-lg border cursor-pointer transition-colors ${
                           selectedPrograms.includes(pt.id)
-                            ? 'bg-blue-50 border-blue-500'
-                            : 'bg-white border-gray-200 hover:border-blue-300'
+                            ? 'bg-orange-50 border-orange-500'
+                            : 'bg-white border-gray-200 hover:border-orange-300'
                         }`}
                         onClick={() => toggleProgramSelection(pt.id)}
                         data-testid={`program-personal-${pt.id}`}
@@ -3333,7 +3280,7 @@ function CenterInfoContent() {
                           <div className="flex items-center space-x-3">
                             <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
                               selectedPrograms.includes(pt.id) 
-                                ? 'bg-blue-500 border-blue-500' 
+                                ? 'bg-orange-500 border-orange-500' 
                                 : 'border-gray-300'
                             }`}>
                               {selectedPrograms.includes(pt.id) && (
@@ -3376,7 +3323,7 @@ function CenterInfoContent() {
                     취소
                   </Button>
                   <Button 
-                    className="bg-blue-500 hover-elevate"
+                    className="bg-orange-500 hover-elevate"
                     onClick={handleAddPrograms}
                     disabled={selectedPrograms.length === 0}
                   >
@@ -3445,7 +3392,7 @@ function CenterInfoContent() {
                 취소
               </Button>
               <Button 
-                className="bg-blue-500 hover-elevate"
+                className="bg-orange-500 hover-elevate"
                 onClick={() => setShowServiceModal(null)}
               >
                 저장
@@ -3545,7 +3492,7 @@ function CenterInfoContent() {
                 </Button>
                 <Button 
                   onClick={() => setShowPostDetail(false)}
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                 >
                   닫기
                 </Button>

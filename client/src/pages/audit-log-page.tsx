@@ -32,7 +32,7 @@ interface AuditSummary {
 
 const ACTION_TONE: Record<string, string> = {
   create: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-  update: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+  update: "bg-orange-500/10 text-orange-400 border-orange-500/20",
   delete: "bg-red-500/10 text-red-400 border-red-500/20",
   restore: "bg-amber-400/10 text-amber-400 border-amber-400/20",
 };

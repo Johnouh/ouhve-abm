@@ -46,8 +46,8 @@ export default function UsageGuidePage({ onBack }: UsageGuidePageProps) {
       title: "대시보드",
       description: "메인 대시보드 사용법 및 주요 기능",
       icon: Home,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
       items: [
         {
           title: "대시보드 개요",
@@ -116,8 +116,8 @@ export default function UsageGuidePage({ onBack }: UsageGuidePageProps) {
       title: "직원 관리",
       description: "직원 등록, 권한 관리, 근무 일정 관리",
       icon: UserCircle,
-      color: "text-purple-600",
-      bgColor: "bg-purple-50",
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
       items: [
         {
           title: "직원 등록",
@@ -146,8 +146,8 @@ export default function UsageGuidePage({ onBack }: UsageGuidePageProps) {
       title: "상품 관리",
       description: "회원권, 개인 레슨 등 상품 등록 및 관리",
       icon: ShoppingBag,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
       items: [
         {
           title: "상품 등록",
@@ -206,8 +206,8 @@ export default function UsageGuidePage({ onBack }: UsageGuidePageProps) {
       title: "스케줄 관리",
       description: "그룹 수업, 개인 레슨 스케줄 관리",
       icon: Calendar,
-      color: "text-indigo-600",
-      bgColor: "bg-indigo-50",
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
       items: [
         {
           title: "그룹 수업 등록",
@@ -321,8 +321,8 @@ export default function UsageGuidePage({ onBack }: UsageGuidePageProps) {
                       <ul className="space-y-2">
                         {item.steps.map((step, stepIndex) => (
                           <li key={stepIndex} className="flex items-start space-x-2">
-                            <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <span className="text-xs font-bold text-blue-600">{stepIndex + 1}</span>
+                            <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <span className="text-xs font-bold text-orange-600">{stepIndex + 1}</span>
                             </div>
                             <span className="text-sm text-gray-700">{step}</span>
                           </li>
@@ -349,7 +349,7 @@ export default function UsageGuidePage({ onBack }: UsageGuidePageProps) {
               홈으로
             </Button>
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -379,11 +379,11 @@ export default function UsageGuidePage({ onBack }: UsageGuidePageProps) {
       <div className="max-w-6xl mx-auto px-6 py-8">
         {/* 빠른 시작 가이드 */}
         <div className="mb-8">
-          <Card className="bg-gradient-to-r from-blue-50 to-blue-100 border-blue-200">
+          <Card className="bg-gradient-to-r from-orange-50 to-orange-100 border-orange-200">
             <CardAccentLine />
             <CardContent className="p-6">
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
                   <PlayCircle className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex-1">
@@ -392,7 +392,7 @@ export default function UsageGuidePage({ onBack }: UsageGuidePageProps) {
                 </div>
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div className="bg-white p-3 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-600">1</div>
+                    <div className="text-2xl font-bold text-orange-600">1</div>
                     <div className="text-xs text-gray-600">회원 등록</div>
                   </div>
                   <div className="bg-white p-3 rounded-lg">
@@ -400,7 +400,7 @@ export default function UsageGuidePage({ onBack }: UsageGuidePageProps) {
                     <div className="text-xs text-gray-600">상품 생성</div>
                   </div>
                   <div className="bg-white p-3 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-600">3</div>
+                    <div className="text-2xl font-bold text-orange-600">3</div>
                     <div className="text-xs text-gray-600">출석 체크</div>
                   </div>
                 </div>

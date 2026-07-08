@@ -146,7 +146,7 @@ function RiskBadge({ score }: { score: number }) {
   const tone =
     score >= 80 ? "bg-red-500/10 text-red-400 border-red-500/30" :
     score >= 50 ? "bg-amber-400/10 text-amber-400 border-amber-400/30" :
-    "bg-blue-500/10 text-blue-400 border-blue-500/30";
+    "bg-orange-500/10 text-orange-400 border-orange-500/30";
   return (
     <div className={`w-10 h-10 rounded-md flex items-center justify-center shrink-0 border ${tone}`}>
       <span className="text-sm font-bold tabular-nums">{score}</span>

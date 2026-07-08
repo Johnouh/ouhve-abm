@@ -49,8 +49,8 @@ export default function HelpPage({ onBack }: HelpPageProps) {
       title: "운영 노하우",
       description: "체육관 운영 성공을 위한 전문 지식과 모범 사례",
       icon: Settings,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
       items: [
         {
           title: "회원 유지율 향상 전략",
@@ -178,8 +178,8 @@ export default function HelpPage({ onBack }: HelpPageProps) {
       title: "마케팅 전략",
       description: "효과적인 마케팅과 홍보 전략",
       icon: Heart,
-      color: "text-purple-600",
-      bgColor: "bg-purple-50",
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
       items: [
         {
           title: "디지털 마케팅",
@@ -221,8 +221,8 @@ export default function HelpPage({ onBack }: HelpPageProps) {
       title: "데이터 분석",
       description: "운영 데이터를 활용한 의사결정 지원",
       icon: BarChart3,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
       items: [
         {
           title: "핵심 지표 관리",
@@ -410,7 +410,7 @@ export default function HelpPage({ onBack }: HelpPageProps) {
               홈으로
             </Button>
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
                 <HelpCircle className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -441,11 +441,11 @@ export default function HelpPage({ onBack }: HelpPageProps) {
       <div className="max-w-6xl mx-auto px-6 py-8">
         {/* 체육관 운영 핵심 지표 */}
         <div className="mb-8">
-          <Card className="bg-gradient-to-r from-blue-50 to-blue-100 border-blue-200">
+          <Card className="bg-gradient-to-r from-orange-50 to-orange-100 border-orange-200">
             <CardAccentLine />
             <CardContent className="p-6">
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
                   <BarChart3 className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex-1">
@@ -454,7 +454,7 @@ export default function HelpPage({ onBack }: HelpPageProps) {
                 </div>
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div className="bg-white p-3 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-600">85%</div>
+                    <div className="text-2xl font-bold text-orange-600">85%</div>
                     <div className="text-xs text-gray-600">회원 유지율</div>
                   </div>
                   <div className="bg-white p-3 rounded-lg">
@@ -462,7 +462,7 @@ export default function HelpPage({ onBack }: HelpPageProps) {
                     <div className="text-xs text-gray-600">회원 LTV</div>
                   </div>
                   <div className="bg-white p-3 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-600">75%</div>
+                    <div className="text-2xl font-bold text-orange-600">75%</div>
                     <div className="text-xs text-gray-600">시설 이용률</div>
                   </div>
                 </div>
@@ -502,7 +502,7 @@ export default function HelpPage({ onBack }: HelpPageProps) {
           <CardAccentLine />
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <Heart className="w-5 h-5 text-blue-600" />
+              <Heart className="w-5 h-5 text-orange-600" />
               <span>운영 팁 & 노하우</span>
             </CardTitle>
           </CardHeader>
@@ -511,15 +511,15 @@ export default function HelpPage({ onBack }: HelpPageProps) {
               {quickTips.map((section, index) => (
                 <div key={index} className="space-y-3">
                   <h4 className="font-medium text-gray-900 flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                     <span>{section.category}</span>
                   </h4>
                   <div className="space-y-3">
                     {section.tips.map((tip, tipIndex) => (
                       <div key={tipIndex} className="p-3 bg-gray-50 rounded-lg hover-elevate transition-colors">
                         <div className="flex items-start space-x-3">
-                          <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <CheckCircle className="w-3 h-3 text-blue-600" />
+                          <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <CheckCircle className="w-3 h-3 text-orange-600" />
                           </div>
                           <div>
                             <h5 className="font-medium text-gray-900 text-sm">{tip.title}</h5>
@@ -540,24 +540,24 @@ export default function HelpPage({ onBack }: HelpPageProps) {
           <CardAccentLine />
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <MessageCircle className="w-5 h-5 text-blue-600" />
+              <MessageCircle className="w-5 h-5 text-orange-600" />
               <span>전문 지원 & 컨설팅</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <Phone className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+              <div className="text-center p-4 bg-orange-50 rounded-lg border border-orange-200">
+                <Phone className="w-8 h-8 text-orange-600 mx-auto mb-2" />
                 <h4 className="font-medium text-gray-900">운영 컨설팅</h4>
                 <p className="text-sm text-gray-600 mt-1">체육관 운영 전문가 상담</p>
-                <p className="text-sm font-medium text-blue-600 mt-2">1588-9999</p>
+                <p className="text-sm font-medium text-orange-600 mt-2">1588-9999</p>
                 <p className="text-xs text-gray-500 mt-1">평일 09:00 - 18:00</p>
               </div>
-              <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <Mail className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+              <div className="text-center p-4 bg-orange-50 rounded-lg border border-orange-200">
+                <Mail className="w-8 h-8 text-orange-600 mx-auto mb-2" />
                 <h4 className="font-medium text-gray-900">기술 지원</h4>
                 <p className="text-sm text-gray-600 mt-1">시스템 오류 및 기술 문의</p>
-                <p className="text-sm font-medium text-blue-600 mt-2">tech@ouhve.app</p>
+                <p className="text-sm font-medium text-orange-600 mt-2">tech@ouhve.app</p>
                 <p className="text-xs text-gray-500 mt-1">24시간 접수</p>
               </div>
               <div className="text-center p-4 bg-green-50 rounded-lg border border-green-200">
@@ -572,9 +572,9 @@ export default function HelpPage({ onBack }: HelpPageProps) {
             </div>
             
             {/* 추가 지원 정보 */}
-            <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-red-50 rounded-lg border border-blue-200">
+            <div className="mt-6 p-4 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg border border-orange-200">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
                   <User className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">

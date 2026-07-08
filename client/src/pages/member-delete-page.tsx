@@ -134,9 +134,9 @@ export default function MemberDeletePage() {
       </div>
 
       {/* ⚠️ 주의사항 알림 (Warning notice) */}
-      <Alert className="border-blue-200 bg-blue-50">
-        <AlertTriangle className="h-4 w-4 text-blue-600" />
-        <AlertDescription className="text-blue-800">
+      <Alert className="border-orange-200 bg-orange-50">
+        <AlertTriangle className="h-4 w-4 text-orange-600" />
+        <AlertDescription className="text-orange-800">
           <strong>주의:</strong> 회원 삭제 시 관련된 모든 데이터(출석 기록, 결제 내역, 상담 기록 등)가 함께 삭제됩니다. 
           삭제된 데이터는 복구할 수 없으니 신중하게 진행해 주세요.
         </AlertDescription>

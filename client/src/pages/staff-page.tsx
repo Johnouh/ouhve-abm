@@ -320,7 +320,7 @@ export default function StaffPage({ selectedStaffId, onStaffSelect, onRegister }
             onClick={() => setActiveSubTab("직원 정보")}
             className={`pb-4 px-2 text-sm font-medium border-b-2 transition-colors ${
               activeSubTab === "직원 정보" 
-                ? "text-gray-900 border-blue-500" 
+                ? "text-gray-900 border-orange-500" 
                 : "text-gray-500 hover:text-gray-700 border-transparent"
             }`}
           >
@@ -330,7 +330,7 @@ export default function StaffPage({ selectedStaffId, onStaffSelect, onRegister }
             onClick={() => setActiveSubTab("퇴사 관리")}
             className={`pb-4 px-2 text-sm font-medium border-b-2 transition-colors ${
               activeSubTab === "퇴사 관리" 
-                ? "text-gray-900 border-blue-500" 
+                ? "text-gray-900 border-orange-500" 
                 : "text-gray-500 hover:text-gray-700 border-transparent"
             }`}
           >
@@ -340,7 +340,7 @@ export default function StaffPage({ selectedStaffId, onStaffSelect, onRegister }
             onClick={() => setActiveSubTab("가입 관리")}
             className={`pb-4 px-2 text-sm font-medium border-b-2 transition-colors ${
               activeSubTab === "가입 관리" 
-                ? "text-gray-900 border-blue-500" 
+                ? "text-gray-900 border-orange-500" 
                 : "text-gray-500 hover:text-gray-700 border-transparent"
             }`}
           >
@@ -358,7 +358,7 @@ export default function StaffPage({ selectedStaffId, onStaffSelect, onRegister }
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
               <Input 
                 placeholder="이름 및 연락처로 검색" 
-                className="pl-10 bg-white border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                className="pl-10 bg-white border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -423,7 +423,7 @@ export default function StaffPage({ selectedStaffId, onStaffSelect, onRegister }
                       <TableRow 
                         key={staffMember.id} 
                         className={`cursor-pointer transition-all duration-200 hover-elevate ${
- selectedStaffId === staffMember.id ? 'bg-blue-50' : ''
+ selectedStaffId === staffMember.id ? 'bg-orange-50' : ''
  }`}
                         onClick={() => onStaffSelect?.(staffMember.id)}
                       >
@@ -471,7 +471,7 @@ export default function StaffPage({ selectedStaffId, onStaffSelect, onRegister }
                         variant={currentPage === page ? "default" : "outline"}
                         size="sm"
                         onClick={() => setCurrentPage(page)}
-                        className={currentPage === page ? "bg-blue-500 hover-elevate" : ""}
+                        className={currentPage === page ? "bg-orange-500 hover-elevate" : ""}
                       >
                         {page}
                       </Button>
@@ -497,7 +497,7 @@ export default function StaffPage({ selectedStaffId, onStaffSelect, onRegister }
               엑셀 다운로드
             </Button>
             <Button 
-              className="bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg hover-elevate"
+              className="bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover-elevate"
               onClick={() => setShowAddStaffDialog(true)}
             >
               <Plus className="w-4 h-4 mr-2" />
@@ -516,7 +516,7 @@ export default function StaffPage({ selectedStaffId, onStaffSelect, onRegister }
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
               <Input 
                 placeholder="이름 및 연락처로 검색" 
-                className="pl-10 bg-white border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                className="pl-10 bg-white border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -644,7 +644,7 @@ export default function StaffPage({ selectedStaffId, onStaffSelect, onRegister }
                         variant={currentPage === page ? "default" : "outline"}
                         size="sm"
                         onClick={() => setCurrentPage(page)}
-                        className={currentPage === page ? "bg-blue-500 hover-elevate" : ""}
+                        className={currentPage === page ? "bg-orange-500 hover-elevate" : ""}
                       >
                         {page}
                       </Button>
@@ -668,7 +668,7 @@ export default function StaffPage({ selectedStaffId, onStaffSelect, onRegister }
             <Button variant="outline" className="px-8">
               엑셀 다운로드
             </Button>
-            <Button className="bg-blue-500 px-8 hover-elevate">
+            <Button className="bg-orange-500 px-8 hover-elevate">
               퇴사 등록
             </Button>
           </div>
@@ -1008,7 +1008,7 @@ export default function StaffPage({ selectedStaffId, onStaffSelect, onRegister }
                 </Button>
                 <Button 
                   type="submit" 
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                   disabled={createStaffMutation.isPending}
                 >
                   {createStaffMutation.isPending ? "등록 중..." : "등록하기"}

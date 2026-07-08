@@ -333,7 +333,7 @@ function LockerSettingsTab() {
                 <Button 
                   size="sm" 
                   onClick={() => setShowAddSectionDialog(true)} 
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                 >
                   <Plus className="w-4 h-4 mr-1" />
                   구역 추가
@@ -363,7 +363,7 @@ function LockerSettingsTab() {
                         <tr 
                           key={index} 
                           className={`border-b last:border-b-0 hover-elevate cursor-pointer ${
-                            selectedSection === section.name ? 'bg-blue-100' : ''
+                            selectedSection === section.name ? 'bg-orange-100' : ''
                           }`}
                           onClick={() => setSelectedSection(section.name)}
                         >
@@ -503,8 +503,8 @@ function LockerSettingsTab() {
                     <p className="text-xs text-gray-500 mt-1">비워두면 기본 이용료 적용</p>
                   </div>
                 </div>
-                <div className="bg-blue-50 p-3 rounded-md border border-blue-200 mt-4">
-                  <p className="text-sm text-blue-700">
+                <div className="bg-orange-50 p-3 rounded-md border border-orange-200 mt-4">
+                  <p className="text-sm text-orange-700">
                     락커 번호: {getSelectedSectionDetails()?.startNumber || 1}번 ~ {(getSelectedSectionDetails()?.startNumber || 1) + (getSelectedSectionDetails()?.lockerCount || 25) - 1}번 ({getSelectedSectionDetails()?.lockerCount || 25}개)
                   </p>
                 </div>
@@ -564,8 +564,8 @@ function LockerSettingsTab() {
                     />
                   </div>
                 </div>
-                <div className="bg-blue-50 p-3 rounded-md border border-blue-200">
-                  <p className="text-sm text-blue-700">
+                <div className="bg-orange-50 p-3 rounded-md border border-orange-200">
+                  <p className="text-sm text-orange-700">
                     락커 번호: {startNumber}번 ~ {startNumber + lockerCount - 1}번 ({lockerCount}개)
                   </p>
                 </div>
@@ -581,7 +581,7 @@ function LockerSettingsTab() {
                     취소
                   </Button>
                   <Button 
-                    className="flex-1 bg-blue-500 hover-elevate text-white"
+                    className="flex-1 bg-orange-500 hover-elevate text-white"
                     onClick={handleAddSectionWithDetails}
                     disabled={!newSectionName.trim()}
                   >
@@ -613,7 +613,7 @@ function LockerSettingsTab() {
               초기화
             </Button>
             <Button 
-              className="flex-1 bg-blue-500 hover-elevate text-white"
+              className="flex-1 bg-orange-500 hover-elevate text-white"
               onClick={handleSaveSettings}
               disabled={saveSettingsMutation.isPending}
             >
@@ -629,7 +629,7 @@ function LockerSettingsTab() {
               <CardTitle className="text-lg">락커 배치 미리보기</CardTitle>
               {selectedSection && (
                 <p className="text-sm text-gray-500">
-                  선택된 구역: <span className="font-medium text-blue-600">{selectedSection}</span>
+                  선택된 구역: <span className="font-medium text-orange-600">{selectedSection}</span>
                 </p>
               )}
             </CardHeader>
@@ -709,7 +709,7 @@ function LockerSettingsTab() {
                       <span>빈 락커</span>
                     </div>
                     <div className="flex items-center space-x-1">
-                      <div className="w-4 h-4 bg-blue-100 border border-blue-300 rounded"></div>
+                      <div className="w-4 h-4 bg-orange-100 border border-orange-300 rounded"></div>
                       <span>이용 중</span>
                     </div>
                     <div className="flex items-center space-x-1">
@@ -800,7 +800,7 @@ function LockerSettingsTab() {
                   취소
                 </Button>
                 <Button 
-                  className="flex-1 bg-blue-500 hover-elevate"
+                  className="flex-1 bg-orange-500 hover-elevate"
                   onClick={() => {
                     updateLockerMutationSettings.mutate({
                       id: editingLocker.id,
@@ -1282,7 +1282,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
   const getLockerStatusColor = (status: string) => {
     switch (status) {
       case "이용 중":
-        return "bg-blue-100 text-blue-600 border-blue-200";
+        return "bg-orange-100 text-orange-600 border-orange-200";
       case "만료":
         return "bg-red-100 text-red-600 border-red-200";
       case "빈 락커":
@@ -1294,7 +1294,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
   const getLockerBorderColor = (status: string) => {
     switch (status) {
       case "이용 중":
-        return "border-blue-200 hover:border-blue-300";
+        return "border-orange-200 hover:border-orange-300";
       case "만료":
         return "border-red-200 hover:border-red-300";
       case "빈 락커":
@@ -1404,7 +1404,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                       key={section}
                       variant={sectionFilter === section ? "default" : "outline"}
                       size="sm"
-                      className={`rounded-full ${sectionFilter === section ? 'bg-blue-500 hover-elevate' : ''}`}
+                      className={`rounded-full ${sectionFilter === section ? 'bg-orange-500 hover-elevate' : ''}`}
                       onClick={() => setSectionFilter(section as string)}
                     >
                       {section}
@@ -1527,7 +1527,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                           key={lockerNumber} 
                           className={`cursor-pointer border-2 ${
                             isAssigned 
-                              ? "border-blue-200 bg-blue-50 hover:border-blue-300" 
+                              ? "border-orange-200 bg-orange-50 hover:border-orange-300" 
                               : "border-gray-200 hover:border-gray-300"
                           }`}
                           onClick={() => {
@@ -1560,7 +1560,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                                   variant="outline" 
                                   className={`text-xs ${
                                     isAssigned 
-                                      ? "bg-blue-100 text-blue-600" 
+                                      ? "bg-orange-100 text-orange-600" 
                                       : "bg-gray-100 text-gray-600"
                                   }`}
                                 >
@@ -1704,7 +1704,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                               <Button
                                 size="sm"
                                 variant={isPurchaser ? "default" : "outline"}
-                                className={`text-xs ${isPurchaser ? 'bg-blue-500 hover-elevate text-white' : 'border-blue-300 text-blue-600 hover-elevate'}`}
+                                className={`text-xs ${isPurchaser ? 'bg-orange-500 hover-elevate text-white' : 'border-orange-300 text-orange-600 hover-elevate'}`}
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   if (isPurchaser) {
@@ -1755,7 +1755,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                           variant={currentPage === page ? "default" : "outline"}
                           size="sm"
                           onClick={() => setCurrentPage(page)}
-                          className={currentPage === page ? "bg-blue-500 hover-elevate" : ""}
+                          className={currentPage === page ? "bg-orange-500 hover-elevate" : ""}
                         >
                           {page}
                         </Button>
@@ -1841,7 +1841,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
           </DialogHeader>
           {selectedLocker && (
             <div className="space-y-4">
-              <div className="bg-blue-50 p-4 rounded-lg">
+              <div className="bg-orange-50 p-4 rounded-lg">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm font-medium">사물함 번호:</span>
                   <span className="text-sm">{selectedLocker.number}</span>
@@ -1897,7 +1897,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
           </DialogHeader>
           {selectedLocker && (
             <div className="space-y-4">
-              <div className="bg-blue-50 p-4 rounded-lg">
+              <div className="bg-orange-50 p-4 rounded-lg">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm font-medium">사물함 번호:</span>
                   <span className="text-sm">{selectedLocker.number}</span>
@@ -2024,8 +2024,8 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                     key={lockerNumber} 
                     className={`cursor-pointer border-2 ${
                       isAssigned 
-                        ? "border-blue-200 bg-blue-50" 
-                        : "border-gray-200 hover:border-blue-300"
+                        ? "border-orange-200 bg-orange-50" 
+                        : "border-gray-200 hover:border-orange-300"
                     }`}
                     onClick={() => handleLockerSelect(locker)}
                   >
@@ -2037,7 +2037,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                             variant="outline" 
                             className={`text-xs ${
                               isAssigned 
-                                ? "bg-blue-100 text-blue-600" 
+                                ? "bg-orange-100 text-orange-600" 
                                 : "bg-gray-100 text-gray-600"
                             }`}
                           >
@@ -2083,7 +2083,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                 아니오
               </Button>
               <Button 
-                className="bg-blue-500 hover-elevate"
+                className="bg-orange-500 hover-elevate"
                 onClick={handleLockerAssignmentConfirm}
               >
                 예
@@ -2102,7 +2102,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
               <Badge 
                 variant="outline"
                 className={
-                  editFormData?.status === "이용 중" ? "bg-blue-100 text-blue-600" :
+                  editFormData?.status === "이용 중" ? "bg-orange-100 text-orange-600" :
                   editFormData?.status === "만료" ? "bg-red-100 text-red-600" :
                   "bg-gray-100 text-gray-600"
                 }
@@ -2115,8 +2115,8 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
             <div className="space-y-4">
               {/* 회원 정보 표시 (Member info display) */}
               {editFormData.memberId && (
-                <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
-                  <p className="text-sm text-blue-700">
+                <div className="p-3 bg-orange-50 rounded-lg border border-orange-200">
+                  <p className="text-sm text-orange-700">
                     배정 회원: {membersList.find(m => m.id === editFormData.memberId)?.name || "알 수 없음"}
                   </p>
                 </div>
@@ -2200,7 +2200,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                   취소
                 </Button>
                 <Button 
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                   onClick={() => {
                     if (selectedLocker) {
                       // 🔧 빈 락커(id: 0)일 경우 POST로 생성, 그렇지 않으면 PUT으로 수정
@@ -2267,7 +2267,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                   {selectedLockerProduct && (
                     <div className="flex justify-between py-2 border-b border-gray-100">
                       <span className="text-sm text-gray-500">선택 상품</span>
-                      <span className="text-sm font-medium text-blue-600">
+                      <span className="text-sm font-medium text-orange-600">
                         {selectedLockerProduct.name} ({selectedLockerProduct.price?.toLocaleString()}원)
                       </span>
                     </div>
@@ -2276,22 +2276,22 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
 
               {/* 🆕 락커 상품이 없으면 상품 등록 폼 표시 (Show product registration form if no locker products) */}
               {(lockerProducts.length === 0 || showLockerProductForm) && (
-                <div className="space-y-4 bg-blue-50 p-5 rounded-xl border border-blue-200">
+                <div className="space-y-4 bg-orange-50 p-5 rounded-xl border border-orange-200">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-semibold text-blue-700">락커 상품 등록</h3>
+                    <h3 className="text-sm font-semibold text-orange-700">락커 상품 등록</h3>
                     {lockerProducts.length > 0 && (
                       <Button 
                         variant="ghost" 
                         size="sm"
                         onClick={() => setShowLockerProductForm(false)}
-                        className="text-blue-600 hover:text-blue-800"
+                        className="text-orange-600 hover:text-orange-800"
                       >
                         취소
                       </Button>
                     )}
                   </div>
                   {lockerProducts.length === 0 && (
-                    <p className="text-sm text-blue-600">등록된 락커 상품이 없습니다. 먼저 락커 상품을 등록해주세요.</p>
+                    <p className="text-sm text-orange-600">등록된 락커 상품이 없습니다. 먼저 락커 상품을 등록해주세요.</p>
                   )}
                   
                   {/* 상품명 */}
@@ -2357,7 +2357,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                   
                   {/* 상품 등록 버튼 */}
                   <Button 
-                    className="w-full bg-blue-500 hover-elevate"
+                    className="w-full bg-orange-500 hover-elevate"
                     onClick={async () => {
                       if (!lockerProductFormData.name || !lockerProductFormData.price) {
                         toast({
@@ -2419,7 +2419,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                         variant="ghost" 
                         size="sm"
                         onClick={() => setShowLockerProductForm(true)}
-                        className="text-blue-600 hover:text-blue-800 text-xs"
+                        className="text-orange-600 hover:text-orange-800 text-xs"
                       >
                         + 새 상품 추가
                       </Button>
@@ -2439,8 +2439,8 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                           }}
                           className={`p-3 rounded-lg border-2 cursor-pointer transition-all ${
                             selectedLockerProduct?.id === product.id
-                              ? 'border-blue-500 bg-blue-50'
-                              : 'border-gray-200 hover:border-blue-300 hover-elevate'
+                              ? 'border-orange-500 bg-orange-50'
+                              : 'border-gray-200 hover:border-orange-300 hover-elevate'
                           }`}
                         >
                           <div className="flex items-center justify-between">
@@ -2448,7 +2448,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                               <span className="font-medium text-gray-900">{product.name}</span>
                               <span className="text-sm text-gray-500 ml-2">({product.duration || "1개월"})</span>
                             </div>
-                            <span className="font-bold text-blue-600">{product.price?.toLocaleString()}원</span>
+                            <span className="font-bold text-orange-600">{product.price?.toLocaleString()}원</span>
                           </div>
                           {product.description && (
                             <p className="text-xs text-gray-500 mt-1">{product.description}</p>
@@ -2575,7 +2575,7 @@ function LockersPage({ selectedLockerId, onLockerSelect }: LockersPageProps = {}
                   취소
                 </Button>
                 <Button 
-                  className="flex-1 bg-blue-500 hover-elevate"
+                  className="flex-1 bg-orange-500 hover-elevate"
                   onClick={() => {
                     if (!registrationFormData.section || !registrationFormData.number) {
                       toast({

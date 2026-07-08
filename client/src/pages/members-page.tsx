@@ -431,7 +431,7 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
             </Button>
             <Button
               size="sm"
-              className="bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg hover-elevate"
+              className="bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover-elevate"
               onClick={() => setRegistrationTypeModalOpen(true)}
             >
               <Plus className="w-4 h-4 shrink-0 mr-1 md:mr-2" />
@@ -451,7 +451,7 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
                 onClick={() => setActiveTab(tab)}
                 className={`py-3 md:py-4 px-1 md:px-2 text-xs md:text-sm font-medium border-b-2 whitespace-nowrap ${
                   activeTab === tab
-                    ? "border-blue-500 text-blue-600"
+                    ? "border-orange-500 text-orange-600"
                     : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                 }`}
               >
@@ -477,11 +477,11 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
                   placeholder="회원 이름이나 전화번호를 검색하세요"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 border-gray-200 focus:border-blue-400 focus:ring-blue-400 bg-white"
+                  className="pl-10 border-gray-200 focus:border-orange-400 focus:ring-orange-400 bg-white"
                 />
               </div>
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-full md:w-40 border-gray-200 focus:border-blue-400 focus:ring-blue-400">
+                <SelectTrigger className="w-full md:w-40 border-gray-200 focus:border-orange-400 focus:ring-orange-400">
                   <SelectValue placeholder="상태 필터" />
                 </SelectTrigger>
                 <SelectContent>
@@ -585,7 +585,7 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
                       variant={currentPage === page ? "default" : "outline"}
                       size="sm"
                       onClick={() => setCurrentPage(page)}
-                      className={currentPage === page ? "bg-blue-500 hover-elevate" : ""}
+                      className={currentPage === page ? "bg-orange-500 hover-elevate" : ""}
                     >
                       {page}
                     </Button>
@@ -613,7 +613,7 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
           </DialogHeader>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4 md:py-6">
             <Card
-              className="cursor-pointer hover:shadow-xl transition-all duration-300 border-2 hover:border-blue-300 transform hover:scale-105"
+              className="cursor-pointer hover:shadow-xl transition-all duration-300 border-2 hover:border-orange-300 transform hover:scale-105"
               onClick={() => {
                 setRegistrationType("simple");
                 setRegistrationTypeModalOpen(false);
@@ -622,8 +622,8 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
             >
               <CardAccentLine />
               <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-100 to-red-100 rounded-full flex items-center justify-center">
-                  <FileText className="w-8 h-8 text-blue-500" />
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-orange-100 to-red-100 rounded-full flex items-center justify-center">
+                  <FileText className="w-8 h-8 text-orange-500" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2 text-gray-900">간편 등록</h3>
                 <p className="text-sm text-gray-600">
@@ -634,7 +634,7 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
             </Card>
             
             <Card
-              className="cursor-pointer hover:shadow-xl transition-all duration-300 border-2 hover:border-blue-300 transform hover:scale-105"
+              className="cursor-pointer hover:shadow-xl transition-all duration-300 border-2 hover:border-orange-300 transform hover:scale-105"
               onClick={() => {
                 setRegistrationType("detailed");
                 setRegistrationTypeModalOpen(false);
@@ -643,8 +643,8 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
             >
               <CardAccentLine />
               <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-100 to-red-100 rounded-full flex items-center justify-center">
-                  <Users className="w-8 h-8 text-blue-500" />
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-orange-100 to-red-100 rounded-full flex items-center justify-center">
+                  <Users className="w-8 h-8 text-orange-500" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2 text-gray-900">상세 등록</h3>
                 <p className="text-sm text-gray-600">
@@ -673,7 +673,7 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
               type="file"
               accept=".xlsx,.xls"
               onChange={handleExcelUpload}
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100"
             />
           </div>
         </DialogContent>
@@ -1064,7 +1064,7 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
                 </Button>
                 <Button 
                   type="submit" 
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                   disabled={addMemberMutation.isPending}
                 >
                   {addMemberMutation.isPending ? "등록 중..." : "등록 완료"}
@@ -1129,7 +1129,7 @@ export default function MembersPage({ selectedMemberId, onMemberSelect, onContra
                   onChange={handleExcelUpload}
                   className="hidden"
                 />
-                <span className="text-blue-500 hover:text-blue-600 font-medium">
+                <span className="text-orange-500 hover:text-orange-600 font-medium">
                   파일 선택
                 </span>
               </label>
@@ -1342,7 +1342,7 @@ function RefundProcessingTab() {
   const getStatusBadgeColor = (status: string) => {
     switch (status) {
       case "요청": return "bg-yellow-100 text-yellow-800";
-      case "처리중": return "bg-blue-100 text-blue-800";
+      case "처리중": return "bg-orange-100 text-orange-800";
       case "완료": return "bg-green-100 text-green-800";
       case "거절": return "bg-red-100 text-red-800";
       default: return "bg-gray-100 text-gray-800";
@@ -1357,7 +1357,7 @@ function RefundProcessingTab() {
           <p className="text-sm text-gray-600">환불 요청 회원을 관리하세요 ({refunds.length}건)</p>
         </div>
         <Button
-          className="bg-blue-500 hover-elevate w-full md:w-auto"
+          className="bg-orange-500 hover-elevate w-full md:w-auto"
           onClick={() => setShowRefundDialog(true)}
         >
           <Plus className="w-4 h-4 shrink-0 mr-2" />
@@ -1404,9 +1404,9 @@ function RefundProcessingTab() {
                       <td className="p-3">
                         <span className={`px-2 py-1 rounded-full text-xs ${
                           refund.productType === 'personal_training' || refund.productType === 'pt' 
-                            ? 'bg-purple-100 text-purple-700' 
+                            ? 'bg-orange-100 text-orange-700' 
                             : refund.productType === 'membership' 
-                              ? 'bg-blue-100 text-blue-700' 
+                              ? 'bg-orange-100 text-orange-700' 
                               : refund.productType === 'locker' 
                                 ? 'bg-orange-100 text-orange-700' 
                                 : refund.productType === 'equipment'
@@ -1646,7 +1646,7 @@ function GroupExtensionTab() {
           <p className="text-sm text-gray-600">여러 회원의 이용권을 일괄 연장하세요 ({extensions.length}회)</p>
         </div>
         <Button
-          className="bg-blue-500 hover-elevate w-full md:w-auto"
+          className="bg-orange-500 hover-elevate w-full md:w-auto"
           onClick={() => setShowExtensionDialog(true)}
         >
           <Plus className="w-4 h-4 shrink-0 mr-2" />
@@ -1713,8 +1713,8 @@ function GroupExtensionTab() {
           </div>
 
           {selectedMembers.length > 0 && (
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-              <p className="text-sm text-blue-800">
+            <div className="mt-4 p-4 bg-orange-50 rounded-lg">
+              <p className="text-sm text-orange-800">
                 {selectedMembers.length}명의 회원이 선택되었습니다.
               </p>
             </div>
@@ -1881,7 +1881,7 @@ function SuspensionRecordsTab() {
           <p className="text-sm text-gray-600">회원들의 정지 기록을 확인하세요 ({suspensions.length}건)</p>
         </div>
         <Button
-          className="bg-blue-500 hover-elevate w-full md:w-auto"
+          className="bg-orange-500 hover-elevate w-full md:w-auto"
           onClick={() => setShowSuspensionDialog(true)}
         >
           <Plus className="w-4 h-4 shrink-0 mr-2" />
@@ -2175,8 +2175,8 @@ function ModificationRecordsTab() {
           </div>
 
           {selectedIds.size > 0 && (
-            <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-              <span className="text-sm font-medium text-blue-800">
+            <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+              <span className="text-sm font-medium text-orange-800">
                 {selectedIds.size}개 선택됨
               </span>
               <Button
@@ -2237,7 +2237,7 @@ function ModificationRecordsTab() {
                   filteredRecords.map((record) => (
                     <tr 
                       key={record.id} 
-                      className={`border-b hover-elevate ${record.type === "modification" && record.originalId && selectedIds.has(record.originalId) ? "bg-blue-50" : ""}`}
+                      className={`border-b hover-elevate ${record.type === "modification" && record.originalId && selectedIds.has(record.originalId) ? "bg-orange-50" : ""}`}
                     >
                       <td className="text-center p-3">
                         {record.type === "modification" && record.originalId ? (
@@ -2257,7 +2257,7 @@ function ModificationRecordsTab() {
                         <span className={`px-2 py-1 rounded-full text-xs ${
                           record.type === "deletion" 
                             ? "bg-red-100 text-red-800" 
-                            : "bg-blue-100 text-blue-800"
+                            : "bg-orange-100 text-orange-800"
                         }`}>
                           {record.type === "deletion" ? "삭제" : "수정"}
                         </span>

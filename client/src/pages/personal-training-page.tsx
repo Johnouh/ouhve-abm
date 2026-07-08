@@ -301,7 +301,7 @@ export default function PersonalTrainingPage() {
             <p className="text-sm md:text-base text-gray-600 mt-1">PT 상품 관리</p>
           </div>
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-blue-600 border-blue-300">
+            <Badge variant="outline" className="text-orange-600 border-orange-300">
               총 {ptProducts.length}개 상품
             </Badge>
           </div>
@@ -319,7 +319,7 @@ export default function PersonalTrainingPage() {
                 placeholder="상품명으로 검색"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-white border-gray-200 focus:border-blue-400 focus:ring-blue-400"
+                className="pl-10 bg-white border-gray-200 focus:border-orange-400 focus:ring-orange-400"
                 data-testid="input-search-pt"
               />
               {searchTerm && (
@@ -346,7 +346,7 @@ export default function PersonalTrainingPage() {
             </Select>
           </div>
           <Button
-            className="w-full md:w-auto bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg hover-elevate"
+            className="w-full md:w-auto bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover-elevate"
             onClick={() => {
               form.reset({
                 name: "",
@@ -419,7 +419,7 @@ export default function PersonalTrainingPage() {
                         )}
                       </TableCell>
                       <TableCell>
-                        <div className="font-medium text-blue-600">{formatPrice(product.price)}</div>
+                        <div className="font-medium text-orange-600">{formatPrice(product.price)}</div>
                       </TableCell>
                       <TableCell className="hidden md:table-cell">
                         <div className="text-gray-700">{product.duration || "-"}일</div>
@@ -429,7 +429,7 @@ export default function PersonalTrainingPage() {
                       </TableCell>
                       <TableCell className="hidden md:table-cell">
                         {product.appExposed ? (
-                          <Badge className="bg-blue-100 text-blue-700 hover-elevate">노출</Badge>
+                          <Badge className="bg-orange-100 text-orange-700 hover-elevate">노출</Badge>
                         ) : (
                           <Badge className="bg-gray-100 text-gray-500 hover-elevate">비노출</Badge>
                         )}
@@ -446,7 +446,7 @@ export default function PersonalTrainingPage() {
                             onClick={() => handleEditProduct(product)}
                             data-testid={`btn-edit-pt-${product.id}`}
                           >
-                            <Edit className="h-4 w-4 text-blue-500" />
+                            <Edit className="h-4 w-4 text-orange-500" />
                           </Button>
                           <Button
                             variant="ghost"
@@ -487,7 +487,7 @@ export default function PersonalTrainingPage() {
                       variant={currentPage === page ? "default" : "outline"}
                       size="sm"
                       onClick={() => setCurrentPage(page)}
-                      className={currentPage === page ? "bg-blue-500 hover-elevate" : ""}
+                      className={currentPage === page ? "bg-orange-500 hover-elevate" : ""}
                     >
                       {page}
                     </Button>
@@ -526,8 +526,8 @@ export default function PersonalTrainingPage() {
             {/* 헤더 */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <Dumbbell className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                  <Dumbbell className="w-5 h-5 text-orange-600" />
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">개인 레슨 등록</h2>
               </div>
@@ -547,8 +547,8 @@ export default function PersonalTrainingPage() {
               <form onSubmit={form.handleSubmit(onSubmitCreate)} className="p-6 space-y-5">
                 {/* 상품명 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <FileText className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <FileText className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">상품명 *</Label>
                   <FormField
@@ -567,8 +567,8 @@ export default function PersonalTrainingPage() {
 
                 {/* 담당 강사 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <User className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <User className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">담당 강사</Label>
                   <FormField
@@ -599,8 +599,8 @@ export default function PersonalTrainingPage() {
 
                 {/* 가격 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <Banknote className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <Banknote className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">가격 (원) *</Label>
                   <FormField
@@ -625,8 +625,8 @@ export default function PersonalTrainingPage() {
 
                 {/* 유효기간 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <Calendar className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <Calendar className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">유효기간</Label>
                   <FormField
@@ -655,8 +655,8 @@ export default function PersonalTrainingPage() {
 
                 {/* 이용 횟수 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <Hash className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <Hash className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">이용 횟수</Label>
                   <FormField
@@ -685,8 +685,8 @@ export default function PersonalTrainingPage() {
 
                 {/* 수업 시간 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <Clock className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <Clock className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">수업 시간</Label>
                   <div className="flex-1 flex items-center gap-2">
@@ -728,8 +728,8 @@ export default function PersonalTrainingPage() {
 
                 {/* 수업 요일 */}
                 <div className="flex items-start gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0 mt-1">
-                    <Calendar className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0 mt-1">
+                    <Calendar className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0 mt-1">수업 요일</Label>
                   <div className="flex-1">
@@ -741,8 +741,8 @@ export default function PersonalTrainingPage() {
                           onClick={() => toggleDay(day)}
                           className={`w-10 h-10 rounded-full border-2 flex items-center justify-center text-sm font-medium transition-all hover-elevate ${
  selectedDays.includes(day)
- ? "bg-blue-500 border-blue-500 text-white"
- : "border-gray-300 text-gray-600 hover:border-blue-300"
+ ? "bg-orange-500 border-orange-500 text-white"
+ : "border-gray-300 text-gray-600 hover:border-orange-300"
  }`}
                           data-testid={`btn-day-${day}`}
                         >
@@ -769,7 +769,7 @@ export default function PersonalTrainingPage() {
                   </Button>
                   <Button
                     type="submit"
-                    className="bg-blue-500 hover-elevate"
+                    className="bg-orange-500 hover-elevate"
                     disabled={createProductMutation.isPending}
                     data-testid="btn-submit-pt-product"
                   >
@@ -915,8 +915,8 @@ export default function PersonalTrainingPage() {
                       onClick={() => toggleDay(day)}
                       className={`w-10 h-10 rounded-full border-2 flex items-center justify-center text-sm font-medium transition-all hover-elevate ${
  selectedDays.includes(day)
- ? "bg-blue-500 border-blue-500 text-white"
- : "border-gray-300 text-gray-600 hover:border-blue-300"
+ ? "bg-orange-500 border-orange-500 text-white"
+ : "border-gray-300 text-gray-600 hover:border-orange-300"
  }`}
                       data-testid={`btn-edit-day-${day}`}
                     >
@@ -1021,7 +1021,7 @@ export default function PersonalTrainingPage() {
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 text-white hover-elevate"
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 text-white hover-elevate"
                   disabled={updateProductMutation.isPending}
                   data-testid="btn-update-pt-product"
                 >

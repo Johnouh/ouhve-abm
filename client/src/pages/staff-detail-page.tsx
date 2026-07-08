@@ -216,12 +216,12 @@ export default function StaffDetailPage({ staffId, onBack }: StaffDetailPageProp
               {/* Profile Picture */}
               <div className="flex-shrink-0">
                 <div 
-                  className="w-32 h-32 bg-blue-100 rounded-lg flex items-center justify-center cursor-pointer hover-elevate transition-colors"
+                  className="w-32 h-32 bg-orange-100 rounded-lg flex items-center justify-center cursor-pointer hover-elevate transition-colors"
                   onClick={() => setShowPhotoUpload(true)}
                 >
                   <div className="text-center">
-                    <Camera className="w-8 h-8 text-blue-500 mx-auto mb-2" />
-                    <p className="text-xs text-blue-600">사진 업로드</p>
+                    <Camera className="w-8 h-8 text-orange-500 mx-auto mb-2" />
+                    <p className="text-xs text-orange-600">사진 업로드</p>
                   </div>
                 </div>
                 <Button 
@@ -238,8 +238,8 @@ export default function StaffDetailPage({ staffId, onBack }: StaffDetailPageProp
               {/* Staff Info */}
               <div className="flex-1">
                 <div className="flex items-start space-x-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                    <User className="w-4 h-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                    <User className="w-4 h-4 text-orange-600" />
                   </div>
                   <div className="flex-1">
                     <h1 className="text-2xl font-bold text-gray-900 mb-2">{staff.name}</h1>
@@ -261,7 +261,7 @@ export default function StaffDetailPage({ staffId, onBack }: StaffDetailPageProp
                         </div>
                       )}
                       {staff.workType && (
-                        <span className="px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded">{staff.workType}</span>
+                        <span className="px-2 py-1 bg-orange-100 text-orange-600 text-xs rounded">{staff.workType}</span>
                       )}
                     </div>
                   </div>
@@ -293,11 +293,11 @@ export default function StaffDetailPage({ staffId, onBack }: StaffDetailPageProp
               {/* Notes */}
               {staff.notes && (
                 <div className="flex-shrink-0 w-80">
-                  <Card className="bg-blue-50 border-blue-200">
+                  <Card className="bg-orange-50 border-orange-200">
                     <CardAccentLine />
                     <CardContent className="p-4">
-                      <h4 className="font-medium text-blue-900 mb-2">비고</h4>
-                      <p className="text-sm text-blue-800">{staff.notes}</p>
+                      <h4 className="font-medium text-orange-900 mb-2">비고</h4>
+                      <p className="text-sm text-orange-800">{staff.notes}</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -309,9 +309,9 @@ export default function StaffDetailPage({ staffId, onBack }: StaffDetailPageProp
         {/* Tabs Section */}
         <Tabs defaultValue="매출" className="w-full">
           <TabsList className="bg-white border-b w-full justify-start gap-1 p-1">
-            <TabsTrigger value="매출" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white px-6 py-2">매출</TabsTrigger>
-            <TabsTrigger value="담당 회원" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white px-6 py-2">담당 회원</TabsTrigger>
-            <TabsTrigger value="수업 내역" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white px-6 py-2">수업 내역</TabsTrigger>
+            <TabsTrigger value="매출" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white px-6 py-2">매출</TabsTrigger>
+            <TabsTrigger value="담당 회원" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white px-6 py-2">담당 회원</TabsTrigger>
+            <TabsTrigger value="수업 내역" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white px-6 py-2">수업 내역</TabsTrigger>
           </TabsList>
 
           <TabsContent value="매출" className="space-y-6">
@@ -336,11 +336,11 @@ export default function StaffDetailPage({ staffId, onBack }: StaffDetailPageProp
 
                 {/* Sales Stats Cards - 5 categories */}
                 <div className="grid grid-cols-5 gap-4 mb-6">
-                  <Card className="border-l-4 border-blue-500">
+                  <Card className="border-l-4 border-orange-500">
                     <CardAccentLine />
                     <CardContent className="p-4">
                       <div className="text-xs text-gray-500 mb-1">전체 매출</div>
-                      <div className="text-xl font-bold text-blue-600 tabular-nums">{totalSales.toLocaleString()}</div>
+                      <div className="text-xl font-bold text-orange-600 tabular-nums">{totalSales.toLocaleString()}</div>
                       <div className="text-xs text-gray-500">원</div>
                     </CardContent>
                   </Card>
@@ -352,11 +352,11 @@ export default function StaffDetailPage({ staffId, onBack }: StaffDetailPageProp
                       <div className="text-xs text-gray-500">원</div>
                     </CardContent>
                   </Card>
-                  <Card className="border-l-4 border-purple-500">
+                  <Card className="border-l-4 border-orange-500">
                     <CardAccentLine />
                     <CardContent className="p-4">
                       <div className="text-xs text-gray-500 mb-1">개인 레슨 매출</div>
-                      <div className="text-xl font-bold text-purple-600 tabular-nums">{ptSales.toLocaleString()}</div>
+                      <div className="text-xl font-bold text-orange-600 tabular-nums">{ptSales.toLocaleString()}</div>
                       <div className="text-xs text-gray-500">원</div>
                     </CardContent>
                   </Card>
@@ -489,7 +489,7 @@ export default function StaffDetailPage({ staffId, onBack }: StaffDetailPageProp
                                 <span className={`px-2 py-1 rounded text-xs ${
                                   pt?.status === "진행중" ? "bg-green-100 text-green-600" :
                                   pt?.status === "완료" ? "bg-gray-100 text-gray-600" :
-                                  "bg-blue-100 text-blue-600"
+                                  "bg-orange-100 text-orange-600"
                                 }`}>
                                   {pt?.status || "활성"}
                                 </span>
@@ -518,10 +518,10 @@ export default function StaffDetailPage({ staffId, onBack }: StaffDetailPageProp
                 {/* Lesson Type Tabs */}
                 <Tabs defaultValue="개인 레슨" className="w-full">
                   <TabsList className="bg-gray-100 mb-4">
-                    <TabsTrigger value="개인 레슨" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white">
+                    <TabsTrigger value="개인 레슨" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white">
                       개인 레슨 ({staffPersonalTrainings.length})
                     </TabsTrigger>
-                    <TabsTrigger value="그룹 수업" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white">
+                    <TabsTrigger value="그룹 수업" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white">
                       그룹 수업 ({staffGroupLessons.length})
                     </TabsTrigger>
                   </TabsList>
@@ -562,12 +562,12 @@ export default function StaffDetailPage({ staffId, onBack }: StaffDetailPageProp
                                   <td className="p-3 text-sm font-medium">{member?.name || "-"}</td>
                                   <td className="p-3 text-sm">{pt.totalSessions || 0}회</td>
                                   <td className="p-3 text-sm">{pt.usedSessions || 0}회</td>
-                                  <td className="p-3 text-sm font-medium text-blue-600">{(pt.totalSessions || 0) - (pt.usedSessions || 0)}회</td>
+                                  <td className="p-3 text-sm font-medium text-orange-600">{(pt.totalSessions || 0) - (pt.usedSessions || 0)}회</td>
                                   <td className="p-3 text-sm">
                                     <span className={`px-2 py-1 rounded text-xs ${
                                       pt.status === "진행중" ? "bg-green-100 text-green-600" :
                                       pt.status === "완료" ? "bg-gray-100 text-gray-600" :
-                                      "bg-blue-100 text-blue-600"
+                                      "bg-orange-100 text-orange-600"
                                     }`}>
                                       {pt.status || "활성"}
                                     </span>
@@ -872,7 +872,7 @@ export default function StaffDetailPage({ staffId, onBack }: StaffDetailPageProp
                   setShowPhotoUpload(false);
                 }
               }}
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100"
             />
           </div>
         </DialogContent>

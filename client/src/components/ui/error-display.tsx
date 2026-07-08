@@ -34,7 +34,7 @@ export const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
             onClick={onRetry}
             variant="outline"
             size="sm"
-            className="text-blue-500 border-blue-500 hover:bg-blue-50"
+            className="text-orange-500 border-orange-500 hover:bg-orange-50"
           >
             <RefreshCw className="w-4 h-4 mr-1" />
             다시 시도

@@ -261,7 +261,7 @@ export default function StatisticsPage() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
+                  <div className="w-3 h-3 bg-orange-500 rounded-sm"></div>
                   <h3 className="font-medium text-sm">매출 통계</h3>
                 </div>
               </div>
@@ -330,8 +330,8 @@ export default function StatisticsPage() {
                     <h3 className="font-medium text-sm text-gray-600 mb-1">{label}</h3>
                     <div className="text-xl font-bold text-gray-900 mb-3">0 원</div>
                     <div className="flex items-center gap-4 text-sm">
-                      <div className="flex items-center gap-2 text-blue-500">
-                        <span className="text-lg font-bold text-blue-600">남</span><span>남성 0원</span>
+                      <div className="flex items-center gap-2 text-orange-500">
+                        <span className="text-lg font-bold text-orange-600">남</span><span>남성 0원</span>
                       </div>
                       <div className="border-l border-gray-200 h-4"></div>
                       <div className="flex items-center gap-2 text-pink-500">
@@ -390,7 +390,7 @@ export default function StatisticsPage() {
       </div>
 
       <div className="flex justify-end mt-6">
-        <Button onClick={handleExcelDownload} className="bg-blue-500 hover-elevate text-white">
+        <Button onClick={handleExcelDownload} className="bg-orange-500 hover-elevate text-white">
           <Download className="w-4 h-4 mr-2" />
           엑셀 다운로드
         </Button>

@@ -362,8 +362,8 @@ export default function ProductEditPage({ product, onBack }: ProductEditPageProp
                               onClick={() => toggleDay(day)}
                               className={`w-10 h-10 rounded-full text-sm font-medium ${
                                 selectedDays.includes(day) 
-                                  ? "bg-blue-500 text-white" 
-                                  : "bg-blue-100 text-blue-500"
+                                  ? "bg-orange-500 text-white" 
+                                  : "bg-orange-100 text-orange-500"
                               }`}
                             >
                               {day}
@@ -517,7 +517,7 @@ export default function ProductEditPage({ product, onBack }: ProductEditPageProp
             <Button
               type="submit"
               disabled={updateProductMutation.isPending}
-              className="px-8 py-3 bg-blue-500 hover-elevate"
+              className="px-8 py-3 bg-orange-500 hover-elevate"
             >
               상품 수정
             </Button>

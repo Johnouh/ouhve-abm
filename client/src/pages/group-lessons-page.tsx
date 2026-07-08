@@ -334,7 +334,7 @@ export default function GroupLessonsPage() {
               onClick={() => setActiveSubTab(tab)}
               className={`pb-4 px-2 text-xs md:text-sm font-medium border-b-2 transition-colors ${
                 activeSubTab === tab
-                  ? "text-gray-900 border-blue-500"
+                  ? "text-gray-900 border-orange-500"
                   : "text-gray-500 hover:text-gray-700 border-transparent"
               }`}
             >
@@ -442,7 +442,7 @@ export default function GroupLessonsPage() {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleEditClass(lesson)}
-                            className="h-8 w-8 p-0 text-gray-500 hover:text-blue-600"
+                            className="h-8 w-8 p-0 text-gray-500 hover:text-orange-600"
                             data-testid={`button-edit-lesson-${lesson.id}`}
                           >
                             <Edit className="h-4 w-4" />
@@ -486,7 +486,7 @@ export default function GroupLessonsPage() {
                       variant={currentPage === page ? "default" : "outline"}
                       size="sm"
                       onClick={() => setCurrentPage(page)}
-                      className={currentPage === page ? "bg-blue-500 hover-elevate" : ""}
+                      className={currentPage === page ? "bg-orange-500 hover-elevate" : ""}
                     >
                       {page}
                     </Button>
@@ -517,7 +517,7 @@ export default function GroupLessonsPage() {
             {syncToProductsMutation.isPending ? "동기화 중..." : "상품 동기화"}
           </Button>
           <Button
-            className="bg-gradient-to-r from-blue-500 to-blue-600 hover-elevate text-white shadow-lg"
+            className="bg-gradient-to-r from-orange-500 to-orange-600 hover-elevate text-white shadow-lg"
             onClick={() => setShowAddDialog(true)}
             data-testid="button-add-group-lesson"
           >
@@ -559,8 +559,8 @@ export default function GroupLessonsPage() {
               <form onSubmit={form.handleSubmit(onSubmitLesson)} className="p-6 space-y-5">
                 {/* 수업명 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <FileText className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <FileText className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">수업명 *</Label>
                   <FormField
@@ -579,8 +579,8 @@ export default function GroupLessonsPage() {
 
                 {/* 담당 강사 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <User className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <User className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">담당 강사</Label>
                   <FormField
@@ -613,8 +613,8 @@ export default function GroupLessonsPage() {
 
                 {/* 수업 시간 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <Clock className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <Clock className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">수업 시간 *</Label>
                   <div className="flex items-center gap-2 flex-1">
@@ -660,8 +660,8 @@ export default function GroupLessonsPage() {
 
                 {/* 운영 요일 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <Calendar className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <Calendar className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">운영 요일 *</Label>
                   <FormField
@@ -681,7 +681,7 @@ export default function GroupLessonsPage() {
                             }}
                             className={`w-8 h-8 rounded-full text-sm font-medium transition-colors ${
                               field.value.includes(day)
-                                ? 'bg-blue-500 text-white'
+                                ? 'bg-orange-500 text-white'
                                 : 'bg-gray-100 text-gray-600 hover-elevate'
                             }`}
                           >
@@ -695,8 +695,8 @@ export default function GroupLessonsPage() {
 
                 {/* 수업료 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <Banknote className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <Banknote className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">수업료 (원)</Label>
                   <FormField
@@ -720,8 +720,8 @@ export default function GroupLessonsPage() {
 
                 {/* 인원 설정 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <Users className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <Users className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 w-24 flex-shrink-0">인원 설정 *</Label>
                   <div className="flex items-center gap-4 flex-1">
@@ -775,7 +775,7 @@ export default function GroupLessonsPage() {
                   </Button>
                   <Button
                     type="submit"
-                    className="bg-blue-500 hover-elevate"
+                    className="bg-orange-500 hover-elevate"
                     disabled={createGroupLessonMutation.isPending}
                   >
                     {createGroupLessonMutation.isPending ? "등록 중..." : "그룹 수업 등록"}
@@ -924,7 +924,7 @@ export default function GroupLessonsPage() {
                           }}
                           className={`w-8 h-8 rounded-full text-sm font-medium transition-colors ${
                             field.value.includes(day)
-                              ? 'bg-blue-500 text-white'
+                              ? 'bg-orange-500 text-white'
                               : 'bg-gray-100 text-gray-600 hover-elevate'
                           }`}
                         >
@@ -1009,7 +1009,7 @@ export default function GroupLessonsPage() {
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                   disabled={updateGroupLessonMutation.isPending}
                 >
                   {updateGroupLessonMutation.isPending ? "수정 중..." : "수정 완료"}

@@ -188,11 +188,11 @@ export default function GroupLessonAddPage() {
         {/* Logo */}
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">A</span>
             </div>
             <span className="font-bold text-lg">OUHVE ABM</span>
-            <span className="text-xs bg-blue-500 text-white px-2 py-1 rounded">PRO</span>
+            <span className="text-xs bg-orange-500 text-white px-2 py-1 rounded">PRO</span>
           </div>
         </div>
 
@@ -268,8 +268,8 @@ export default function GroupLessonAddPage() {
               <div className="space-y-6">
                 {/* Class Name */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                    <FileText className="w-4 h-4 text-blue-600 shrink-0" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                    <FileText className="w-4 h-4 text-orange-600 shrink-0" />
                   </div>
                   <label className="text-sm font-medium text-gray-700 w-20">수업명 *</label>
                   <Input
@@ -282,8 +282,8 @@ export default function GroupLessonAddPage() {
 
                 {/* Instructor */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                    <GraduationCap className="w-4 h-4 text-blue-600 shrink-0" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                    <GraduationCap className="w-4 h-4 text-orange-600 shrink-0" />
                   </div>
                   <label className="text-sm font-medium text-gray-700 w-20">담당 강사 *</label>
                   <Select value={instructor} onValueChange={setInstructor}>
@@ -302,8 +302,8 @@ export default function GroupLessonAddPage() {
 
                 {/* Class Period */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                    <Calendar className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                    <Calendar className="h-4 w-4 text-orange-600" />
                   </div>
                   <label className="text-sm font-medium text-gray-700 w-20">수업 진행 기간</label>
                   <div className="flex items-center gap-2">
@@ -327,8 +327,8 @@ export default function GroupLessonAddPage() {
 
                 {/* Class Time */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                    <Clock className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                    <Clock className="h-4 w-4 text-orange-600" />
                   </div>
                   <label className="text-sm font-medium text-gray-700 w-20">수업 시간 *</label>
                   <div className="flex items-center gap-2">
@@ -364,8 +364,8 @@ export default function GroupLessonAddPage() {
 
                 {/* Days Selection */}
                 <div className="flex items-start gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center mt-1">
-                    <ClipboardList className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center mt-1">
+                    <ClipboardList className="h-4 w-4 text-orange-600" />
                   </div>
                   <label className="text-sm font-medium text-gray-700 w-20 pt-1">운영 요일</label>
                   <div className="flex gap-2">
@@ -375,7 +375,7 @@ export default function GroupLessonAddPage() {
                         onClick={() => toggleDay(day)}
                         className={`w-8 h-8 rounded-full text-sm font-medium transition-colors ${
                           selectedDays.includes(day)
-                            ? 'bg-blue-500 text-white'
+                            ? 'bg-orange-500 text-white'
                             : 'bg-gray-100 text-gray-600 hover-elevate'
                         }`}
                       >
@@ -387,8 +387,8 @@ export default function GroupLessonAddPage() {
 
                 {/* Capacity Setting */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                    <Users className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                    <Users className="h-4 w-4 text-orange-600" />
                   </div>
                   <label className="text-sm font-medium text-gray-700 w-20">수강 가능한 상품 설정 *</label>
                   <div className="flex items-center gap-4">
@@ -399,7 +399,7 @@ export default function GroupLessonAddPage() {
                         name="capacity-setting"
                         checked={!canSetCapacity}
                         onChange={() => setCanSetCapacity(false)}
-                        className="w-4 h-4 text-blue-600"
+                        className="w-4 h-4 text-orange-600"
                       />
                       <label htmlFor="all-products" className="text-sm text-gray-700">모든 수강 수업</label>
                     </div>
@@ -410,7 +410,7 @@ export default function GroupLessonAddPage() {
                         name="capacity-setting"
                         checked={canSetCapacity}
                         onChange={() => setCanSetCapacity(true)}
-                        className="w-4 h-4 text-blue-600"
+                        className="w-4 h-4 text-orange-600"
                       />
                       <label htmlFor="specific-products" className="text-sm text-gray-700">선택한 상품만 설정</label>
                     </div>
@@ -426,8 +426,8 @@ export default function GroupLessonAddPage() {
               <div className="space-y-6">
                 {/* Capacity */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                    <Users className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                    <Users className="h-4 w-4 text-orange-600" />
                   </div>
                   <label className="text-sm font-medium text-gray-700 w-20">인원 설정 *</label>
                   <div className="flex items-center gap-4">
@@ -456,8 +456,8 @@ export default function GroupLessonAddPage() {
 
                 {/* Reservation Time */}
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                    <Clock className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                    <Clock className="h-4 w-4 text-orange-600" />
                   </div>
                   <label className="text-sm font-medium text-gray-700 w-20">예약 가능 시간 설정 *</label>
                   <div className="flex gap-4">
@@ -469,7 +469,7 @@ export default function GroupLessonAddPage() {
                           name="reservation-time"
                           checked={reservationDeadline === option}
                           onChange={() => setReservationDeadline(option)}
-                          className="w-4 h-4 text-blue-600"
+                          className="w-4 h-4 text-orange-600"
                         />
                         <label htmlFor={option} className="text-sm text-gray-700">{option}</label>
                       </div>
@@ -482,8 +482,8 @@ export default function GroupLessonAddPage() {
                   {/* Reservation Deadline */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                        <Clock className="h-4 w-4 text-blue-600" />
+                      <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                        <Clock className="h-4 w-4 text-orange-600" />
                       </div>
                       <label className="text-sm font-medium text-gray-700">예약 마감 시간 설정</label>
                     </div>
@@ -496,8 +496,8 @@ export default function GroupLessonAddPage() {
                   {/* Auto Cancel */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                        <AlertTriangle className="h-4 w-4 text-blue-600" />
+                      <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                        <AlertTriangle className="h-4 w-4 text-orange-600" />
                       </div>
                       <div>
                         <label className="text-sm font-medium text-gray-700">인원 미달 시 자동 취소 / 예약 승인</label>
@@ -513,8 +513,8 @@ export default function GroupLessonAddPage() {
                   {/* Require Approval */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                        <CheckCircle className="h-4 w-4 text-blue-600" />
+                      <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                        <CheckCircle className="h-4 w-4 text-orange-600" />
                       </div>
                       <div>
                         <label className="text-sm font-medium text-gray-700">예약 승인</label>
@@ -530,8 +530,8 @@ export default function GroupLessonAddPage() {
                   {/* Outside Reservation */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                        <Lock className="h-4 w-4 text-blue-600" />
+                      <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                        <Lock className="h-4 w-4 text-orange-600" />
                       </div>
                       <div>
                         <label className="text-sm font-medium text-gray-700">수업 외 예약 가능</label>
@@ -547,8 +547,8 @@ export default function GroupLessonAddPage() {
                   {/* Attendance Management */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                        <ClipboardList className="h-4 w-4 text-blue-600" />
+                      <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                        <ClipboardList className="h-4 w-4 text-orange-600" />
                       </div>
                       <div>
                         <label className="text-sm font-medium text-gray-700">출석 관리</label>
@@ -570,8 +570,8 @@ export default function GroupLessonAddPage() {
               
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                    <DollarSign className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                    <DollarSign className="h-4 w-4 text-orange-600" />
                   </div>
                   <label className="text-sm font-medium text-gray-700 w-20">수업료</label>
                   <div className="flex items-center gap-2">
@@ -586,8 +586,8 @@ export default function GroupLessonAddPage() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                    <Building className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                    <Building className="h-4 w-4 text-orange-600" />
                   </div>
                   <label className="text-sm font-medium text-gray-700 w-20">지급 옵션</label>
                   <Button variant="outline" size="sm">
@@ -605,7 +605,7 @@ export default function GroupLessonAddPage() {
             <Button 
               onClick={handleSave}
               disabled={createGroupLessonMutation.isPending}
-              className="bg-blue-500 hover-elevate text-white px-8 py-3 rounded-lg"
+              className="bg-orange-500 hover-elevate text-white px-8 py-3 rounded-lg"
             >
               {createGroupLessonMutation.isPending ? "저장 중..." : "수업 저장"}
             </Button>

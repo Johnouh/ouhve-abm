@@ -2,38 +2,84 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardAccentLine } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Brain, AlertTriangle, ArrowUp, ArrowDown, Minus, RefreshCw, Zap, Users, User } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  Brain, AlertTriangle, ArrowUp, ArrowDown, Minus, RefreshCw, Zap, Users, User,
+  History, FileText, Building2, Filter, CalendarPlus, ScrollText,
+} from "lucide-react";
+import OuhveActivityPage from "./ouhve-activity-page";
+import OwnerReportPage from "./owner-report-page";
+import BusinessProfilePage from "./business-profile-page";
+import SalesPipelinePage from "./sales-pipeline-page";
+import BulkExtendPage from "./bulk-extend-page";
+import AuditLogPage from "./audit-log-page";
+
+// AI 인사이트 = Ouhve AI가 센터 데이터를 분석해 "무엇을 어떻게 처리했는지"를 한 페이지에서 탭으로 본다.
+const TABS = [
+  { key: "activity", label: "AI 작업 내역", icon: History, desc: "AI가 처리한 작업", render: () => <OuhveActivityPage /> },
+  { key: "report", label: "운영 리포트", icon: FileText, desc: "오늘 봐야 할 것", render: () => <OwnerReportPage /> },
+  { key: "insights", label: "이탈·매출 분석", icon: AlertTriangle, desc: "위험·예측", render: () => <LegacyInsights /> },
+  { key: "profile", label: "센터 프로필", icon: Building2, desc: "AI 컨텍스트", render: () => <BusinessProfilePage /> },
+  { key: "pipeline", label: "예비회원", icon: Filter, desc: "상담 칸반", render: () => <SalesPipelinePage /> },
+  { key: "bulk", label: "단체 연장", icon: CalendarPlus, desc: "휴장/이벤트 보상", render: () => <BulkExtendPage /> },
+  { key: "audit", label: "감사 로그", icon: ScrollText, desc: "변경 이력 추적", render: () => <AuditLogPage /> },
+] as const;
 
 export default function AiInsightsPage() {
-  const {
-    data: churnData,
-    isLoading: churnLoading,
-    refetch: refetchChurn,
-  } = useQuery<any>({
-    queryKey: ["/api/ai/churn-analysis"],
-    staleTime: 60 * 60 * 1000,
-    retry: 1,
-  });
+  return (
+    <div className="bg-gray-50 min-h-full">
+      {/* 헤더 */}
+      <div className="px-3 md:px-6 pt-3 md:pt-6">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+            <Brain className="w-5 h-5 text-primary" />
+          </div>
+          <div className="min-w-0">
+            <h1 className="text-base md:text-lg font-semibold text-gray-900 leading-tight">AI 인사이트</h1>
+            <p className="text-[11px] md:text-xs text-gray-500 truncate">
+              Ouhve AI가 센터 데이터를 분석해 처리한 작업과 인사이트를 한곳에서 확인하세요
+            </p>
+          </div>
+        </div>
+      </div>
 
-  const {
-    data: revenueInsights,
-    isLoading: revenueLoading,
-    refetch: refetchRevenue,
-  } = useQuery<any>({
-    queryKey: ["/api/ai/revenue-insights"],
-    staleTime: 60 * 60 * 1000,
-    retry: 1,
-  });
+      <Tabs defaultValue="activity" className="w-full">
+        {/* 탭 바 — 모바일 가로 스크롤 */}
+        <div className="sticky top-0 z-10 bg-gray-50/90 backdrop-blur border-b border-gray-200 mt-3 px-3 md:px-6 overflow-x-auto">
+          <TabsList className="h-auto bg-transparent p-0 gap-1 justify-start">
+            {TABS.map(({ key, label, icon: Icon }) => (
+              <TabsTrigger
+                key={key}
+                value={key}
+                className="shrink-0 gap-1.5 rounded-none border-b-2 border-transparent px-2.5 py-2.5 text-gray-500 data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+              >
+                <Icon className="w-4 h-4 shrink-0" />
+                <span className="whitespace-nowrap">{label}</span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
+
+        {TABS.map(({ key, render }) => (
+          <TabsContent key={key} value={key} className="mt-0">
+            {render()}
+          </TabsContent>
+        ))}
+      </Tabs>
+    </div>
+  );
+}
+
+// ── 기존 이탈/매출 인사이트 (오렌지 통일) ────────────────────────────────
+function LegacyInsights() {
+  const { data: churnData, isLoading: churnLoading, refetch: refetchChurn } =
+    useQuery<any>({ queryKey: ["/api/ai/churn-analysis"], staleTime: 60 * 60 * 1000, retry: 1 });
+  const { data: revenueInsights, isLoading: revenueLoading, refetch: refetchRevenue } =
+    useQuery<any>({ queryKey: ["/api/ai/revenue-insights"], staleTime: 60 * 60 * 1000, retry: 1 });
 
   return (
-    <div className="p-3 md:p-6 bg-gray-50 min-h-full">
-      {/* 헤더 */}
-      <div className="flex items-center justify-between mb-4 md:mb-6">
-        <div className="flex items-center gap-2 min-w-0">
-          <Brain className="w-5 h-5 text-purple-500 shrink-0" />
-          <h1 className="text-base md:text-lg font-semibold text-gray-900">AI 인사이트</h1>
-          <span className="text-xs text-gray-400 ml-1 hidden md:inline">Claude AI 기반 분석</span>
-        </div>
+    <div className="p-3 md:p-6">
+      <div className="flex items-center justify-end mb-4">
         <Button
           variant="outline"
           size="sm"
@@ -46,20 +92,16 @@ export default function AiInsightsPage() {
       </div>
 
       <div className="space-y-6">
-        {/* 로딩 스켈레톤 */}
         {(churnLoading || revenueLoading) && (
           <div className="space-y-4 animate-pulse">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {[0, 1, 2].map(i => (
-                <div key={i} className="h-24 bg-gray-200 rounded-xl" />
-              ))}
+              {[0, 1, 2].map(i => <div key={i} className="h-24 bg-gray-200 rounded-xl" />)}
             </div>
             <div className="h-48 bg-gray-200 rounded-xl" />
-            <div className="h-36 bg-gray-200 rounded-xl" />
           </div>
         )}
 
-        {/* 이탈 위험도 섹션 */}
+        {/* 이탈 위험도 */}
         {!churnLoading && churnData && (
           <div className="space-y-4">
             <div className="flex items-center gap-2">
@@ -159,11 +201,11 @@ export default function AiInsightsPage() {
           </div>
         )}
 
-        {/* 매출 예측 섹션 */}
+        {/* 매출 예측 */}
         {!revenueLoading && revenueInsights && (
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <Zap className="w-5 h-5 text-blue-500 shrink-0" />
+              <Zap className="w-5 h-5 text-primary shrink-0" />
               <h2 className="text-base font-semibold text-gray-900">매출 예측 & 인사이트</h2>
             </div>
 
@@ -206,13 +248,13 @@ export default function AiInsightsPage() {
                 <CardAccentLine />
                 <CardContent className="p-4">
                   <div className="flex items-center gap-2 mb-3">
-                    <Brain className="w-4 h-4 text-purple-500" />
+                    <Brain className="w-4 h-4 text-primary" />
                     <h3 className="text-sm font-semibold text-gray-700">AI 분석 인사이트</h3>
                   </div>
                   <ul className="space-y-2">
                     {revenueInsights.insights.map((insight: string, i: number) => (
                       <li key={i} className="flex items-start gap-2.5 text-sm text-gray-700">
-                        <span className="mt-0.5 w-5 h-5 rounded-full bg-purple-100 text-purple-600 text-xs flex-shrink-0 flex items-center justify-center font-medium">{i + 1}</span>
+                        <span className="mt-0.5 w-5 h-5 rounded-full bg-primary/10 text-primary text-xs flex-shrink-0 flex items-center justify-center font-medium">{i + 1}</span>
                         {insight}
                       </li>
                     ))}
@@ -226,14 +268,14 @@ export default function AiInsightsPage() {
                 <CardAccentLine />
                 <CardContent className="p-4">
                   <div className="flex items-center gap-2 mb-3">
-                    <Zap className="w-4 h-4 text-blue-500" />
+                    <Zap className="w-4 h-4 text-primary" />
                     <h3 className="text-sm font-semibold text-gray-700">권장 액션</h3>
                   </div>
                   <div className="space-y-2">
                     {revenueInsights.recommendedActions.map((action: string, i: number) => (
-                      <div key={i} className="flex items-start gap-2 p-3 rounded-lg bg-blue-50 border border-blue-100">
-                        <span className="text-blue-500 font-bold text-sm mt-0.5 flex-shrink-0">→</span>
-                        <span className="text-sm text-blue-800">{action}</span>
+                      <div key={i} className="flex items-start gap-2 p-3 rounded-lg bg-primary/5 border border-primary/15">
+                        <span className="text-primary font-bold text-sm mt-0.5 flex-shrink-0">→</span>
+                        <span className="text-sm text-orange-800">{action}</span>
                       </div>
                     ))}
                   </div>
@@ -247,7 +289,6 @@ export default function AiInsightsPage() {
           </div>
         )}
 
-        {/* 에러 / 데이터 없음 */}
         {!churnLoading && !revenueLoading && !churnData && !revenueInsights && (
           <Card className="bg-white">
             <CardAccentLine />

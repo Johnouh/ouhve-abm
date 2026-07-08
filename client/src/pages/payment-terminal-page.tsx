@@ -30,14 +30,14 @@ import KioskPaymentView from "@/components/kiosk-payment-view";
 
 // 메뉴 아이템 정의 (Menu item definitions)
 const MENU_ITEMS = [
-  { id: "transactions", icon: CreditCard, label: "결제현황", color: "text-blue-600" },
+  { id: "transactions", icon: CreditCard, label: "결제현황", color: "text-orange-600" },
   { id: "deposits", icon: Banknote, label: "입금현황", color: "text-green-600" },
-  { id: "search", icon: Search, label: "자료조회", color: "text-purple-600" },
+  { id: "search", icon: Search, label: "자료조회", color: "text-orange-600" },
   { id: "link-payment", icon: Link2, label: "링크결제", color: "text-orange-600" },
   { id: "pg-products", icon: ShoppingBag, label: "상품관리", color: "text-pink-600" },
   { id: "cash-receipt", icon: Receipt, label: "현금영수증", color: "text-teal-600" },
   { id: "pg-settings", icon: Settings, label: "PG설정", color: "text-gray-600" },
-  { id: "help", icon: Headphones, label: "고객센터", color: "text-indigo-600" },
+  { id: "help", icon: Headphones, label: "고객센터", color: "text-orange-600" },
 ];
 
 type ActiveView = "main" | "pay" | "transactions" | "deposits" | "search" | "link-payment" | "link-payment-register" | "pg-products" | "cash-receipt" | "pg-settings" | "help" | "transaction-detail" | "kiosk";
@@ -463,7 +463,7 @@ export default function PaymentTerminalPage() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Badge variant="outline" className="text-xs bg-blue-50 text-blue-600 border-blue-200">
+          <Badge variant="outline" className="text-xs bg-orange-50 text-orange-600 border-orange-200">
             {pgConfig?.pgMode === "production" ? "실거래" : "테스트"}
           </Badge>
           <button onClick={() => setActiveView("pg-settings")} className="p-2 rounded-lg hover-elevate">
@@ -505,7 +505,7 @@ export default function PaymentTerminalPage() {
       {/* 결제받기 메인 카드 (Main payment card — blue gradient) */}
       <button
         onClick={() => setActiveView("pay")}
-        className="w-full rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 p-8 text-white shadow-lg hover-elevate transition-all"
+        className="w-full rounded-2xl bg-gradient-to-br from-orange-500 to-orange-700 p-8 text-white shadow-lg hover-elevate transition-all"
       >
         <div className="flex flex-col items-center gap-3">
           <div className="w-16 h-16 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center">
@@ -591,7 +591,7 @@ export default function PaymentTerminalPage() {
                   }}
                   className={`p-3 rounded-lg border text-left transition-all ${
                     selectedPayProduct?.id === p.id
-                      ? "border-blue-500 bg-blue-50 ring-1 ring-blue-500"
+                      ? "border-orange-500 bg-orange-50 ring-1 ring-orange-500"
                       : "border-gray-200 bg-white hover-elevate"
                   }`}
                 >
@@ -1019,8 +1019,8 @@ export default function PaymentTerminalPage() {
 
                 {/* 결제 링크 URL (Payment link URL) */}
                 <div className="bg-gray-50 rounded-lg p-2.5 flex items-center gap-2">
-                  <ExternalLink className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                  <p className="text-xs text-blue-600 truncate min-w-0">{product.linkPaymentUrl}</p>
+                  <ExternalLink className="w-3.5 h-3.5 text-orange-500 shrink-0" />
+                  <p className="text-xs text-orange-600 truncate min-w-0">{product.linkPaymentUrl}</p>
                 </div>
 
                 {/* 3 액션 버튼 (3 action buttons: QR / SMS / Copy) */}
@@ -1081,7 +1081,7 @@ export default function PaymentTerminalPage() {
                 </p>
               </div>
               <div className="bg-gray-50 rounded-lg p-2">
-                <p className="text-xs text-blue-600 break-all">{selectedLinkProduct.linkPaymentUrl}</p>
+                <p className="text-xs text-orange-600 break-all">{selectedLinkProduct.linkPaymentUrl}</p>
               </div>
               <Button
                 variant="outline"
@@ -1196,8 +1196,8 @@ export default function PaymentTerminalPage() {
             </Select>
           </div>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-            <p className="text-xs text-blue-700">
+          <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
+            <p className="text-xs text-orange-700">
               <Link2 className="w-3.5 h-3.5 inline mr-1 shrink-0" />
               등록 시 결제 링크가 자동으로 생성됩니다
             </p>
@@ -1338,18 +1338,18 @@ export default function PaymentTerminalPage() {
       </div>
 
       {!isSuperAdmin && pgConfig?.pgServiceId && (
-        <div className="flex items-start gap-2 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
-          <AlertCircle className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-          <p className="text-xs text-blue-400">
+        <div className="flex items-start gap-2 p-3 rounded-lg bg-orange-500/10 border border-orange-500/20">
+          <AlertCircle className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
+          <p className="text-xs text-orange-400">
             PG 설정은 관리자(Superadmin)가 관리합니다. 설정 변경이 필요하면 본사에 문의하세요.
           </p>
         </div>
       )}
 
       {isSuperAdmin && (
-        <div className="flex items-start gap-2 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
-          <AlertCircle className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-          <p className="text-xs text-blue-400">
+        <div className="flex items-start gap-2 p-3 rounded-lg bg-orange-500/10 border border-orange-500/20">
+          <AlertCircle className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
+          <p className="text-xs text-orange-400">
             Superadmin 계정은 테스트 PG(M2103140)에 연결되어 있습니다.
             회사별 PG 설정은 홈 &gt; 회사 PG 관리에서 관리하세요.
           </p>

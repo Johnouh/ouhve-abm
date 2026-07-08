@@ -287,7 +287,7 @@ export default function SuperadminPage() {
                           <div className="flex items-center gap-2 mt-0.5">
                             {f.code ? (
                               <button
-                                className="flex items-center gap-1 text-xs text-blue-500 hover:text-blue-600"
+                                className="flex items-center gap-1 text-xs text-orange-500 hover:text-orange-600"
                                 onClick={() => copyCode(f.code!)}
                               >
                                 <Copy className="w-3 h-3 shrink-0" />

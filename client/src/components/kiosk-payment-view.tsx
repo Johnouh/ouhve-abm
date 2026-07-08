@@ -647,7 +647,7 @@ export default function KioskPaymentView({ onBack, franchiseId, kioskMode = fals
         {/* 결제 링크 생성 상태 */}
         {linkMutation.isPending && (
           <div className="flex items-center justify-center gap-2 py-4">
-            <Loader2 className="w-5 h-5 animate-spin text-blue-500 shrink-0" />
+            <Loader2 className="w-5 h-5 animate-spin text-orange-500 shrink-0" />
             <span className="text-sm text-muted-foreground">결제 링크 생성 중...</span>
           </div>
         )}
@@ -660,8 +660,8 @@ export default function KioskPaymentView({ onBack, franchiseId, kioskMode = fals
             disabled={!generatedLink}
             className="flex flex-col items-center gap-2 p-5 rounded-xl border border-gray-200 bg-white hover-elevate transition-all disabled:opacity-40"
           >
-            <div className="w-11 h-11 rounded-full bg-purple-50 flex items-center justify-center">
-              <QrCode className="w-5 h-5 text-purple-600 shrink-0" />
+            <div className="w-11 h-11 rounded-full bg-orange-50 flex items-center justify-center">
+              <QrCode className="w-5 h-5 text-orange-600 shrink-0" />
             </div>
             <span className="text-sm font-medium text-gray-700">QR결제</span>
           </button>
@@ -684,11 +684,11 @@ export default function KioskPaymentView({ onBack, franchiseId, kioskMode = fals
             disabled={prepareMutation.isPending}
             className="flex flex-col items-center gap-2 p-5 rounded-xl border border-gray-200 bg-white hover-elevate transition-all disabled:opacity-40"
           >
-            <div className="w-11 h-11 rounded-full bg-blue-50 flex items-center justify-center">
+            <div className="w-11 h-11 rounded-full bg-orange-50 flex items-center justify-center">
               {prepareMutation.isPending ? (
-                <Loader2 className="w-5 h-5 animate-spin text-blue-600 shrink-0" />
+                <Loader2 className="w-5 h-5 animate-spin text-orange-600 shrink-0" />
               ) : (
-                <CreditCard className="w-5 h-5 text-blue-600 shrink-0" />
+                <CreditCard className="w-5 h-5 text-orange-600 shrink-0" />
               )}
             </div>
             <span className="text-sm font-medium text-gray-700">카드결제</span>
@@ -845,15 +845,15 @@ export default function KioskPaymentView({ onBack, franchiseId, kioskMode = fals
     <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-6 text-center">
       {/* 카드 일러스트 + 애니메이션 */}
       <div className="relative">
-        <div className="w-32 h-44 rounded-2xl bg-gradient-to-b from-gray-800 to-blue-900 shadow-xl flex items-center justify-center">
+        <div className="w-32 h-44 rounded-2xl bg-gradient-to-b from-gray-800 to-orange-900 shadow-xl flex items-center justify-center">
           <div className="w-10 h-7 rounded bg-yellow-400 absolute top-5 left-5" />
           <Wifi className="w-10 h-10 text-white/40 mt-8 shrink-0" />
         </div>
         {/* 웨이브 애니메이션 */}
         <div className="flex gap-2 items-end justify-center mt-4">
-          <div className="w-2 h-5 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: "0ms" }} />
-          <div className="w-2 h-8 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: "150ms" }} />
-          <div className="w-2 h-11 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: "300ms" }} />
+          <div className="w-2 h-5 bg-orange-400 rounded-full animate-pulse" style={{ animationDelay: "0ms" }} />
+          <div className="w-2 h-8 bg-orange-400 rounded-full animate-pulse" style={{ animationDelay: "150ms" }} />
+          <div className="w-2 h-11 bg-orange-400 rounded-full animate-pulse" style={{ animationDelay: "300ms" }} />
         </div>
       </div>
 

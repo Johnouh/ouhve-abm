@@ -38,19 +38,19 @@ interface Payload {
 }
 
 const STAGE_COLORS: Record<Stage, string> = {
-  신규리드: "border-blue-500/30 bg-blue-500/5",
+  신규리드: "border-orange-500/30 bg-orange-500/5",
   상담예약: "border-primary/30 bg-primary/5",
   체험중: "border-amber-400/30 bg-amber-400/5",
-  가입임박: "border-purple-500/30 bg-purple-500/5",
+  가입임박: "border-orange-500/30 bg-orange-500/5",
   등록완료: "border-emerald-500/30 bg-emerald-500/5",
   이탈: "border-red-500/30 bg-red-500/5",
 };
 
 const STAGE_HEADER: Record<Stage, string> = {
-  신규리드: "text-blue-400",
+  신규리드: "text-orange-400",
   상담예약: "text-primary",
   체험중: "text-amber-400",
-  가입임박: "text-purple-400",
+  가입임박: "text-orange-400",
   등록완료: "text-emerald-400",
   이탈: "text-red-400",
 };

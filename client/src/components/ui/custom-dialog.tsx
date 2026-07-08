@@ -41,9 +41,9 @@ export function CustomDialog({
       case 'delete':
         return 'bg-red-500 hover:bg-red-600 text-white border-red-500';
       case 'confirm':
-        return 'bg-blue-500 hover:bg-blue-600 text-white border-blue-500';
+        return 'bg-orange-500 hover:bg-orange-600 text-white border-orange-500';
       default:
-        return 'bg-blue-500 hover:bg-blue-600 text-white border-blue-500';
+        return 'bg-orange-500 hover:bg-orange-600 text-white border-orange-500';
     }
   };
 

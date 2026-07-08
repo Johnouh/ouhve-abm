@@ -830,7 +830,7 @@ export default function MemberDetailPage({ memberId, onBack, onContractCreate }:
                           return (
                           <tr key={`pt-${pt.id}`} className="border-b">
                             <td className="p-3">
-                              <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                              <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">
                                 개인
                               </Badge>
                             </td>
@@ -1076,7 +1076,7 @@ export default function MemberDetailPage({ memberId, onBack, onContractCreate }:
                   <Download className="w-4 h-4 mr-2" />
                   내역 내보내기
                 </Button>
-                <Button size="sm" className="bg-blue-600 hover-elevate" onClick={() => setShowRegistrationDialog(true)}>
+                <Button size="sm" className="bg-orange-600 hover-elevate" onClick={() => setShowRegistrationDialog(true)}>
                   <Plus className="w-4 h-4 mr-2" />
                   {activeTab === '회원권' && '회원권 등록'}
                   {activeTab === '수업 상품' && '수업 상품 등록'}
@@ -1112,7 +1112,7 @@ export default function MemberDetailPage({ memberId, onBack, onContractCreate }:
                             <p className="text-gray-500 text-sm mb-2">
                               아직 결제된 {activeTab}이 없습니다.
                             </p>
-                            <Button size="sm" className="bg-blue-600 hover-elevate" onClick={() => setShowRegistrationDialog(true)}>
+                            <Button size="sm" className="bg-orange-600 hover-elevate" onClick={() => setShowRegistrationDialog(true)}>
                               <Plus className="w-4 h-4 mr-2" />
                               {activeTab === '회원권' && '회원권 등록'}
                               {activeTab === '수업 상품' && '수업 상품 등록'}
@@ -1311,7 +1311,7 @@ export default function MemberDetailPage({ memberId, onBack, onContractCreate }:
               </Button>
               <Button 
                 type="submit" 
-                className="bg-blue-500 hover-elevate"
+                className="bg-orange-500 hover-elevate"
                 disabled={updateMemberMutation.isPending}
                 data-testid="button-edit-submit"
               >
@@ -1590,7 +1590,7 @@ function RegistrationForm({ activeTab, memberId, onSuccess, onContractCreate }: 
                     setCreateProductCategory("회원권");
                     setShowCreateProductDialog(true);
                   }}
-                  className="text-blue-600 border-blue-300 hover-elevate"
+                  className="text-orange-600 border-orange-300 hover-elevate"
                   data-testid="btn-create-membership-product"
                 >
                   <Plus className="w-4 h-4 mr-1" />
@@ -1655,7 +1655,7 @@ function RegistrationForm({ activeTab, memberId, onSuccess, onContractCreate }: 
                     setCreateProductCategory("회원권");
                     setShowCreateProductDialog(true);
                   }}
-                  className="text-xs text-gray-500 hover:text-blue-600"
+                  className="text-xs text-gray-500 hover:text-orange-600"
                   data-testid="btn-add-new-membership-product"
                 >
                   <Plus className="w-3 h-3 mr-1" />
@@ -1667,10 +1667,10 @@ function RegistrationForm({ activeTab, memberId, onSuccess, onContractCreate }: 
 
           {/* 회원권 상품 선택 시 자동 표시되는 정보 (Auto-filled info from selected membership product) */}
           {formData.productId && formData.type && (
-            <div className="bg-purple-50 p-4 rounded-lg border border-purple-200 space-y-3">
+            <div className="bg-orange-50 p-4 rounded-lg border border-orange-200 space-y-3">
               <div className="flex items-center gap-2 mb-2">
-                <CreditCard className="w-4 h-4 text-purple-500" />
-                <span className="text-sm font-semibold text-purple-700">선택한 회원권 정보</span>
+                <CreditCard className="w-4 h-4 text-orange-500" />
+                <span className="text-sm font-semibold text-orange-700">선택한 회원권 정보</span>
               </div>
               <div className="grid grid-cols-3 gap-4 text-sm">
                 <div>
@@ -1776,16 +1776,16 @@ function RegistrationForm({ activeTab, memberId, onSuccess, onContractCreate }: 
 
       {activeTab === '수업 상품' && (
         <>
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-            <Label className="text-sm font-semibold text-blue-700 mb-3 block">수업 유형 선택 *</Label>
+          <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+            <Label className="text-sm font-semibold text-orange-700 mb-3 block">수업 유형 선택 *</Label>
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
                 onClick={() => handleInputChange('lessonType', '개인레슨')}
                 className={`p-4 rounded-lg border-2 transition-all flex flex-col items-center gap-2 ${
                   formData.lessonType === '개인레슨'
-                    ? "border-blue-500 bg-blue-100 text-blue-700"
-                    : "border-gray-200 bg-white text-gray-600 hover:border-blue-300"
+                    ? "border-orange-500 bg-orange-100 text-orange-700"
+                    : "border-gray-200 bg-white text-gray-600 hover:border-orange-300"
                 }`}
                 data-testid="select-lesson-type-personal"
               >
@@ -1825,7 +1825,7 @@ function RegistrationForm({ activeTab, memberId, onSuccess, onContractCreate }: 
                         setCreateProductCategory("PT");
                         setShowCreateProductDialog(true);
                       }}
-                      className="text-blue-600 border-blue-300 hover-elevate"
+                      className="text-orange-600 border-orange-300 hover-elevate"
                       data-testid="btn-create-pt-product"
                     >
                       <Plus className="w-4 h-4 mr-1" />
@@ -1862,10 +1862,10 @@ function RegistrationForm({ activeTab, memberId, onSuccess, onContractCreate }: 
 
               {/* PT 상품 선택 시 자동 표시되는 정보 (Auto-filled info from selected PT product) */}
               {formData.ptProductId && (
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 space-y-3">
+                <div className="bg-orange-50 p-4 rounded-lg border border-orange-200 space-y-3">
                   <div className="flex items-center gap-2 mb-2">
-                    <Dumbbell className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm font-semibold text-blue-700">선택한 PT 상품 정보</span>
+                    <Dumbbell className="w-4 h-4 text-orange-500" />
+                    <span className="text-sm font-semibold text-orange-700">선택한 PT 상품 정보</span>
                   </div>
                   <div className="grid grid-cols-3 gap-4 text-sm">
                     <div>
@@ -1945,7 +1945,7 @@ function RegistrationForm({ activeTab, memberId, onSuccess, onContractCreate }: 
                         }}
                         className={`px-3 py-2 rounded-md border text-sm font-medium hover-elevate ${
  isSelected
- ? 'bg-blue-500 text-white border-blue-500'
+ ? 'bg-orange-500 text-white border-orange-500'
  : 'bg-white text-gray-700 border-gray-300'
  }`}
                         data-testid={`btn-day-${day}`}
@@ -1956,7 +1956,7 @@ function RegistrationForm({ activeTab, memberId, onSuccess, onContractCreate }: 
                   })}
                 </div>
                 {formData.scheduledDays && formData.scheduledDays.length > 0 && (
-                  <p className="text-sm text-blue-600">선택된 요일: {formData.scheduledDays.join(', ')}</p>
+                  <p className="text-sm text-orange-600">선택된 요일: {formData.scheduledDays.join(', ')}</p>
                 )}
               </div>
 
@@ -2101,7 +2101,7 @@ function RegistrationForm({ activeTab, memberId, onSuccess, onContractCreate }: 
                     setCreateProductCategory("락커 상품");
                     setShowCreateProductDialog(true);
                   }}
-                  className="text-blue-600 border-blue-300 hover-elevate"
+                  className="text-orange-600 border-orange-300 hover-elevate"
                   data-testid="btn-create-locker-product"
                 >
                   <Plus className="w-4 h-4 mr-1" />
@@ -2253,7 +2253,7 @@ function RegistrationForm({ activeTab, memberId, onSuccess, onContractCreate }: 
                     setCreateProductCategory("운동 용품");
                     setShowCreateProductDialog(true);
                   }}
-                  className="text-blue-600 border-blue-300 hover-elevate"
+                  className="text-orange-600 border-orange-300 hover-elevate"
                   data-testid="btn-create-equipment-product"
                 >
                   <Plus className="w-4 h-4 mr-1" />
@@ -2383,7 +2383,7 @@ function RegistrationForm({ activeTab, memberId, onSuccess, onContractCreate }: 
         <Button type="button" variant="outline" onClick={() => setFormData({})}>
           초기화
         </Button>
-        <Button type="submit" className="bg-blue-600 hover-elevate">
+        <Button type="submit" className="bg-orange-600 hover-elevate">
           등록
         </Button>
       </div>

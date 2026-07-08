@@ -236,7 +236,7 @@ export default function ContractsPage({ onCreateContract }: ContractsPageProps) 
                   variant={currentPage === page ? "default" : "outline"}
                   size="sm"
                   onClick={() => setCurrentPage(page)}
-                  className={currentPage === page ? "bg-blue-500 hover-elevate" : ""}
+                  className={currentPage === page ? "bg-orange-500 hover-elevate" : ""}
                   data-testid={`button-page-${page}`}
                 >
                   {page}
@@ -258,7 +258,7 @@ export default function ContractsPage({ onCreateContract }: ContractsPageProps) 
 
       <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8">
         <Button
-          className="bg-blue-500 hover-elevate text-white px-4 md:px-6 py-3 rounded-lg shadow-lg text-sm md:text-base"
+          className="bg-orange-500 hover-elevate text-white px-4 md:px-6 py-3 rounded-lg shadow-lg text-sm md:text-base"
           size="lg"
           onClick={onCreateContract}
           data-testid="button-create-contract"

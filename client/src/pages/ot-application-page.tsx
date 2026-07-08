@@ -61,7 +61,7 @@ export default function OtApplicationPage() {
       "대기": { label: "대기", className: "bg-amber-50 text-amber-600 border-amber-200" },
       "승인": { label: "승인", className: "bg-emerald-50 text-emerald-600 border-emerald-200" },
       "거절": { label: "거절", className: "bg-red-50 text-red-600 border-red-200" },
-      "완료": { label: "완료", className: "bg-blue-50 text-blue-600 border-blue-200" },
+      "완료": { label: "완료", className: "bg-orange-50 text-orange-600 border-orange-200" },
     };
     const s = map[status] || { label: status, className: "bg-gray-50 text-gray-600 border-gray-200" };
     return <Badge variant="outline" className={`text-xs shrink-0 ${s.className}`}>{s.label}</Badge>;
@@ -137,7 +137,7 @@ export default function OtApplicationPage() {
           <div className="flex gap-2 text-xs text-gray-500">
             <span>대기 <strong className="text-amber-600">{filteredApplications.filter(a => a.status === "대기").length}</strong></span>
             <span>승인 <strong className="text-emerald-600">{filteredApplications.filter(a => a.status === "승인").length}</strong></span>
-            <span>완료 <strong className="text-blue-600">{filteredApplications.filter(a => a.status === "완료").length}</strong></span>
+            <span>완료 <strong className="text-orange-600">{filteredApplications.filter(a => a.status === "완료").length}</strong></span>
           </div>
           <Button variant="outline" size="sm" onClick={() => setCurrentDate(new Date())} className="px-4 py-2 text-sm">
             이번 달
@@ -207,7 +207,7 @@ export default function OtApplicationPage() {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="h-7 px-2 text-xs text-blue-600 border-blue-200 hover-elevate"
+                      className="h-7 px-2 text-xs text-orange-600 border-orange-200 hover-elevate"
                       onClick={() => handleComplete(app.id)}
                       disabled={updateStatusMutation.isPending}
                     >

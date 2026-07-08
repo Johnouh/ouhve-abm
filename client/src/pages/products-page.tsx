@@ -444,7 +444,7 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               onClick={() => setActiveTab(tab)}
               className={`pb-3 text-xs md:text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                 activeTab === tab
-                  ? "font-medium text-gray-900 border-b-2 border-blue-500"
+                  ? "font-medium text-gray-900 border-b-2 border-orange-500"
                   : "text-gray-400 hover:text-gray-600"
               }`}
             >
@@ -463,7 +463,7 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               onClick={() => setActiveCategory(category)}
               className={`px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm font-medium rounded-md transition-colors whitespace-nowrap ${
                 activeCategory === category
-                  ? "bg-blue-500 text-white"
+                  ? "bg-orange-500 text-white"
                   : "bg-white text-gray-500 hover:text-gray-700"
               }`}
             >
@@ -520,7 +520,7 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
             {(activeTab === "전체 상품" || activeTab === "APP 노출 상품") && (
               <Button 
                 onClick={handleOpenAddDialog}
-                className="bg-blue-500 hover-elevate px-6 py-2"
+                className="bg-orange-500 hover-elevate px-6 py-2"
               >
                 상품 추가
               </Button>
@@ -578,7 +578,7 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
                           variant={product.appExposed ? "default" : "secondary"}
                           className={
                             product.appExposed 
-                              ? "bg-blue-100 text-blue-700" 
+                              ? "bg-orange-100 text-orange-700" 
                               : "bg-gray-100 text-gray-600"
                           }
                         >
@@ -590,7 +590,7 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
                             variant="outline"
                             className={
                               product.lessonType === "개인 레슨" 
-                                ? "border-purple-300 bg-purple-50 text-purple-700" 
+                                ? "border-orange-300 bg-orange-50 text-orange-700" 
                                 : "border-orange-300 bg-orange-50 text-orange-700"
                             }
                           >
@@ -611,7 +611,7 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
                         onClick={() => handleAppExpose(product)}
                         className={`flex-1 text-xs py-2 ${
                           product.appExposed 
-                            ? "border-blue-300 bg-blue-50 text-blue-700" 
+                            ? "border-orange-300 bg-orange-50 text-orange-700" 
                             : "border-gray-200 text-gray-600 hover-elevate"
                         }`}
                       >
@@ -656,7 +656,7 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
                       variant={currentPage === page ? "default" : "outline"}
                       size="sm"
                       onClick={() => setCurrentPage(page)}
-                      className={currentPage === page ? "bg-blue-500 hover-elevate" : ""}
+                      className={currentPage === page ? "bg-orange-500 hover-elevate" : ""}
                     >
                       {page}
                     </Button>
@@ -678,7 +678,7 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               {(activeTab === "전체 상품" || activeTab === "APP 노출 상품" || activeTab === "APP 비노출 상품") && (
                 <Button
                   onClick={handleOpenAddDialog}
-                  className="bg-blue-500 hover-elevate px-6 py-2"
+                  className="bg-orange-500 hover-elevate px-6 py-2"
                 >
                   상품 추가
                 </Button>
@@ -727,8 +727,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
             {/* 헤더 */}
             <div className="flex items-center justify-between p-4 md:p-6 border-b border-gray-200">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <Package className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                  <Package className="w-5 h-5 text-orange-600" />
                 </div>
                 <h2 className="text-lg md:text-xl font-bold text-gray-900">
                   {editingProduct ? "상품 수정" : `${dialogCategory} 등록`}
@@ -751,16 +751,16 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
             <div className="p-4 md:p-6 space-y-4 md:space-y-5">
               {/* 수업 상품일 경우 레슨 타입 선택 */}
               {dialogCategory === "수업 상품" && (
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                  <Label className="text-sm font-semibold text-blue-700 mb-3 block">수업 유형 선택 *</Label>
+                <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                  <Label className="text-sm font-semibold text-orange-700 mb-3 block">수업 유형 선택 *</Label>
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       type="button"
                       onClick={() => setFormData(prev => ({ ...prev, lessonType: "개인 레슨" }))}
                       className={`p-4 rounded-lg border-2 transition-all flex flex-col items-center gap-2 ${
                         formData.lessonType === "개인 레슨"
-                          ? "border-blue-500 bg-blue-100 text-blue-700"
-                          : "border-gray-200 bg-white text-gray-600 hover:border-blue-300"
+                          ? "border-orange-500 bg-orange-100 text-orange-700"
+                          : "border-gray-200 bg-white text-gray-600 hover:border-orange-300"
                       }`}
                     >
                       <Dumbbell className="w-6 h-6" />
@@ -785,8 +785,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               {/* 상품명 */}
               <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                 <div className="flex items-center gap-2 md:gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <FileText className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <FileText className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 md:w-24 flex-shrink-0">{dialogCategory === "수업 상품" ? "수업명" : "상품명"} *</Label>
                 </div>
@@ -802,8 +802,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               {dialogCategory === "수업 상품" && formData.lessonType && (
                 <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                   <div className="flex items-center gap-2 md:gap-4">
-                    <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                      <User className="h-4 w-4 text-blue-600" />
+                    <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                      <User className="h-4 w-4 text-orange-600" />
                     </div>
                     <Label className="text-sm font-medium text-gray-700 md:w-24 flex-shrink-0">담당 강사</Label>
                   </div>
@@ -830,8 +830,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               {dialogCategory === "수업 상품" && formData.lessonType && (
                 <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                   <div className="flex items-center gap-2 md:gap-4">
-                    <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                      <Clock className="h-4 w-4 text-blue-600" />
+                    <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                      <Clock className="h-4 w-4 text-orange-600" />
                     </div>
                     <Label className="text-sm font-medium text-gray-700 md:w-24 flex-shrink-0">수업 시간 *</Label>
                   </div>
@@ -869,8 +869,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               {dialogCategory === "수업 상품" && formData.lessonType && (
                 <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                   <div className="flex items-center gap-2 md:gap-4">
-                    <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                      <Calendar className="h-4 w-4 text-blue-600" />
+                    <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                      <Calendar className="h-4 w-4 text-orange-600" />
                     </div>
                     <Label className="text-sm font-medium text-gray-700 md:w-24 flex-shrink-0">운영 요일</Label>
                   </div>
@@ -889,7 +889,7 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
                         }}
                         className={`w-8 h-8 rounded-full text-sm font-medium transition-colors ${
                           formData.selectedDays.includes(day)
-                            ? 'bg-blue-500 text-white'
+                            ? 'bg-orange-500 text-white'
                             : 'bg-gray-100 text-gray-600 hover-elevate'
                         }`}
                       >
@@ -903,8 +903,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               {/* 가격 (수업 상품은 수업료로 표시) */}
               <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                 <div className="flex items-center gap-2 md:gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <Banknote className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <Banknote className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 md:w-24 flex-shrink-0">
                     {dialogCategory === "수업 상품" ? "수업료" : "가격"} (원) *
@@ -923,8 +923,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               {dialogCategory !== "수업 상품" && (
                 <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                   <div className="flex items-center gap-2 md:gap-4">
-                    <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                      <Calendar className="h-4 w-4 text-blue-600" />
+                    <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                      <Calendar className="h-4 w-4 text-orange-600" />
                     </div>
                     <Label className="text-sm font-medium text-gray-700 md:w-24 flex-shrink-0">유효기간</Label>
                   </div>
@@ -958,8 +958,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               {dialogCategory === "수업 상품" && formData.lessonType && (
                 <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                   <div className="flex items-center gap-2 md:gap-4">
-                    <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                      <Users className="h-4 w-4 text-blue-600" />
+                    <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                      <Users className="h-4 w-4 text-orange-600" />
                     </div>
                     <Label className="text-sm font-medium text-gray-700 md:w-24 flex-shrink-0">인원 설정 *</Label>
                   </div>
@@ -992,8 +992,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               {dialogCategory === "락커 상품" && (
                 <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                   <div className="flex items-center gap-2 md:gap-4">
-                    <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                      <Package className="h-4 w-4 text-blue-600" />
+                    <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                      <Package className="h-4 w-4 text-orange-600" />
                     </div>
                     <Label className="text-sm font-medium text-gray-700 md:w-24 flex-shrink-0">구역 선택 *</Label>
                   </div>
@@ -1024,8 +1024,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               {/* 상품 설명 */}
               <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                 <div className="flex items-center gap-2 md:gap-4">
-                  <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                    <FileText className="h-4 w-4 text-blue-600" />
+                  <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                    <FileText className="h-4 w-4 text-orange-600" />
                   </div>
                   <Label className="text-sm font-medium text-gray-700 md:w-24 flex-shrink-0">상품 설명</Label>
                 </div>
@@ -1041,8 +1041,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
               <div className="border-t border-gray-200 pt-4 md:pt-5 space-y-4">
                 <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                   <div className="flex items-center gap-2 md:gap-4">
-                    <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                      <Settings className="h-4 w-4 text-blue-600" />
+                    <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                      <Settings className="h-4 w-4 text-orange-600" />
                     </div>
                     <Label className="text-sm font-medium text-gray-700 md:w-24 flex-shrink-0">상태</Label>
                   </div>
@@ -1062,8 +1062,8 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0">
-                      <Smartphone className="h-4 w-4 text-blue-600" />
+                    <div className="w-6 h-6 bg-orange-100 rounded flex items-center justify-center flex-shrink-0">
+                      <Smartphone className="h-4 w-4 text-orange-600" />
                     </div>
                     <Label className="text-sm font-medium text-gray-700">APP 노출</Label>
                   </div>
@@ -1090,7 +1090,7 @@ export default function ProductsPage({ selectedProductId, onProductSelect, onNav
                 취소
               </Button>
               <Button
-                className="flex-1 bg-blue-500 hover-elevate"
+                className="flex-1 bg-orange-500 hover-elevate"
                 onClick={handleSaveProduct}
                 disabled={createProductMutation.isPending || updateProductMutation.isPending || (!editingProduct && !user?.franchiseId)}
               >

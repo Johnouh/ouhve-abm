@@ -219,7 +219,7 @@ export default function OtherSalesPage() {
   const getPaymentMethodBadge = (paymentMethod: string) => {
     switch (paymentMethod) {
       case '카드':
-        return <Badge className="bg-blue-100 text-blue-700 hover-elevate">{paymentMethod}</Badge>;
+        return <Badge className="bg-orange-100 text-orange-700 hover-elevate">{paymentMethod}</Badge>;
       case '현금':
         return <Badge className="bg-green-100 text-green-700 hover-elevate">{paymentMethod}</Badge>;
       case '계좌이체':
@@ -301,9 +301,9 @@ export default function OtherSalesPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-6">
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 md:p-4">
-          <div className="text-sm text-blue-600 mb-1">이번 달 매출 건수</div>
-          <div className="text-xl md:text-2xl font-bold text-blue-700 tabular-nums" data-testid="text-sales-count-summary">
+        <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 md:p-4">
+          <div className="text-sm text-orange-600 mb-1">이번 달 매출 건수</div>
+          <div className="text-xl md:text-2xl font-bold text-orange-700 tabular-nums" data-testid="text-sales-count-summary">
             {currentMonthSales.length}건
           </div>
         </div>
@@ -345,7 +345,7 @@ export default function OtherSalesPage() {
                     {getPaymentMethodBadge(sale.paymentMethod)}
                   </TableCell>
                   <TableCell className="text-center text-sm hidden md:table-cell">{sale.period || '-'}</TableCell>
-                  <TableCell className="text-center text-sm font-medium text-blue-600 tabular-nums">
+                  <TableCell className="text-center text-sm font-medium text-orange-600 tabular-nums">
                     {sale.amount.toLocaleString()}원
                   </TableCell>
                   <TableCell className="text-center">
@@ -395,7 +395,7 @@ export default function OtherSalesPage() {
                     variant={currentPage === page ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCurrentPage(page)}
-                    className={currentPage === page ? "bg-blue-500 hover-elevate" : ""}
+                    className={currentPage === page ? "bg-orange-500 hover-elevate" : ""}
                   >
                     {page}
                   </Button>
@@ -435,7 +435,7 @@ export default function OtherSalesPage() {
 
       <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8">
         <Button
-          className="bg-blue-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg shadow-lg hover-elevate"
+          className="bg-orange-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg shadow-lg hover-elevate"
           size="lg"
           onClick={openAddDialog}
           data-testid="button-add-sale"
@@ -564,7 +564,7 @@ export default function OtherSalesPage() {
                 <Button type="button" variant="outline" onClick={() => setIsAddDialogOpen(false)}>취소</Button>
                 <Button 
                   type="submit"
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                   disabled={createSaleMutation.isPending}
                   data-testid="button-confirm-add"
                 >
@@ -690,7 +690,7 @@ export default function OtherSalesPage() {
                 <Button type="button" variant="outline" onClick={() => setIsEditDialogOpen(false)}>취소</Button>
                 <Button 
                   type="submit"
-                  className="bg-blue-500 hover-elevate"
+                  className="bg-orange-500 hover-elevate"
                   disabled={updateSaleMutation.isPending}
                 >
                   {updateSaleMutation.isPending ? "수정 중..." : "수정"}

@@ -502,7 +502,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                   <div 
                     key={day} 
                     className={`p-2 text-center text-sm font-medium ${
-                      index === 0 ? 'text-red-500' : index === 6 ? 'text-blue-500' : 'text-gray-600'
+                      index === 0 ? 'text-red-500' : index === 6 ? 'text-orange-500' : 'text-gray-600'
                     }`}
                   >
                     {day}
@@ -523,7 +523,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                     <Card
                       key={index}
                       className={`h-16 md:h-32 cursor-pointer transition-all hover:shadow-sm border ${
-                        isSelected ? 'ring-2 ring-blue-500 bg-blue-50' : ''
+                        isSelected ? 'ring-2 ring-orange-500 bg-orange-50' : ''
                       } ${!isCurrentMonth(date) ? 'opacity-50' : ''}`}
                       onClick={() => handleDateSelect(date)}
                     >
@@ -531,9 +531,9 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                         <div className="flex items-center justify-between mb-1 md:mb-2">
                           <span
                             className={`text-xs md:text-sm font-medium ${
-                              isToday(date) ? 'bg-blue-500 text-white rounded-full w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-xs' :
+                              isToday(date) ? 'bg-orange-500 text-white rounded-full w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-xs' :
                               dayOfWeek === 0 ? 'text-red-500' :
-                              dayOfWeek === 6 ? 'text-blue-500' :
+                              dayOfWeek === 6 ? 'text-orange-500' :
                               'text-gray-900'
                             }`}
                           >
@@ -543,7 +543,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
 
                         <div className="flex-1 space-y-1 overflow-hidden">
                           {getEventsForDate(date).filter(e => e.type === 'attendance').length > 0 && (
-                            <div className="text-[10px] md:text-xs bg-blue-100 text-blue-700 px-1 py-0.5 rounded whitespace-nowrap truncate">
+                            <div className="text-[10px] md:text-xs bg-orange-100 text-orange-700 px-1 py-0.5 rounded whitespace-nowrap truncate">
                               입출입 {getEventsForDate(date).filter(e => e.type === 'attendance').length}건
                             </div>
                           )}
@@ -567,7 +567,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                   {selectedDateState ? (
                     <>
                       {/* 날짜 헤더 (Date Header) */}
-                      <div className="bg-purple-600 text-white p-4">
+                      <div className="bg-orange-600 text-white p-4">
                         <div className="text-lg font-bold">
                           {selectedDateObj && `${selectedDateObj.getMonth() + 1}월 ${selectedDateObj.getDate()}일`}
                         </div>
@@ -671,7 +671,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                   <div 
                     key={day} 
                     className={`p-2 text-center text-sm font-medium ${
-                      index === 0 ? 'text-red-500' : index === 6 ? 'text-blue-500' : 'text-gray-600'
+                      index === 0 ? 'text-red-500' : index === 6 ? 'text-orange-500' : 'text-gray-600'
                     }`}
                   >
                     {day}
@@ -692,7 +692,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                     <Card 
                       key={index}
                       className={`h-16 md:h-28 cursor-pointer transition-all hover:shadow-sm border ${
-                        isSelected ? 'ring-2 ring-blue-500 bg-blue-50' : ''
+                        isSelected ? 'ring-2 ring-orange-500 bg-orange-50' : ''
                       } ${!isCurrentMonth(date) ? 'opacity-50' : ''}`}
                       onClick={() => handleDateSelect(date)}
                     >
@@ -700,9 +700,9 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                         <div className="flex items-center justify-between mb-1 md:mb-2">
                           <span
                             className={`text-xs md:text-sm font-medium ${
-                              isToday(date) ? 'bg-blue-500 text-white rounded-full w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-xs' :
+                              isToday(date) ? 'bg-orange-500 text-white rounded-full w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-xs' :
                               dayOfWeek === 0 ? 'text-red-500' :
-                              dayOfWeek === 6 ? 'text-blue-500' :
+                              dayOfWeek === 6 ? 'text-orange-500' :
                               'text-gray-900'
                             }`}
                           >
@@ -712,7 +712,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
 
                         <div className="flex-1 space-y-1 overflow-hidden">
                           {getEventsForDate(date).filter(e => e.type === 'personal-training').length > 0 && (
-                            <div className="text-[10px] md:text-xs bg-purple-100 text-purple-700 px-1 py-0.5 rounded whitespace-nowrap truncate">
+                            <div className="text-[10px] md:text-xs bg-orange-100 text-orange-700 px-1 py-0.5 rounded whitespace-nowrap truncate">
                               개인 {getEventsForDate(date).filter(e => e.type === 'personal-training').length}건
                             </div>
                           )}
@@ -838,7 +838,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                   <div 
                     key={day} 
                     className={`p-2 text-center text-sm font-medium ${
-                      index === 0 ? 'text-red-500' : index === 6 ? 'text-blue-500' : 'text-gray-600'
+                      index === 0 ? 'text-red-500' : index === 6 ? 'text-orange-500' : 'text-gray-600'
                     }`}
                   >
                     {day}
@@ -859,7 +859,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                     <Card 
                       key={index}
                       className={`h-16 md:h-28 cursor-pointer transition-all hover:shadow-sm border ${
-                        isSelected ? 'ring-2 ring-blue-500 bg-blue-50' : ''
+                        isSelected ? 'ring-2 ring-orange-500 bg-orange-50' : ''
                       } ${!isCurrentMonth(date) ? 'opacity-50' : ''}`}
                       onClick={() => handleDateSelect(date)}
                     >
@@ -867,9 +867,9 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                         <div className="flex items-center justify-between mb-1 md:mb-2">
                           <span
                             className={`text-xs md:text-sm font-medium ${
-                              isToday(date) ? 'bg-blue-500 text-white rounded-full w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-xs' :
+                              isToday(date) ? 'bg-orange-500 text-white rounded-full w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-xs' :
                               dayOfWeek === 0 ? 'text-red-500' :
-                              dayOfWeek === 6 ? 'text-blue-500' :
+                              dayOfWeek === 6 ? 'text-orange-500' :
                               'text-gray-900'
                             }`}
                           >
@@ -924,7 +924,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                               <div className="flex items-center justify-between mb-2">
                                 <div className="font-medium text-gray-900">{event.title}</div>
                                 <span className={`text-xs px-2 py-1 rounded-full font-medium ${
-                                  event.status === '예약' ? 'bg-blue-100 text-blue-700' : 
+                                  event.status === '예약' ? 'bg-orange-100 text-orange-700' : 
                                   event.status === '완료' ? 'bg-green-100 text-green-700' :
                                   event.status === '취소' ? 'bg-red-100 text-red-700' :
                                   'bg-gray-100 text-gray-600'
@@ -993,7 +993,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                   <div 
                     key={day} 
                     className={`p-2 text-center text-sm font-medium ${
-                      index === 0 ? 'text-red-500' : index === 6 ? 'text-blue-500' : 'text-gray-600'
+                      index === 0 ? 'text-red-500' : index === 6 ? 'text-orange-500' : 'text-gray-600'
                     }`}
                   >
                     {day}
@@ -1014,7 +1014,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                     <Card 
                       key={index}
                       className={`h-16 md:h-28 cursor-pointer transition-all hover:shadow-sm border ${
-                        isSelected ? 'ring-2 ring-blue-500 bg-blue-50' : ''
+                        isSelected ? 'ring-2 ring-orange-500 bg-orange-50' : ''
                       } ${!isCurrentMonth(date) ? 'opacity-50' : ''}`}
                       onClick={() => handleDateSelect(date)}
                     >
@@ -1022,9 +1022,9 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                         <div className="flex items-center justify-between mb-1 md:mb-2">
                           <span
                             className={`text-xs md:text-sm font-medium ${
-                              isToday(date) ? 'bg-blue-500 text-white rounded-full w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-xs' :
+                              isToday(date) ? 'bg-orange-500 text-white rounded-full w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-xs' :
                               dayOfWeek === 0 ? 'text-red-500' :
-                              dayOfWeek === 6 ? 'text-blue-500' :
+                              dayOfWeek === 6 ? 'text-orange-500' :
                               'text-gray-900'
                             }`}
                           >
@@ -1034,7 +1034,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
 
                         <div className="flex-1 space-y-1 overflow-hidden">
                           {getEventsForDate(date).filter(e => e.type === 'consultation').length > 0 && (
-                            <div className="text-[10px] md:text-xs bg-blue-100 text-blue-700 px-1 py-0.5 rounded whitespace-nowrap truncate">
+                            <div className="text-[10px] md:text-xs bg-orange-100 text-orange-700 px-1 py-0.5 rounded whitespace-nowrap truncate">
                               상담 {getEventsForDate(date).filter(e => e.type === 'consultation').length}건
                             </div>
                           )}
@@ -1053,7 +1053,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
       {activeTab === '입출입' && (
         <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8">
           <Button
-            className="bg-blue-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg shadow-lg hover-elevate"
+            className="bg-orange-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg shadow-lg hover-elevate"
             size="lg"
             onClick={() => setShowCheckInDialog(true)}
             data-testid="button-check-in"
@@ -1096,7 +1096,7 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
               <Button
                 onClick={() => selectedMemberId && checkInMutation.mutate(parseInt(selectedMemberId))}
                 disabled={!selectedMemberId || checkInMutation.isPending}
-                className="bg-blue-500 hover-elevate"
+                className="bg-orange-500 hover-elevate"
                 data-testid="button-confirm-checkin"
               >
                 {checkInMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
@@ -1133,13 +1133,13 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      selectedEvent.type === 'attendance' ? 'bg-blue-100' :
-                      selectedEvent.type === 'personal-training' ? 'bg-purple-100' :
+                      selectedEvent.type === 'attendance' ? 'bg-orange-100' :
+                      selectedEvent.type === 'personal-training' ? 'bg-orange-100' :
                       selectedEvent.type === 'group-lesson' ? 'bg-green-100' :
                       'bg-gray-100'
                     }`}>
-                      {selectedEvent.type === 'attendance' && <LogIn className={`w-5 h-5 text-blue-600`} />}
-                      {selectedEvent.type === 'personal-training' && <Dumbbell className={`w-5 h-5 text-purple-600`} />}
+                      {selectedEvent.type === 'attendance' && <LogIn className={`w-5 h-5 text-orange-600`} />}
+                      {selectedEvent.type === 'personal-training' && <Dumbbell className={`w-5 h-5 text-orange-600`} />}
                       {selectedEvent.type === 'group-lesson' && <Users className={`w-5 h-5 text-green-600`} />}
                     </div>
                     <div>
@@ -1189,13 +1189,13 @@ export default function AttendancePage({ selectedDate, onDateSelect, onMemberCli
                         }
                       }}
                     >
-                      <User className={`w-5 h-5 ${onMemberClick && selectedEvent.details?.memberId ? "text-blue-400 group-hover:text-blue-600" : "text-gray-400"}`} />
+                      <User className={`w-5 h-5 ${onMemberClick && selectedEvent.details?.memberId ? "text-orange-400 group-hover:text-orange-600" : "text-gray-400"}`} />
                       <div className="flex-1">
                         <p className="text-sm text-gray-500">회원</p>
-                        <p className={`font-medium ${onMemberClick && selectedEvent.details?.memberId ? "text-blue-700 group-hover:underline" : "text-gray-900"}`}>{selectedEvent.member}</p>
+                        <p className={`font-medium ${onMemberClick && selectedEvent.details?.memberId ? "text-orange-700 group-hover:underline" : "text-gray-900"}`}>{selectedEvent.member}</p>
                       </div>
                       {onMemberClick && selectedEvent.details?.memberId && (
-                        <span className="text-xs text-blue-500 opacity-0 group-hover:opacity-100">상세보기 →</span>
+                        <span className="text-xs text-orange-500 opacity-0 group-hover:opacity-100">상세보기 →</span>
                       )}
                     </div>
                   )}
