@@ -91,7 +91,7 @@ export default function ProductEditPage({ product, onBack }: ProductEditPageProp
     setWeekdaysChecked(checked);
     if (checked) {
       const weekdays = ["월", "화", "수", "목", "금"];
-      setSelectedDays(prev => [...new Set([...prev, ...weekdays])]);
+      setSelectedDays(prev => Array.from(new Set([...prev, ...weekdays])));
     } else {
       setSelectedDays(prev => prev.filter(day => !["월", "화", "수", "목", "금"].includes(day)));
     }
@@ -101,7 +101,7 @@ export default function ProductEditPage({ product, onBack }: ProductEditPageProp
     setWeekendsChecked(checked);
     if (checked) {
       const weekends = ["토", "일"];
-      setSelectedDays(prev => [...new Set([...prev, ...weekends])]);
+      setSelectedDays(prev => Array.from(new Set([...prev, ...weekends])));
     } else {
       setSelectedDays(prev => prev.filter(day => !["토", "일"].includes(day)));
     }
@@ -322,10 +322,10 @@ export default function ProductEditPage({ product, onBack }: ProductEditPageProp
                             className="bg-gray-50 border-gray-200 flex-1" 
                           />
                           <div className="flex items-center gap-1">
-                            <Checkbox 
-                              id="24hours" 
+                            <Checkbox
+                              id="24hours"
                               checked={is24Hours}
-                              onCheckedChange={setIs24Hours}
+                              onCheckedChange={(checked) => setIs24Hours(checked === true)}
                             />
                             <label htmlFor="24hours" className="text-xs">24시간</label>
                           </div>

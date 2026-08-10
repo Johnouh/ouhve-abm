@@ -127,11 +127,10 @@ export function validateNumberRange(value: number, min: number, max: number): bo
 
 // 📋 폼 데이터 정리 함수 (Form data sanitization function)
 export function sanitizeFormData<T extends Record<string, any>>(data: T): T {
-  const sanitized = { ...data };
-  
+  const sanitized: Record<string, any> = { ...data };
+
   for (const [key, value] of Object.entries(sanitized)) {
     if (typeof value === 'string') {
-      // 🧹 문자열 필드 정리 (Clean string fields)
       if (key.includes('name') || key.includes('Name')) {
         sanitized[key] = sanitizeName(value);
       } else if (key.includes('phone') || key.includes('Phone')) {
@@ -144,14 +143,13 @@ export function sanitizeFormData<T extends Record<string, any>>(data: T): T {
         sanitized[key] = sanitizeText(value);
       }
     } else if (typeof value === 'number') {
-      // 🔢 숫자 필드 검증 (Validate number fields)
       if (key.includes('amount') || key.includes('price') || key.includes('Price')) {
         sanitized[key] = sanitizeAmount(value);
       }
     }
   }
-  
-  return sanitized;
+
+  return sanitized as T;
 }
 
 // ⚠️ 입력 데이터 위험성 검사 함수 (Input data risk assessment function)

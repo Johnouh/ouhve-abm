@@ -1522,18 +1522,16 @@ export class DatabaseStorage implements IStorage {
     const existing = await this.getLockerSettings(settings.franchiseId!);
     
     if (existing) {
-      // 업데이트
       const [updated] = await db
         .update(lockerSettings)
-        .set({ ...settings, updatedAt: new Date() })
+        .set({ ...(settings as any), updatedAt: new Date() })
         .where(eq(lockerSettings.id, existing.id))
         .returning();
       return updated;
     } else {
-      // 새로 생성
       const [created] = await db
         .insert(lockerSettings)
-        .values(settings)
+        .values(settings as any)
         .returning();
       return created;
     }
